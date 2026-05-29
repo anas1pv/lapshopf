@@ -1,0 +1,263 @@
+@model List<lapshop.Domains.TbContactMessage>
+@{
+    ViewBag.Title = "Contact Messages";
+}
+
+@section Styles
+{
+<link rel="stylesheet" href="~/assets/Backend/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+<style>
+    .dataTables_filter {
+        display: none !important;
+    }
+    .unread-row {
+        background: rgba(0, 243, 255, 0.02) !important;
+        font-weight: 600;
+    }
+    .unread-indicator {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background-color: #00f3ff;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #00f3ff;
+        margin-right: 6px;
+    }
+    .status-pill {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .status-unread {
+        background: rgba(0, 243, 255, 0.1);
+        color: #00f3ff;
+        border: 1px solid rgba(0, 243, 255, 0.2);
+    }
+    .status-read {
+        background: rgba(255, 255, 255, 0.05);
+        color: #86868b;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    /* Modal Dark Styling */
+    .modal-content-dark {
+        background: #161617 !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 14px !important;
+        color: #ffffff;
+    }
+    .modal-header-dark {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+    .modal-footer-dark {
+        border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+</style>
+}
+
+<div class="content-wrapper">
+    <!-- Page Header Title and Subtitle -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+            <h2 style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #ffffff; margin: 0; font-size: 24px;">Contact Messages</h2>
+            <span style="color: #86868b; font-size: 13px;">Read and manage messages sent by website visitors</span>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background: transparent; margin: 0; padding: 0;">
+                <li class="breadcrumb-item"><a href="/admin/Home" style="color: #0071e3; text-decoration: none;">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="color: #86868b;">Messages</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Control Bar -->
+    <div class="admin-control-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px; flex-wrap: wrap;">
+        <!-- Search bar on left -->
+        <div style="position: relative; max-width: 320px; width: 100%;">
+            <input type="text" id="customSearchInput" placeholder="Search messages..." style="width: 100%; padding: 10px 15px 10px 38px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; font-size: 13px; outline: none; font-family: 'Inter', sans-serif;" />
+            <i class="mdi mdi-magnify" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 16px;"></i>
+        </div>
+    </div>
+
+    <!-- Messages Table Card -->
+    <div class="card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+        <div class="card-body" style="padding: 25px;">
+            <div class="table-responsive">
+                <table id="message-listing" class="table table-hover">
+                    <thead>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px; width: 180px;"> From </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px; width: 220px;"> Subject </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Snippet </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px; width: 140px;"> Date </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px; width: 100px;"> Status </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px; width: 180px;"> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var msg in Model)
+                        {
+                            var rowClass = !msg.IsRead ? "unread-row" : "";
+                            var snippet = msg.Message.Length > 60 ? msg.Message.Substring(0, 60) + "..." : msg.Message;
+                            
+                            <tr id="row-@msg.MessageId" class="@rowClass" style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+                                <td style="border: none; padding: 16px 12px;">
+                                    <div style="color: #ffffff; font-size: 13px;">@msg.Name</div>
+                                    <div style="color: #86868b; font-size: 11px; margin-top: 2px;">@msg.Email</div>
+                                </td>
+                                <td style="color: #ffffff; font-size: 13px; border: none; padding: 16px 12px; font-weight: inherit;">
+                                    @if (!msg.IsRead)
+                                    {
+                                        <span class="unread-indicator"></span>
+                                    }
+                                    @msg.Subject
+                                </td>
+                                <td style="color: #86868b; font-size: 13px; border: none; padding: 16px 12px;">@snippet</td>
+                                <td style="color: #86868b; font-size: 13px; border: none; padding: 16px 12px;">@msg.CreatedDate.ToString("MMM dd, yyyy\n hh:mm tt")</td>
+                                <td style="border: none; padding: 16px 12px;">
+                                    @if (!msg.IsRead)
+                                    {
+                                        <span class="status-pill status-unread">Unread</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status-pill status-read">Read</span>
+                                    }
+                                </td>
+                                <td style="border: none; padding: 16px 12px; white-space: nowrap;">
+                                    <button class="btn btn-primary btn-sm view-msg-btn" 
+                                            data-id="@msg.MessageId" 
+                                            data-name="@msg.Name"
+                                            data-email="@msg.Email"
+                                            data-subject="@msg.Subject"
+                                            data-date="@msg.CreatedDate.ToString("MMMM dd, yyyy - hh:mm tt")"
+                                            data-message="@msg.Message"
+                                            style="padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 6px; background: #2563eb !important; border: 1px solid #2563eb !important; color: #ffffff !important; display: inline-flex; align-items: center; gap: 4px;">
+                                        <i class="mdi mdi-eye" style="font-size: 12px;"></i> View
+                                    </button>
+
+                                    <form asp-area="admin" asp-controller="ContactMessages" asp-action="Delete" asp-route-id="@msg.MessageId" method="post" style="display: inline-block; margin-left: 5px;" onsubmit="return confirm('Are you sure you want to delete this message?');">
+                                        <button type="submit" class="btn btn-danger btn-sm" style="padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;">
+                                            <i class="mdi mdi-trash-can-outline" style="font-size: 12px;"></i> Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Beautiful View Message Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-dark">
+            <div class="modal-header modal-header-dark d-flex justify-content-between align-items-center">
+                <h5 class="modal-title" id="messageModalLabel" style="font-family: 'Outfit', sans-serif; font-weight: 600; color: #ffffff;">Message Details</h5>
+                <button type="button" class="close text-white" data-bs-dismiss="modal" aria-label="Close" style="background: transparent; border: none; font-size: 20px; outline: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 25px;">
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 15px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #86868b; letter-spacing: 1px; margin-bottom: 4px;">From</div>
+                    <div id="modalFromName" style="font-weight: 600; font-size: 15px; color: #ffffff;"></div>
+                    <div id="modalFromEmail" style="color: #00f3ff; font-size: 13px; margin-top: 2px;"></div>
+                </div>
+
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 15px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #86868b; letter-spacing: 1px; margin-bottom: 4px;">Subject</div>
+                    <div id="modalSubject" style="font-weight: 600; font-size: 15px; color: #ffffff;"></div>
+                </div>
+
+                <div style="margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 15px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #86868b; letter-spacing: 1px; margin-bottom: 4px;">Date / Time</div>
+                    <div id="modalDate" style="color: #f5f5f7; font-size: 13px;"></div>
+                </div>
+
+                <div>
+                    <div style="font-size: 11px; text-transform: uppercase; color: #86868b; letter-spacing: 1px; margin-bottom: 8px;">Message Content</div>
+                    <div id="modalBody" style="color: #e5e5ea; font-size: 14px; line-height: 1.6; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.04); white-space: pre-wrap;"></div>
+                </div>
+            </div>
+            <div class="modal-footer modal-footer-dark">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); color: #fff; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+<script src="~/Admin/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#message-listing').DataTable({
+            "dom": "<'row'<'col-sm-12'tr>><'row mt-3 align-items-center'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4 text-center'i><'col-sm-12 col-md-4 d-flex justify-content-end'p>>",
+            "pageLength": 10,
+            "lengthMenu": [10, 25, 50, 100],
+            "language": {
+                "paginate": {
+                    "previous": "Previous",
+                    "next": "Next"
+                }
+            }
+        });
+
+        $('#customSearchInput').on('keyup', function() {
+            table.search(this.value).draw();
+        });
+
+        // Modal triggers
+        $('.view-msg-btn').on('click', function() {
+            var btn = $(this);
+            var id = btn.data('id');
+            var name = btn.data('name');
+            var email = btn.data('email');
+            var subject = btn.data('subject');
+            var date = btn.data('date');
+            var message = btn.data('message');
+
+            // Populate modal
+            $('#modalFromName').text(name);
+            $('#modalFromEmail').html('<a href="mailto:' + email + '" style="color: #00f3ff; text-decoration: none;">' + email + '</a>');
+            $('#modalSubject').text(subject);
+            $('#modalDate').text(date);
+            $('#modalBody').text(message);
+
+            // Show modal
+            $('#messageModal').modal('show');
+
+            // If it is unread, mark as read on backend via Ajax
+            var row = $('#row-' + id);
+            if (row.hasClass('unread-row')) {
+                $.ajax({
+                    url: '/admin/ContactMessages/MarkAsRead',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function(response) {
+                        if (response.success) {
+                            // Remove unread-row styles
+                            row.removeClass('unread-row');
+                            // Remove unread indicator dot
+                            row.find('.unread-indicator').remove();
+                            // Update status badge
+                            row.find('.status-pill')
+                               .removeClass('status-unread')
+                               .addClass('status-read')
+                               .text('Read');
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+}

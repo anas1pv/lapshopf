@@ -14,13 +14,15 @@ namespace lapshop.Controllers
         private UserManager<ApplicationUser> _userManager;
         private ISalesInvoice salesInvoiceService;
         private readonly LapShopContext _context;
+        private readonly IEmailSender _emailSender;
 
-        public OrderController(IItems itemservice, UserManager<ApplicationUser> userManager, ISalesInvoice ssalesInvoiceService, LapShopContext context)
+        public OrderController(IItems itemservice, UserManager<ApplicationUser> userManager, ISalesInvoice ssalesInvoiceService, LapShopContext context, IEmailSender emailSender)
         {
             itemService = itemservice;
             _userManager = userManager;
             salesInvoiceService = ssalesInvoiceService;
             _context = context;
+            _emailSender = emailSender;
         }
 
         public IActionResult Wishlist()
@@ -222,6 +224,73 @@ namespace lapshop.Controllers
             };
 
             salesInvoiceService.Save(oSalesInvoice, lstInvoiceItems, true);
+
+            try
+            {
+                var itemsListHtml = string.Join("", cart.lstItems.Select(item => {
+                    decimal itemFinalPrice = discountPercent > 0 ? item.Price * (1 - discountPercent / 100m) : item.Price;
+                    decimal itemTotal = itemFinalPrice * item.Qty;
+                    return $@"
+                        <tr style='border-bottom: 1px solid rgba(255,255,255,0.06);'>
+                            <td style='padding: 12px; color: #ffffff;'>{item.ItemName}</td>
+                            <td style='padding: 12px; color: #86868b; text-align: center;'>{item.Qty}</td>
+                            <td style='padding: 12px; color: #00f3ff; text-align: right;'>${itemFinalPrice:N2}</td>
+                            <td style='padding: 12px; color: #00f3ff; text-align: right;'>${itemTotal:N2}</td>
+                        </tr>";
+                }));
+
+                decimal cartTotal = cart.lstItems.Sum(item => (discountPercent > 0 ? item.Price * (1 - discountPercent / 100m) : item.Price) * item.Qty);
+
+                string emailBody = $@"
+                    <div style='font-family: ""Outfit"", ""Inter"", Arial, sans-serif; background: #0a0a0c; color: #ffffff; padding: 40px 20px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.06);'>
+                        <div style='text-align: center; margin-bottom: 30px;'>
+                            <h1 style='color: #00f3ff; font-size: 28px; font-weight: 800; letter-spacing: 2px; margin: 0;'>LAPSHOP</h1>
+                            <p style='color: #86868b; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 5px 0 0 0;'>Order Confirmed</p>
+                        </div>
+                        
+                        <p style='font-size: 16px; color: #f5f5f7;'>Dear {user.FirstName} {user.LastName},</p>
+                        <p style='color: #86868b; font-size: 14px; line-height: 1.6;'>Thank you for your order! We are preparing it for shipment. Here are the details of your order:</p>
+                        
+                        <div style='background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 8px; padding: 20px; margin: 25px 0;'>
+                            <p style='margin: 0 0 10px 0; font-size: 14px; color: #86868b;'>Order ID: <strong style='color: #ffffff;'>#{oSalesInvoice.InvoiceId}</strong></p>
+                            <p style='margin: 0 0 10px 0; font-size: 14px; color: #86868b;'>Order Date: <strong style='color: #ffffff;'>{oSalesInvoice.InvoiceDate:yyyy-MM-dd HH:mm}</strong></p>
+                            <p style='margin: 0 0 10px 0; font-size: 14px; color: #86868b;'>Delivery Estimate: <strong style='color: #ffffff;'>{oSalesInvoice.DelivryDate:yyyy-MM-dd}</strong></p>
+                            <p style='margin: 0; font-size: 14px; color: #86868b;'>Shipping Info: <strong style='color: #ffffff;'>{shippingNotes}</strong></p>
+                        </div>
+
+                        <h3 style='color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; font-size: 16px;'>Items Ordered</h3>
+                        <table style='width: 100%; border-collapse: collapse; font-size: 13px;'>
+                            <thead>
+                                <tr style='border-bottom: 1px solid rgba(255,255,255,0.1);'>
+                                    <th style='padding: 8px 12px; text-align: left; color: #86868b;'>Product</th>
+                                    <th style='padding: 8px 12px; text-align: center; color: #86868b; width: 50px;'>Qty</th>
+                                    <th style='padding: 8px 12px; text-align: right; color: #86868b; width: 80px;'>Price</th>
+                                    <th style='padding: 8px 12px; text-align: right; color: #86868b; width: 80px;'>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {itemsListHtml}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan='3' style='padding: 15px 12px 5px 12px; font-weight: bold; color: #ffffff; text-align: right;'>Total:</td>
+                                    <td style='padding: 15px 12px 5px 12px; font-weight: bold; color: #00f3ff; text-align: right; font-size: 15px;'>${cartTotal:N2}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div style='margin-top: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 25px;'>
+                            <p style='color: #86868b; font-size: 12px; margin: 0;'>If you have any questions, please contact us from the storefront or reply to this email.</p>
+                            <p style='color: #00f3ff; font-size: 12px; font-weight: bold; margin: 5px 0 0 0;'>Thank you for choosing LapShop!</p>
+                        </div>
+                    </div>";
+
+                await _emailSender.SendEmailAsync(user.Email, $"Order Confirmation #{oSalesInvoice.InvoiceId} - LapShop", emailBody);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to send order confirmation email: {ex.Message}");
+            }
 
             // Clear the cart cookie after saving order
             HttpContext.Response.Cookies.Delete("Cart");

@@ -15,11 +15,13 @@ namespace lapshop.Areas.admin.Controllers
     {
         private readonly LapShopContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public OrdersController(LapShopContext context, UserManager<ApplicationUser> userManager)
+        public OrdersController(LapShopContext context, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         public IActionResult List(string? search = null, int? days = null, int? state = null)
@@ -168,7 +170,7 @@ namespace lapshop.Areas.admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateStatus(int id, int status)
+        public async Task<IActionResult> UpdateStatus(int id, int status)
         {
             var invoice = _context.TbSalesInvoices.FirstOrDefault(i => i.InvoiceId == id);
             if (invoice != null)
@@ -177,6 +179,29 @@ namespace lapshop.Areas.admin.Controllers
                 invoice.UpdatedDate = DateTime.Now;
                 invoice.UpdatedBy = _userManager.GetUserId(User);
                 _context.SaveChanges();
+
+                var customer = _context.Users.FirstOrDefault(u => u.Id == invoice.CustomerId.ToString());
+                if (customer != null && !string.IsNullOrEmpty(customer.Email))
+                {
+                    string statusText = status switch
+                    {
+                        1 => "Pending",
+                        2 => "Shipped",
+                        3 => "Delivered",
+                        4 => "Canceled",
+                        _ => "Updated"
+                    };
+
+                    string emailBody = $@"
+                        <div style='font-family: Arial, sans-serif; background: #0a0a0c; color: #ffffff; padding: 30px; border-radius: 12px; max-width: 600px; border: 1px solid rgba(255,255,255,0.06);'>
+                            <h2 style='color: #00f3ff; margin-bottom: 20px;'>Order Status Update - LapShop</h2>
+                            <p>Dear {customer.FirstName},</p>
+                            <p>Your order <strong>#{invoice.InvoiceId}</strong> status has been updated to: <strong style='color: #00f3ff;'>{statusText}</strong>.</p>
+                            <p>Thank you for choosing LapShop!</p>
+                        </div>";
+
+                    await _emailSender.SendEmailAsync(customer.Email, $"Order #{invoice.InvoiceId} Updated - LapShop", emailBody);
+                }
             }
             return RedirectToAction("Details", new { id = id });
         }

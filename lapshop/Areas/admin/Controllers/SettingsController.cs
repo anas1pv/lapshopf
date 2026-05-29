@@ -44,6 +44,12 @@ namespace lapshop.Areas.admin.Controllers
                     existingSettings.TwitterLink = settings.TwitterLink;
                     existingSettings.InstgramLink = settings.InstgramLink;
                     existingSettings.YoutubeLink = settings.YoutubeLink;
+                    existingSettings.SmtpHost = settings.SmtpHost;
+                    existingSettings.SmtpPort = settings.SmtpPort;
+                    existingSettings.SmtpUsername = settings.SmtpUsername;
+                    existingSettings.SmtpPassword = settings.SmtpPassword;
+                    existingSettings.SmtpEnableSsl = settings.SmtpEnableSsl;
+                    existingSettings.FromEmail = settings.FromEmail;
                     _context.TbSettings.Update(existingSettings);
                 }
                 else

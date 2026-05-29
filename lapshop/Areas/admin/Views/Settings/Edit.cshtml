@@ -91,12 +91,72 @@
                                         <input asp-for="YoutubeLink" class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                <div class="mt-4">
-                                    <button type="submit" class="btn btn-gradient-primary w-100" style="padding: 12px 20px; font-weight: 600; border-radius: 8px; font-size: 14px;">Save Settings</button>
+                <!-- SMTP / Email Settings Row -->
+                <div class="row mt-4 mb-4">
+                    <div class="col-12">
+                        <div class="card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; width: 100%;">
+                            <div class="card-body" style="padding: 25px;">
+                                <h4 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 5px;">SMTP / Email Configuration</h4>
+                                <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px;">Configure SMTP servers to send real emails to your customers.</p>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label asp-for="SmtpHost" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">SMTP Host</label>
+                                            <input asp-for="SmtpHost" class="form-control" placeholder="smtp.gmail.com" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                            <span asp-validation-for="SmtpHost" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label asp-for="SmtpPort" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">SMTP Port</label>
+                                            <input asp-for="SmtpPort" class="form-control" type="number" placeholder="587" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                            <span asp-validation-for="SmtpPort" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label asp-for="FromEmail" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">From Email Address</label>
+                                            <input asp-for="FromEmail" class="form-control" placeholder="noreply@lapshop.com" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                            <span asp-validation-for="FromEmail" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label asp-for="SmtpUsername" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">SMTP Username / Email</label>
+                                            <input asp-for="SmtpUsername" class="form-control" placeholder="your-email@gmail.com" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                            <span asp-validation-for="SmtpUsername" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label asp-for="SmtpPassword" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">SMTP Password</label>
+                                            <input asp-for="SmtpPassword" class="form-control" type="password" placeholder="••••••••••••" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                            <span asp-validation-for="SmtpPassword" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group mb-3" style="padding-top: 32px;">
+                                            <div class="form-check form-check-flat form-check-primary">
+                                                <label class="form-check-label" style="color: #ffffff; font-weight: 500; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                                    <input type="checkbox" name="SmtpEnableSsl" id="SmtpEnableSsl" value="true" @(Model.SmtpEnableSsl == true ? "checked" : "") class="form-check-input" style="cursor: pointer; width: 18px; height: 18px;" /> Enable SSL / TLS
+                                                    <input type="hidden" name="SmtpEnableSsl" value="false" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end mb-4">
+                        <button type="submit" class="btn btn-gradient-primary" style="padding: 12px 35px; font-weight: 600; border-radius: 8px; font-size: 14px; box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);">Save Settings</button>
                     </div>
                 </div>
             </form>

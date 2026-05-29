@@ -40,47 +40,68 @@ namespace lapshop.ApiControllers
             ApiResponse oApiResponse = new ApiResponse();
             try
             {
-                var query = oItem.GetAllItemsData(categoryId);
+                IQueryable<VwItem> query = _context.VwItems
+                    .Where(a => a.CurrentState == 1 && a.ItemName != null && a.ItemName != "");
+
+                if (categoryId > 0)
+                {
+                    query = query.Where(a => a.CategoryId == categoryId);
+                }
 
                 if (!string.IsNullOrEmpty(search))
                 {
                     var searchLower = search.ToLower();
-                    query = query.Where(a => a.ItemName.ToLower().Contains(searchLower) || (a.Description != null && a.Description.ToLower().Contains(searchLower))).ToList();
+                    query = query.Where(a => a.ItemName.ToLower().Contains(searchLower) || (a.Description != null && a.Description.ToLower().Contains(searchLower)));
                 }
 
                 if (!string.IsNullOrEmpty(ramSizes))
                 {
                     var rams = ramSizes.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
-                    query = query.Where(a => rams.Contains(a.RamSize ?? 8)).ToList();
+                    query = query.Where(a => a.RamSize.HasValue && rams.Contains(a.RamSize.Value));
                 }
 
                 if (!string.IsNullOrEmpty(brands))
                 {
                     var brandIds = brands.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
-                    query = query.Where(a => brandIds.Contains(a.CategoryId)).ToList();
+                    query = query.Where(a => brandIds.Contains(a.CategoryId));
                 }
 
                 // Price range filter
-                if (minPrice > 0 || maxPrice > 0)
+                if (minPrice > 0)
                 {
-                    if (minPrice > 0)
-                        query = query.Where(a => a.SalesPrice >= minPrice).ToList();
-                    if (maxPrice > 0)
-                        query = query.Where(a => a.SalesPrice <= maxPrice).ToList();
+                    query = query.Where(a => a.SalesPrice >= minPrice);
+                }
+                if (maxPrice > 0)
+                {
+                    query = query.Where(a => a.SalesPrice <= maxPrice);
                 }
 
                 // Processor filter
                 if (!string.IsNullOrEmpty(processors))
                 {
                     var procList = processors.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                    query = query.Where(a => a.Processor != null && procList.Any(p => a.Processor.Contains(p, StringComparison.OrdinalIgnoreCase))).ToList();
+                    if (procList.Count > 0)
+                    {
+                        query = query.Where(a => a.Processor != null && (
+                            (procList.Contains("i3") && a.Processor.Contains("i3")) ||
+                            (procList.Contains("i5") && a.Processor.Contains("i5")) ||
+                            (procList.Contains("i7") && a.Processor.Contains("i7")) ||
+                            (procList.Contains("i9") && a.Processor.Contains("i9")) ||
+                            (procList.Contains("Ryzen 5") && a.Processor.Contains("Ryzen 5")) ||
+                            (procList.Contains("Ryzen 7") && a.Processor.Contains("Ryzen 7")) ||
+                            (procList.Contains("Ryzen 9") && a.Processor.Contains("Ryzen 9")) ||
+                            (procList.Contains("M1") && a.Processor.Contains("M1")) ||
+                            (procList.Contains("M2") && a.Processor.Contains("M2")) ||
+                            (procList.Contains("M3") && a.Processor.Contains("M3"))
+                        ));
+                    }
                 }
 
                 // OS filter
                 if (!string.IsNullOrEmpty(osIds))
                 {
                     var osList = osIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
-                    query = query.Where(a => a.OsId.HasValue && osList.Contains(a.OsId.Value)).ToList();
+                    query = query.Where(a => a.OsId.HasValue && osList.Contains(a.OsId.Value));
                 }
 
                 // Sorting logic
@@ -89,17 +110,22 @@ namespace lapshop.ApiControllers
                     switch (sortOrder.ToLower())
                     {
                         case "price-asc":
-                            query = query.OrderBy(a => a.SalesPrice).ToList();
+                            query = query.OrderBy(a => a.SalesPrice);
                             break;
                         case "price-desc":
-                            query = query.OrderByDescending(a => a.SalesPrice).ToList();
+                            query = query.OrderByDescending(a => a.SalesPrice);
                             break;
                         case "name-asc":
-                            query = query.OrderBy(a => a.ItemName).ToList();
+                            query = query.OrderBy(a => a.ItemName);
                             break;
                         default:
+                            query = query.OrderByDescending(a => a.CreatedDate);
                             break;
                     }
+                }
+                else
+                {
+                    query = query.OrderByDescending(a => a.CreatedDate);
                 }
 
                 var totalCount = query.Count();

@@ -13,14 +13,17 @@ namespace lapshop.Controllers
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private IConfiguration _configuration;
+        private IEmailSender _emailSender;
 
         public UsersController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _emailSender = emailSender;
         }
 
         public IActionResult Login(string returnUrl)
@@ -72,7 +75,7 @@ namespace lapshop.Controllers
                     var validCode = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Action("ConfirmEmail", "Users", new { userId = user.Id }, protocol: HttpContext.Request.Scheme);
                     var emailBody = $"<h3>Welcome to LapShop!</h3><p>Your email verification code is: <strong>{validCode}</strong></p><p>You can verify your email on this page: <a href='{callbackUrl}'>Verify Email</a></p>";
-                    await SendEmail(user.Email, "Email Verification - LapShop", emailBody);
+                    await _emailSender.SendEmailAsync(user.Email, "Email Verification - LapShop", emailBody);
                     var Myuser = await _userManager.FindByEmailAsync(model.Email);
                     await _userManager.AddToRoleAsync(Myuser, "Customer");
                     return RedirectToAction("ConfirmEmail", new { userId = user.Id });
@@ -114,48 +117,7 @@ namespace lapshop.Controllers
             return View(model);
         }
 
-        private async Task SendEmail(string email, string subject, string body)
-        {
-            try
-            {
-                var smtpSettings = _configuration.GetSection("SmtpSettings");
-                var host = smtpSettings["Host"];
-                if (string.IsNullOrEmpty(host))
-                {
-                    System.Diagnostics.Debug.WriteLine($"To: {email}, Subject: {subject}, Body: {body}");
-                    return;
-                }
 
-                int port = int.Parse(smtpSettings["Port"] ?? "587");
-                var username = smtpSettings["Username"];
-                var password = smtpSettings["Password"];
-                var enableSsl = bool.Parse(smtpSettings["EnableSsl"] ?? "true");
-                var fromEmail = smtpSettings["FromEmail"] ?? "noreply@lapshop.com";
-
-                using (var mail = new System.Net.Mail.MailMessage())
-                {
-                    mail.From = new System.Net.Mail.MailAddress(fromEmail, "LapShop");
-                    mail.To.Add(new System.Net.Mail.MailAddress(email));
-                    mail.Subject = subject;
-                    mail.Body = body;
-                    mail.IsBodyHtml = true;
-
-                    using (var smtp = new System.Net.Mail.SmtpClient(host, port))
-                    {
-                        if (!string.IsNullOrEmpty(username))
-                        {
-                            smtp.Credentials = new System.Net.NetworkCredential(username, password);
-                        }
-                        smtp.EnableSsl = enableSsl;
-                        await smtp.SendMailAsync(mail);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"SMTP Send Error: {ex.Message}");
-            }
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -299,7 +261,7 @@ namespace lapshop.Controllers
             var callbackUrl = Url.Action("ResetPassword", "Users", new { code = validCode, email = user.Email }, protocol: HttpContext.Request.Scheme);
             
             var emailBody = $"<h3>Reset Your Password - LapShop</h3><p>Please reset your password by <a href='{callbackUrl}'>clicking here</a>.</p>";
-            await SendEmail(user.Email, "Reset Password - LapShop", emailBody);
+            await _emailSender.SendEmailAsync(user.Email, "Reset Password - LapShop", emailBody);
 
             ViewBag.Message = "A password reset link has been sent to your email. Please check your inbox.";
             return View();

@@ -25,6 +25,7 @@ builder.Services.AddScoped<ISalesInvoiceItems, ClsSalesInvoiceItems>();
 builder.Services.AddScoped<ISliders, ClsSliders>();
 builder.Services.AddScoped<ISettings, ClsSettings>();
 builder.Services.AddScoped<IPages, ClsPages>();
+builder.Services.AddScoped<IEmailSender, ClsEmailSender>();
 
 builder.Services.AddSession();
 

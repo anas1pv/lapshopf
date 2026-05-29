@@ -1,4 +1,4 @@
-﻿namespace lapshop.Domains
+namespace lapshop.Domains
 {
     public class TbSettings
     {
@@ -14,5 +14,11 @@
         public string ContactNumber { get; set; }
         public string MiddlePanner { get; set; }
         public string LastPanner { get; set; }
+        public string? SmtpHost { get; set; }
+        public int? SmtpPort { get; set; }
+        public string? SmtpUsername { get; set; }
+        public string? SmtpPassword { get; set; }
+        public bool? SmtpEnableSsl { get; set; }
+        public string? FromEmail { get; set; }
     }
 }

@@ -56,6 +56,19 @@ public partial class LapShopContext : IdentityDbContext<ApplicationUser>//<Ident
             ALTER TABLE TbItems ADD DiscountPrice DECIMAL(18,2) NULL;";
             this.Database.ExecuteSqlRaw(sqlAddDiscountPrice);
 
+            var sqlAddSmtpSettings = @"
+            IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('TbSettings') AND name = 'SmtpHost')
+            BEGIN
+                ALTER TABLE TbSettings ADD 
+                    SmtpHost NVARCHAR(200) NULL,
+                    SmtpPort INT NULL,
+                    SmtpUsername NVARCHAR(200) NULL,
+                    SmtpPassword NVARCHAR(200) NULL,
+                    SmtpEnableSsl BIT NULL,
+                    FromEmail NVARCHAR(200) NULL;
+            END";
+            this.Database.ExecuteSqlRaw(sqlAddSmtpSettings);
+
             var sqlRecreateVwItems = @"
             IF EXISTS (SELECT * FROM sys.views WHERE name = 'VwItems')
             DROP VIEW VwItems;
