@@ -35,7 +35,7 @@ namespace lapshop.ApiControllers
         }
 
         [HttpGet("GetPaged")]
-        public ApiResponse GetPaged(int page = 1, int pageSize = 24, int categoryId = 0, string search = "", string ramSizes = "", string brands = "", decimal minPrice = 0, decimal maxPrice = 0, string processors = "", string osIds = "")
+        public ApiResponse GetPaged(int page = 1, int pageSize = 24, int categoryId = 0, string search = "", string ramSizes = "", string brands = "", decimal minPrice = 0, decimal maxPrice = 0, string processors = "", string osIds = "", string sortOrder = "")
         {
             ApiResponse oApiResponse = new ApiResponse();
             try
@@ -81,6 +81,25 @@ namespace lapshop.ApiControllers
                 {
                     var osList = osIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
                     query = query.Where(a => a.OsId.HasValue && osList.Contains(a.OsId.Value)).ToList();
+                }
+
+                // Sorting logic
+                if (!string.IsNullOrEmpty(sortOrder))
+                {
+                    switch (sortOrder.ToLower())
+                    {
+                        case "price-asc":
+                            query = query.OrderBy(a => a.SalesPrice).ToList();
+                            break;
+                        case "price-desc":
+                            query = query.OrderByDescending(a => a.SalesPrice).ToList();
+                            break;
+                        case "name-asc":
+                            query = query.OrderBy(a => a.ItemName).ToList();
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
                 var totalCount = query.Count();

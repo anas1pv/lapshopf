@@ -56,10 +56,10 @@ namespace lapshop.Controllers
             return RedirectToAction("ItemDetails", new { id = itemId });
         }
 
-        public IActionResult ItemList(string? search, int? categoryId)
+        public IActionResult ItemList(string? search, int? id, int? categoryId)
         {
             ViewBag.Search = search;
-            ViewBag.CategoryId = categoryId;
+            ViewBag.CategoryId = categoryId ?? id;
             return View();
         }
     }

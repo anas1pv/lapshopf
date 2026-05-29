@@ -25,6 +25,11 @@ var ClsItems = {
             ClsItems.RefreshPagination();
         });
 
+        // Attach event handlers to page-size and sort-order dropdowns to trigger refresh
+        $('#select-page-size, #select-sort-order').off('change').on('change', function() {
+            ClsItems.RefreshPagination();
+        });
+
         // Intercept search form submit if on product list page
         var searchForm = $('#search-overlay form');
         if (searchForm.length) {
@@ -40,6 +45,35 @@ var ClsItems = {
         }
     },
     InitPagination: function() {
+        // Collect active filters to send with AJAX
+        var selectedBrands = [];
+        $('.brand-filter:checked').each(function() {
+            selectedBrands.push($(this).data('val'));
+        });
+
+        var selectedRam = [];
+        $('.ram-filter:checked').each(function() {
+            selectedRam.push($(this).data('val'));
+        });
+
+        var selectedProcessors = [];
+        $('.processor-filter:checked').each(function() {
+            selectedProcessors.push($(this).data('val'));
+        });
+
+        var selectedOs = [];
+        $('.os-filter:checked').each(function() {
+            selectedOs.push($(this).data('val'));
+        });
+
+        var priceSlider = $('#price-slider');
+        var minPrice = 0;
+        var maxPrice = 0;
+        if (priceSlider.length && priceSlider.hasClass('ui-slider')) {
+            minPrice = priceSlider.slider('values', 0);
+            maxPrice = priceSlider.slider('values', 1);
+        }
+
         $('#ItemPagination').pagination({
             dataSource: '/api/Items/GetPaged',
             locator: 'data.items',
@@ -49,52 +83,22 @@ var ClsItems = {
                 }
                 return 0;
             },
-            pageSize: 24,
+            pageSize: parseInt($('#select-page-size').val()) || 24,
             alias: {
                 pageNumber: 'page',
                 pageSize: 'pageSize'
             },
             ajax: {
-                data: function() {
-                    // Collect active filters to send with AJAX
-                    var selectedBrands = [];
-                    $('.brand-filter:checked').each(function() {
-                        selectedBrands.push($(this).data('val'));
-                    });
-
-                    var selectedRam = [];
-                    $('.ram-filter:checked').each(function() {
-                        selectedRam.push($(this).data('val'));
-                    });
-
-                    var selectedProcessors = [];
-                    $('.processor-filter:checked').each(function() {
-                        selectedProcessors.push($(this).data('val'));
-                    });
-
-                    var selectedOs = [];
-                    $('.os-filter:checked').each(function() {
-                        selectedOs.push($(this).data('val'));
-                    });
-
-                    var priceSlider = $('#price-slider');
-                    var minPrice = 0;
-                    var maxPrice = 0;
-                    if (priceSlider.length && priceSlider.hasClass('ui-slider')) {
-                        minPrice = priceSlider.slider('values', 0);
-                        maxPrice = priceSlider.slider('values', 1);
-                    }
-
-                    return {
-                        categoryId: ClsItems.currentCategoryId,
-                        search: ClsItems.currentSearch,
-                        brands: selectedBrands.join(','),
-                        ramSizes: selectedRam.join(','),
-                        processors: selectedProcessors.join(','),
-                        osIds: selectedOs.join(','),
-                        minPrice: minPrice,
-                        maxPrice: maxPrice
-                    };
+                data: {
+                    categoryId: ClsItems.currentCategoryId,
+                    search: ClsItems.currentSearch,
+                    brands: selectedBrands.join(','),
+                    ramSizes: selectedRam.join(','),
+                    processors: selectedProcessors.join(','),
+                    osIds: selectedOs.join(','),
+                    minPrice: minPrice,
+                    maxPrice: maxPrice,
+                    sortOrder: $('#select-sort-order').val() || "default"
                 },
                 beforeSend: function() {
                     $('#ItemArea').html('<div class="col-12 text-center" style="padding: 80px 0;"><div class="spinner-border text-primary" role="status" style="border-color: #00f3ff; border-right-color: transparent;"><span class="sr-only">Loading...</span></div></div>');
@@ -127,21 +131,21 @@ var ClsItems = {
                 if (d1) {
                     d1.innerHTML = htmlData;
 
-                    // Convert dynamic bg-img elements to background-images (as Multikart expects)
-                    $('#ItemArea .bg-img').parent().addClass('bg-size');
-                    $('#ItemArea .bg-img').each(function () {
-                        var el = $(this),
-                            src = el.attr("src"),
-                            parent = el.parent();
-                        parent.css({
-                            'background-image': 'url(' + src + ')',
-                            'background-size': 'contain',
-                            'background-position': 'center',
-                            'background-repeat': 'no-repeat',
-                            'display': 'block'
-                        });
-                        el.hide();
-                    });
+                    // bg-img parent conversion commented out because card images are rendered natively
+                    // $('#ItemArea .bg-img').parent().addClass('bg-size');
+                    // $('#ItemArea .bg-img').each(function () {
+                    //     var el = $(this),
+                    //         src = el.attr("src"),
+                    //         parent = el.parent();
+                    //     parent.css({
+                    //         'background-image': 'url(' + src + ')',
+                    //         'background-size': 'contain',
+                    //         'background-position': 'center',
+                    //         'background-repeat': 'no-repeat',
+                    //         'display': 'block'
+                    //     });
+                    //     el.hide();
+                    // });
                 }
             }
         });
@@ -154,7 +158,7 @@ var ClsItems = {
         data += "<div class='product-box'>";
         var img = item.imageName || 'silver_ultrabook.png';
         data += "<div class='img-wrapper' style='border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;'>";
-        data += "<div class='front'><a href='/Items/ItemDetails/" + item.itemId + "'><img src='/Uploads/Items/" + img + "' class='img-fluid blur-up lazyload bg-img' alt='' style='max-height: 100%; width: auto; object-fit: contain;'></a></div>";
+        data += "<div class='front'><a href='/Items/ItemDetails/" + item.itemId + "'><img src='/Uploads/Items/" + img + "' class='img-fluid' alt='' style='max-height: 100%; width: auto; object-fit: contain;'></a></div>";
         data += "<div class='cart-info cart-wrap'><a href='/Items/ItemDetails/" + item.itemId + "' title='View details'><i class='ti-search' aria-hidden='true'></i></a></div>";
         data += "</div>";
         

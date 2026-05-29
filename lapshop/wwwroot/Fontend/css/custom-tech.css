@@ -813,7 +813,7 @@ a.btn-solid {
 
 /* ── 14. Parallax Banner ──────────────────────────────────── */
 .full-banner {
-    background: var(--bg-secondary) !important;
+    background-color: var(--bg-secondary);
     position: relative !important;
 }
 

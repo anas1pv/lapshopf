@@ -116,7 +116,7 @@ using (var scope = app.Services.CreateScope())
     {
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-        
+
         // Ensure roles exist
         string[] roleNames = { "Admin", "Customer" };
         foreach (var roleName in roleNames)

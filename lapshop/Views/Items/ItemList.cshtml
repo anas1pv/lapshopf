@@ -43,48 +43,40 @@
                                         <label class="custom-control-label" for="brand-apple">Apple</label>
                                     </div>
                                     <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-hp" data-val="2">
-                                        <label class="custom-control-label" for="brand-hp">HP</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-acer" data-val="3">
-                                        <label class="custom-control-label" for="brand-acer">Acer</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-asus" data-val="4">
-                                        <label class="custom-control-label" for="brand-asus">ASUS</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-dell" data-val="5">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-dell" data-val="2">
                                         <label class="custom-control-label" for="brand-dell">Dell</label>
                                     </div>
                                     <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-lenovo" data-val="6">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-lenovo" data-val="3">
                                         <label class="custom-control-label" for="brand-lenovo">Lenovo</label>
                                     </div>
                                     <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-msi" data-val="8">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-hp" data-val="4">
+                                        <label class="custom-control-label" for="brand-hp">HP</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-asus" data-val="5">
+                                        <label class="custom-control-label" for="brand-asus">ASUS</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-razer" data-val="6">
+                                        <label class="custom-control-label" for="brand-razer">Razer</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-msi" data-val="7">
                                         <label class="custom-control-label" for="brand-msi">MSI</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-acer" data-val="8">
+                                        <label class="custom-control-label" for="brand-acer">Acer</label>
                                     </div>
                                     <div class="custom-control custom-checkbox collection-filter-checkbox">
                                         <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-microsoft" data-val="9">
                                         <label class="custom-control-label" for="brand-microsoft">Microsoft</label>
                                     </div>
                                     <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-razer" data-val="14">
-                                        <label class="custom-control-label" for="brand-razer">Razer</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-samsung" data-val="16">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-samsung" data-val="10">
                                         <label class="custom-control-label" for="brand-samsung">Samsung</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-huawei" data-val="11">
-                                        <label class="custom-control-label" for="brand-huawei">Huawei</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
-                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-toshiba" data-val="10">
-                                        <label class="custom-control-label" for="brand-toshiba">Toshiba</label>
                                     </div>
                                 </div>
                             </div>
@@ -258,26 +250,21 @@
                                                             <li><img src="../assets/images/icon/6.png" alt="" class="product-6-layout-view"></li>
                                                         </ul>
                                                     </div>
-                                                    <div class="product-page-per-view">
-                                                        <select>
-                                                            <option value="High to low">
-                                                                24 Products Par Page
-                                                            </option>
-                                                            <option value="Low to High">
-                                                                50 Products Par Page
-                                                            </option>
-                                                            <option value="Low to High">
-                                                                100 Products Par Page
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="product-page-filter">
-                                                        <select>
-                                                            <option value="High to low">Sorting items</option>
-                                                            <option value="Low to High">50 Products</option>
-                                                            <option value="Low to High">100 Products</option>
-                                                        </select>
-                                                    </div>
+                                                     <div class="product-page-per-view">
+                                                         <select id="select-page-size" style="background: #161617; color: #fff; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 6px 12px; font-family: 'Inter', sans-serif;">
+                                                             <option value="24">24 Products Per Page</option>
+                                                             <option value="48">48 Products Per Page</option>
+                                                             <option value="96">96 Products Per Page</option>
+                                                         </select>
+                                                     </div>
+                                                     <div class="product-page-filter">
+                                                         <select id="select-sort-order" style="background: #161617; color: #fff; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 6px 12px; font-family: 'Inter', sans-serif;">
+                                                             <option value="default">Default Sorting</option>
+                                                             <option value="price-asc">Price: Low to High</option>
+                                                             <option value="price-desc">Price: High to Low</option>
+                                                             <option value="name-asc">Name: A to Z</option>
+                                                         </select>
+                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -311,7 +298,7 @@
 {
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="~/custom/js/pagination.js"></script>
-    <script src="~/modules/items.js"></script>
+    <script src="~/modules/items.js" asp-append-version="true"></script>
     <script>
         var initialSearch = '@Html.Raw(ViewBag.Search)';
         var initialCategoryId = '@(ViewBag.CategoryId ?? 0)';
