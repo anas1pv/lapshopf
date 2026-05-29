@@ -37,6 +37,47 @@ public partial class LapShopContext : IdentityDbContext<ApplicationUser>//<Ident
                 IsActive BIT NOT NULL DEFAULT 1
             )";
             this.Database.ExecuteSqlRaw(sqlCoupons);
+
+            var sqlContactMessages = @"
+            IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='TbContactMessages' AND xtype='U')
+            CREATE TABLE TbContactMessages (
+                MessageId INT IDENTITY(1,1) PRIMARY KEY,
+                Name NVARCHAR(100) NOT NULL,
+                Email NVARCHAR(100) NOT NULL,
+                Subject NVARCHAR(200) NOT NULL,
+                Message NVARCHAR(2000) NOT NULL,
+                CreatedDate DATETIME NOT NULL,
+                IsRead BIT NOT NULL DEFAULT 0
+            )";
+            this.Database.ExecuteSqlRaw(sqlContactMessages);
+
+            var sqlAddDiscountPrice = @"
+            IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('TbItems') AND name = 'DiscountPrice')
+            ALTER TABLE TbItems ADD DiscountPrice DECIMAL(18,2) NULL;";
+            this.Database.ExecuteSqlRaw(sqlAddDiscountPrice);
+
+            var sqlRecreateVwItems = @"
+            IF EXISTS (SELECT * FROM sys.views WHERE name = 'VwItems')
+            DROP VIEW VwItems;
+            ";
+            this.Database.ExecuteSqlRaw(sqlRecreateVwItems);
+
+            var sqlCreateVwItems = @"
+            CREATE VIEW VwItems AS
+            SELECT 
+                a.ItemId, a.ItemName, a.SalesPrice, a.PurchasePrice, a.CategoryId, a.ImageName, 
+                a.CreatedDate, a.CreatedBy, a.CurrentState, a.UpdatedBy, a.UpdatedDate, a.Description, 
+                a.Gpu, a.HardDisk, a.ItemTypeId, a.Processor, a.RamSize, a.ScreenReslution, a.ScreenSize, 
+                a.Weight, a.OsId, a.DiscountPrice,
+                b.CategoryName,
+                c.ItemTypeName,
+                d.OsName
+            FROM TbItems a
+            LEFT JOIN TbCategories b ON a.CategoryId = b.CategoryId
+            LEFT JOIN TbItemTypes c ON a.ItemTypeId = c.ItemTypeId
+            LEFT JOIN TbOs d ON a.OsId = d.OsId;
+            ";
+            this.Database.ExecuteSqlRaw(sqlCreateVwItems);
         }
         catch {}
     }
@@ -78,6 +119,8 @@ public partial class LapShopContext : IdentityDbContext<ApplicationUser>//<Ident
     public virtual DbSet<TbItemEvaluation> TbItemEvaluations { get; set; }
 
     public virtual DbSet<TbCoupon> TbCoupons { get; set; }
+
+    public virtual DbSet<TbContactMessage> TbContactMessages { get; set; }
 
     public virtual DbSet<VwItem> VwItems { get; set; }
 
@@ -155,6 +198,7 @@ public partial class LapShopContext : IdentityDbContext<ApplicationUser>//<Ident
             entity.Property(e => e.OsId).HasDefaultValue(0);
             entity.Property(e => e.PurchasePrice).HasColumnType("decimal(8, 2)");
             entity.Property(e => e.SalesPrice).HasColumnType("decimal(8, 2)");
+            entity.Property(e => e.DiscountPrice).HasColumnType("decimal(8, 2)");
 
             entity.HasOne(d => d.Category).WithMany(p => p.TbItems)
                 .HasForeignKey(d => d.CategoryId)
@@ -326,6 +370,7 @@ public partial class LapShopContext : IdentityDbContext<ApplicationUser>//<Ident
             entity.Property(e => e.OsName).HasMaxLength(100);
             entity.Property(e => e.PurchasePrice).HasColumnType("decimal(8, 2)");
             entity.Property(e => e.SalesPrice).HasColumnType("decimal(8, 2)");
+            entity.Property(e => e.DiscountPrice).HasColumnType("decimal(8, 2)");
         });
 
         modelBuilder.Entity<VwItemCategory>(entity =>
@@ -380,6 +425,17 @@ public partial class LapShopContext : IdentityDbContext<ApplicationUser>//<Ident
             entity.HasIndex(e => e.CouponCode).IsUnique();
             entity.Property(e => e.DiscountPercent).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.ExpiryDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<TbContactMessage>(entity =>
+        {
+            entity.HasKey(e => e.MessageId);
+            entity.ToTable("TbContactMessages");
+            entity.Property(e => e.Name).HasMaxLength(100).IsRequired();
+            entity.Property(e => e.Email).HasMaxLength(100).IsRequired();
+            entity.Property(e => e.Subject).HasMaxLength(200);
+            entity.Property(e => e.Message).HasMaxLength(2000).IsRequired();
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
         });
 
         OnModelCreatingPartial(modelBuilder);

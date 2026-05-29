@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LapShop — Your premium destination for laptops. Browse our wide selection of gaming, business, and ultrabook laptops from top brands.">
+    <meta name="theme-color" content="#0a0a1a">
+    <title>LapShop | Premium Laptop Store</title>
+    <link rel="icon" href="/Fontend/images/favicon/1.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/Fontend/images/favicon/1.png" type="image/x-icon">
+
+    <!--Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/fontawesome.css">
+
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/slick-theme.css">
+
+    <!-- Animate icon -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/animate.css">
+
+    <!-- Themify icon -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/themify-icons.css">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/bootstrap.css">
+
+    <!-- Theme css -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/color19.css" media="screen" id="color">
+
+    <!-- Custom Tech CSS -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/custom-tech.css?v=TdS5mQFmc6uc3Iij5_cKSkoO8PZKB_Z1kDURpuKDIHc">
+
+    ;
+</head>
+
+<body>
+    <!-- header start -->
+    <header class="header-tools marketplace">
+        <div class="mobile-fix-option"></div>
+        <div class="container-fluid custom-container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="main-menu">
+                        <div class="menu-left">
+                            <div class="navbar">
+                                <a href="javascript:void(0)" onclick="openNav()">
+                                    <div class="bar-style">
+                                        <i class="fa fa-bars sidebar-bar" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <div id="mySidenav" class="sidenav">
+                                    <a href="javascript:void(0)" class="sidebar-overlay" onclick="closeNav()"></a>
+                                    <nav>
+                                        <div onclick="closeNav()">
+                                            <div class="sidebar-back text-left">
+                                                <i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back
+                                            </div>
+                                        </div>
+                                        <ul id="sub-menu" class="sm pixelstrap sm-vertical">
+                                            <li>
+                                                <a href="/Home/Index">Home</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Items/ItemList">Products</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Pages/Index/3">About Us</a>
+                                            </li>
+                                            <li><a href="/Pages/Index/4">Terms Of Use</a></li>
+                                            <li>
+                                                <a href="/Pages/Index/5">Contact Us</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="brand-logo" style="padding: 10px 0;">
+                                <a href="/Home/Index" style="text-decoration: none;">
+                                    <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: 1px; color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);">LapShop</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="menu-right pull-right">
+                            <div>
+                                <nav id="main-nav">
+                                    <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+                                    <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+                                        <li>
+                                            <div class="mobile-back text-right">
+                                                Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="/Home/Index">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Items/ItemList">Products</a>
+                                        </li>
+                                        <li id="hover-cls">
+                                            <a href="/Pages/Index/3">
+                                                About Us
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Pages/Index/4">
+                                                Terms
+                                                Of Use
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Pages/Index/5">Contact Us</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- Header icons -->
+                            <ul class="header-dropdown" style="display: flex; align-items: center; gap: 22px; list-style: none; margin: 0 0 0 20px; padding: 0;">
+                                <!-- Search -->
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openSearch()" style="color: #94A3B8; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.3s ease;">
+                                        <i class="fa fa-search" aria-hidden="true" style="margin-right: 5px; color: #00f3ff; text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);"></i> Search
+                                    </a>
+                                </li>
+                                <!-- Cart -->
+                                <li style="position: relative;">
+                                    <a href="/Order/Cart" style="color: #94A3B8; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.3s ease;">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right: 5px; color: #00f3ff; text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);"></i> Cart
+                                            <span id="cartCountBadge" class="badge bg-primary" style="display: none; position: absolute; top: -8px; right: -12px; background: #00f3ff !important; color: #000000 !important; font-size: 9px; padding: 3px 5px; border-radius: 50%; font-weight: 700; line-height: 1; box-shadow: 0 0 8px rgba(0, 243, 255, 0.6);">0</span>
+                                    </a>
+                                </li>
+                                <!-- My Account (click-based) -->
+                                <li id="accountDropdown" style="position: relative;">
+                                    <a href="javascript:void(0)" onclick="toggleAccountMenu()" style="color: #94A3B8; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.3s ease;">
+                                        <i class="fa fa-user" aria-hidden="true" style="margin-right: 5px; color: #00f3ff; text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);"></i> My Account <i class="fa fa-chevron-down" style="font-size: 10px; margin-left: 3px;"></i>
+                                    </a>
+                                    <ul id="accountMenu" style="display: none; position: absolute; right: 0; top: 100%; margin-top: 10px; background: var(--bg-secondary, #10102a); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px); min-width: 200px; padding: 8px 0; z-index: 1000; list-style: none;">
+                                            <li><a style="display: block; padding: 10px 20px; font-size: 13px;" href="/Users/Login"><i class="fa fa-sign-in" style="width: 20px; margin-right: 8px;"></i>Login</a></li>
+                                            <li><a style="display: block; padding: 10px 20px; font-size: 13px;" href="/Users/Register"><i class="fa fa-user-plus" style="width: 20px; margin-right: 8px;"></i>Register</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+<!-- Hero Slider -->
+<section class="p-0 layout-7" style="position: relative;">
+    <div class="slide-1 home-slider">
+            <div>
+                <div class="home text-left" style="position: relative;">
+                    <img src="/Uploads/Sliders/sale_laptop_banner.png" alt="Ultimate Gaming Laptops" class="bg-img" style="filter: brightness(0.35);">
+                    <div class="container-fluid custom-container" style="position: relative; z-index: 2;">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        <h4 style="color: #00e5ff; letter-spacing: 4px; text-transform: uppercase; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Ultimate Gaming Laptops</h4>
+                                        <h1 style="color: #fff; font-size: 44px; font-weight: 800; line-height: 1.15; text-shadow: 0 2px 30px rgba(0,0,0,0.5);">Unleash extreme power with the latest RTX graphics &amp; high-refresh rate displays. Up to 30% Off.</h1>
+                                        <a href="/Items/ItemList" class="btn-solid" style="display: inline-block; margin-top: 25px; padding: 14px 36px;">Shop Now <i class="fa fa-arrow-right" style="margin-left: 8px;"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="home text-left" style="position: relative;">
+                    <img src="/Uploads/Sliders/sale_laptop_banner.png" alt="Sleek Business Workstations" class="bg-img" style="filter: brightness(0.35);">
+                    <div class="container-fluid custom-container" style="position: relative; z-index: 2;">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        <h4 style="color: #00e5ff; letter-spacing: 4px; text-transform: uppercase; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Sleek Business Workstations</h4>
+                                        <h1 style="color: #fff; font-size: 44px; font-weight: 800; line-height: 1.15; text-shadow: 0 2px 30px rgba(0,0,0,0.5);">Supercharge your productivity with Intel Core Ultra &amp; Apple M-series chips. Free Delivery.</h1>
+                                        <a href="/Items/ItemList" class="btn-solid" style="display: inline-block; margin-top: 25px; padding: 14px 36px;">Shop Now <i class="fa fa-arrow-right" style="margin-left: 8px;"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="home text-left" style="position: relative;">
+                    <img src="/Uploads/Sliders/laptop_deal_banner.png" alt="Lightweight Premium Ultrabooks" class="bg-img" style="filter: brightness(0.35);">
+                    <div class="container-fluid custom-container" style="position: relative; z-index: 2;">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        <h4 style="color: #00e5ff; letter-spacing: 4px; text-transform: uppercase; font-size: 16px; font-weight: 500; margin-bottom: 12px;">Lightweight Premium Ultrabooks</h4>
+                                        <h1 style="color: #fff; font-size: 44px; font-weight: 800; line-height: 1.15; text-shadow: 0 2px 30px rgba(0,0,0,0.5);">All-day battery life and gorgeous displays, designed for creators on the go.</h1>
+                                        <a href="/Items/ItemList" class="btn-solid" style="display: inline-block; margin-top: 25px; padding: 14px 36px;">Shop Now <i class="fa fa-arrow-right" style="margin-left: 8px;"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+
+<!-- Category Cards -->
+<section style="padding: 50px 0;">
+    <div class="container-fluid">
+        <div class="row partition4">
+                <div class="col-lg-3 col-md-6" style="margin-bottom: 20px;">
+                    <a href="/Items/ItemList/1" style="text-decoration: none;">
+                        <div class="collection-banner p-right text-right" style="border-radius: 12px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); transition: all 0.3s ease;">
+                            <div class="img-part">
+                                <img src="/Uploads/Categories/apple_macbook.png" class="img-fluid" alt="Apple">
+                            </div>
+                            <div class="contain-banner banner-4">
+                                <div>
+                                    <h4 style="background: rgba(0,243,255,0.75); backdrop-filter: blur(8px); padding: 10px 20px; border-radius: 8px; color: #000; font-size: 15px; font-weight: 600; display: inline-block;">Apple</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6" style="margin-bottom: 20px;">
+                    <a href="/Items/ItemList/2" style="text-decoration: none;">
+                        <div class="collection-banner p-right text-right" style="border-radius: 12px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); transition: all 0.3s ease;">
+                            <div class="img-part">
+                                <img src="/Uploads/Categories/dell_xps.png" class="img-fluid" alt="Dell">
+                            </div>
+                            <div class="contain-banner banner-4">
+                                <div>
+                                    <h4 style="background: rgba(0,243,255,0.75); backdrop-filter: blur(8px); padding: 10px 20px; border-radius: 8px; color: #000; font-size: 15px; font-weight: 600; display: inline-block;">Dell</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6" style="margin-bottom: 20px;">
+                    <a href="/Items/ItemList/3" style="text-decoration: none;">
+                        <div class="collection-banner p-right text-right" style="border-radius: 12px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); transition: all 0.3s ease;">
+                            <div class="img-part">
+                                <img src="/Uploads/Categories/lenovo_thinkpad.png" class="img-fluid" alt="Lenovo">
+                            </div>
+                            <div class="contain-banner banner-4">
+                                <div>
+                                    <h4 style="background: rgba(0,243,255,0.75); backdrop-filter: blur(8px); padding: 10px 20px; border-radius: 8px; color: #000; font-size: 15px; font-weight: 600; display: inline-block;">Lenovo</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6" style="margin-bottom: 20px;">
+                    <a href="/Items/ItemList/4" style="text-decoration: none;">
+                        <div class="collection-banner p-right text-right" style="border-radius: 12px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); transition: all 0.3s ease;">
+                            <div class="img-part">
+                                <img src="/Uploads/Categories/silver_ultrabook.png" class="img-fluid" alt="HP">
+                            </div>
+                            <div class="contain-banner banner-4">
+                                <div>
+                                    <h4 style="background: rgba(0,243,255,0.75); backdrop-filter: blur(8px); padding: 10px 20px; border-radius: 8px; color: #000; font-size: 15px; font-weight: 600; display: inline-block;">HP</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+        </div>
+    </div>
+</section>
+
+<!-- Today's Deal -->
+<div class="title1 section-t-space">
+    <h4 style="color: #00e5ff; letter-spacing: 4px; text-transform: uppercase; font-size: 13px; font-weight: 500;">special offer</h4>
+    <h2 class="title-inner1" style="color: #F1F5F9; font-size: 30px; font-weight: 700;">Today's Deals</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="product-para">
+                <p class="text-center" style="color: #94A3B8;">
+                    Discover our handpicked collection of high-performance laptops — from ultra-lightweight business ultrabooks to extreme gaming rigs and professional workstations.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Grid -->
+<section class="pt-0 section-b-space ratio_asos">
+    <div class="container">
+        <div class="row game-product grid-products">
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/951">
+            <img width="1000px" height="1000px" src="/Uploads/Items/silver_ultrabook.png" class="img-fluid" alt="Microsoft Surface Laptop Studio 2 (Developer Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/951">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/951">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Microsoft Surface Laptop Studio 2 (Developer Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13900H | 64GB RAM">
+        Intel Core i9-13900H | 64GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,690.12</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(951, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/952">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="HP Omen Transcend 16 (Developer Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/952">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/952">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">HP Omen Transcend 16 (Developer Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13980HX | 16GB RAM">
+        Intel Core i9-13980HX | 16GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,221.78</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(952, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/953">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Asus Vivobook Pro 16 (Extreme Config)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/953">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/953">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Asus Vivobook Pro 16 (Extreme Config)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i7-1365U | 8GB RAM">
+        Intel Core i7-1365U | 8GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$693.71</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(953, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/954">
+            <img width="1000px" height="1000px" src="/Uploads/Items/dark_laptop.png" class="img-fluid" alt="Samsung Galaxy Book3 Pro 360 (Studio Config v4)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/954">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/954">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Samsung Galaxy Book3 Pro 360 (Studio Config v4)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i7-1355U | 16GB RAM">
+        Intel Core i7-1355U | 16GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$950.11</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(954, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/955">
+            <img width="1000px" height="1000px" src="/Uploads/Items/dark_laptop.png" class="img-fluid" alt="Samsung Galaxy Book3 Pro 360 (Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/955">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/955">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Samsung Galaxy Book3 Pro 360 (Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i7-1365U | 16GB RAM">
+        Intel Core i7-1365U | 16GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$716.78</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(955, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/956">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Dell G15 Gaming (Performance Pack v3)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/956">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/956">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Dell G15 Gaming (Performance Pack v3)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13900HX | 96GB RAM">
+        Intel Core i9-13900HX | 96GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,970.67</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(956, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/957">
+            <img width="1000px" height="1000px" src="/Uploads/Items/silver_ultrabook.png" class="img-fluid" alt="Microsoft Surface Pro 9 (Studio Config)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/957">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/957">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Microsoft Surface Pro 9 (Studio Config)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i5-1335U | 32GB RAM">
+        Intel Core i5-1335U | 32GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$830.06</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(957, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/958">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Lenovo LOQ 15 (Ultra Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/958">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/958">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Lenovo LOQ 15 (Ultra Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13900HX | 96GB RAM">
+        Intel Core i9-13900HX | 96GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$3,989.72</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(958, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/959">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="MSI Stealth 16 Studio (Signature Edition v2)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/959">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/959">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">MSI Stealth 16 Studio (Signature Edition v2)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 9 7940HS | 64GB RAM">
+        AMD Ryzen 9 7940HS | 64GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,621.72</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(959, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/960">
+            <img width="1000px" height="1000px" src="/Uploads/Items/silver_ultrabook.png" class="img-fluid" alt="Microsoft Surface Laptop Studio 2 (Creator Edition v2)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/960">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/960">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Microsoft Surface Laptop Studio 2 (Creator Edition v2)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 9 7940HS | 128GB RAM">
+        AMD Ryzen 9 7940HS | 128GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$3,049.06</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(960, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/961">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Asus ROG Strix SCAR 18 (Elite Selection v2)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/961">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/961">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Asus ROG Strix SCAR 18 (Elite Selection v2)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 9 7945HX | 64GB RAM">
+        AMD Ryzen 9 7945HX | 64GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$3,751.64</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(961, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/962">
+            <img width="1000px" height="1000px" src="/Uploads/Items/dell_xps.png" class="img-fluid" alt="Dell Latitude 5440 (Performance Pack)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/962">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/962">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Dell Latitude 5440 (Performance Pack)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 7 PRO 7730U | 8GB RAM">
+        AMD Ryzen 7 PRO 7730U | 8GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$634.46</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(962, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+        </div>
+        <div class="text-center" style="margin-top: 30px;">
+            <a href="/Items/ItemList" class="btn-solid" style="display: inline-block;">View All Products <i class="fa fa-arrow-right" style="margin-left: 8px;"></i></a>
+        </div>
+    </div>
+</section>
+
+<section class="p-0">
+    <div class="full-banner text-center p-right" style="background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('/Uploads/Sliders/sale_laptop_banner.png'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="row">
+                <div class="col">
+                    <div class="banner-contain" style="padding: 80px 0;">
+                        <h2 style="color: #00e5ff; font-size: 52px; font-weight: 800; text-shadow: 0 0 30px rgba(0,243,255,0.4);">SALE</h2>
+                        <h3 style="color: #F1F5F9; font-size: 26px; font-weight: 600; margin: 10px 0;">Next-Gen Laptops</h3>
+                        <h4 style="color: #94A3B8; font-size: 16px; font-weight: 400;">Special Tech Deals — Up to 40% Off</h4>
+                        <a href="/Items/ItemList" class="btn-solid" style="display: inline-block; margin-top: 25px;">Shop Deals</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Deals & Recommendations -->
+<section class="tools_product bg-title section-b-space" style="background: rgba(16,16,42,0.5) !important; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <div class="container">
+        <div class="row multiple-slider">
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="theme-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px; backdrop-filter: blur(10px);">
+                    <h5 class="title-border" style="color: #F1F5F9; border-bottom: 2px solid #00f3ff; padding-bottom: 12px; font-size: 16px;">Featured Deals | Free Shipping</h5>
+                    <div class="offer-slider slide-1">
+                        <div>
+                                <div class="media" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 0;">
+                                    <a href="/Items/ItemDetails/971">
+                                        <img class="img-fluid" src="/Uploads/Items/gaming_laptop.png" alt="Acer Nitro 5 (Pro Edition v2)" style="max-height: 80px; width: 80px; object-fit: contain; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 4px;">
+                                    </a>
+                                    <div class="media-body align-self-center" style="padding-left: 15px;">
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <a href="/Items/ItemDetails/971">
+                                            <h6 style="color: #94A3B8; font-size: 13px; margin: 6px 0;">Acer Nitro 5 (Pro Edition v2)</h6>
+                                        </a>
+                                        <h4 style="color: #00e5ff; font-weight: 700; font-size: 15px;">$2060.52</h4>
+                                    </div>
+                                </div>
+                                <div class="media" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 0;">
+                                    <a href="/Items/ItemDetails/972">
+                                        <img class="img-fluid" src="/Uploads/Items/razer_blade.png" alt="Razer Blade 16 (Creator Edition v3)" style="max-height: 80px; width: 80px; object-fit: contain; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 4px;">
+                                    </a>
+                                    <div class="media-body align-self-center" style="padding-left: 15px;">
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <a href="/Items/ItemDetails/972">
+                                            <h6 style="color: #94A3B8; font-size: 13px; margin: 6px 0;">Razer Blade 16 (Creator Edition v3)</h6>
+                                        </a>
+                                        <h4 style="color: #00e5ff; font-weight: 700; font-size: 15px;">$3570.11</h4>
+                                    </div>
+                                </div>
+                                <div class="media" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 0;">
+                                    <a href="/Items/ItemDetails/973">
+                                        <img class="img-fluid" src="/Uploads/Items/silver_ultrabook.png" alt="Microsoft Surface Pro 9 (Developer Edition v3)" style="max-height: 80px; width: 80px; object-fit: contain; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 4px;">
+                                    </a>
+                                    <div class="media-body align-self-center" style="padding-left: 15px;">
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <a href="/Items/ItemDetails/973">
+                                            <h6 style="color: #94A3B8; font-size: 13px; margin: 6px 0;">Microsoft Surface Pro 9 (Developer Edition v3)</h6>
+                                        </a>
+                                        <h4 style="color: #00e5ff; font-weight: 700; font-size: 15px;">$922.26</h4>
+                                    </div>
+                                </div>
+                                <div class="media" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 0;">
+                                    <a href="/Items/ItemDetails/974">
+                                        <img class="img-fluid" src="/Uploads/Items/gaming_laptop.png" alt="MSI Modern 15 (Creator Edition v2)" style="max-height: 80px; width: 80px; object-fit: contain; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 4px;">
+                                    </a>
+                                    <div class="media-body align-self-center" style="padding-left: 15px;">
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <a href="/Items/ItemDetails/974">
+                                            <h6 style="color: #94A3B8; font-size: 13px; margin: 6px 0;">MSI Modern 15 (Creator Edition v2)</h6>
+                                        </a>
+                                        <h4 style="color: #00e5ff; font-weight: 700; font-size: 15px;">$608.03</h4>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                <div class="theme-tab">
+                    <div class="bg-title-part" style="background: transparent; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 15px; margin-bottom: 20px;">
+                        <h5 class="title-border" style="color: #F1F5F9; border-bottom: none; padding-bottom: 0; display: inline; margin-right: 20px;">RECOMMENDATIONS FOR YOU</h5>
+                        <ul class="tabs tab-title">
+                            <li class="current">
+                                <a href="tab-4" style="color: #00e5ff; font-weight: 600;">New Products</a>
+                            </li>
+                            <li class="">
+                                <a href="tab-5" style="color: #64748B; font-weight: 500;">Featured Products</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content-cls ratio_asos">
+                        <div id="tab-4" class="tab-content active default">
+                            <div class="product-4 game-product product-m no-arrow">
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/963">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Lenovo Legion Pro 7 (Extreme Config v2)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/963">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/963">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Lenovo Legion Pro 7 (Extreme Config v2)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 7 7840HS | 64GB RAM">
+        AMD Ryzen 7 7840HS | 64GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,559.35</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(963, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/964">
+            <img width="1000px" height="1000px" src="/Uploads/Items/dell_xps.png" class="img-fluid" alt="Dell Inspiron 15 (Essential Plus v3)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/964">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/964">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Dell Inspiron 15 (Essential Plus v3)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i5-1345U | 16GB RAM">
+        Intel Core i5-1345U | 16GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$829.41</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(964, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/965">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Acer Nitro 5 (Developer Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/965">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/965">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Acer Nitro 5 (Developer Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 9 8945HS | 32GB RAM">
+        AMD Ryzen 9 8945HS | 32GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$3,343.55</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(965, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/966">
+            <img width="1000px" height="1000px" src="/Uploads/Items/silver_ultrabook.png" class="img-fluid" alt="HP EliteBook 840 G10 (Elite Selection v3)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/966">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/966">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">HP EliteBook 840 G10 (Elite Selection v3)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 5 PRO 7530U | 64GB RAM">
+        AMD Ryzen 5 PRO 7530U | 64GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$1,029.76</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(966, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/967">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Dell G15 Gaming (Edition v4)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/967">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/967">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Dell G15 Gaming (Edition v4)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 7 7840HS | 32GB RAM">
+        AMD Ryzen 7 7840HS | 32GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$1,892.06</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(967, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/968">
+            <img width="1000px" height="1000px" src="/Uploads/Items/dark_laptop.png" class="img-fluid" alt="Samsung Galaxy Book3 Pro 360 (Special Edition v2)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/968">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/968">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Samsung Galaxy Book3 Pro 360 (Special Edition v2)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i7-1365U | 32GB RAM">
+        Intel Core i7-1365U | 32GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$773.63</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(968, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/969">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Dell G15 Gaming (Core Version v3)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/969">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/969">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Dell G15 Gaming (Core Version v3)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13980HX | 64GB RAM">
+        Intel Core i9-13980HX | 64GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,595.41</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(969, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/970">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="MSI Katana 15 (Special Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/970">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/970">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">MSI Katana 15 (Special Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="AMD Ryzen 9 8945HS | 64GB RAM">
+        AMD Ryzen 9 8945HS | 64GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$3,255.64</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(970, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                            </div>
+                        </div>
+                        <div id="tab-5" class="tab-content">
+                            <div class="product-4 game-product product-m no-arrow">
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/951">
+            <img width="1000px" height="1000px" src="/Uploads/Items/silver_ultrabook.png" class="img-fluid" alt="Microsoft Surface Laptop Studio 2 (Developer Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/951">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/951">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Microsoft Surface Laptop Studio 2 (Developer Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13900H | 64GB RAM">
+        Intel Core i9-13900H | 64GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,690.12</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(951, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/952">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="HP Omen Transcend 16 (Developer Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/952">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/952">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">HP Omen Transcend 16 (Developer Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13980HX | 16GB RAM">
+        Intel Core i9-13980HX | 16GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,221.78</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(952, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/953">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Asus Vivobook Pro 16 (Extreme Config)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/953">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/953">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Asus Vivobook Pro 16 (Extreme Config)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i7-1365U | 8GB RAM">
+        Intel Core i7-1365U | 8GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$693.71</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(953, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/954">
+            <img width="1000px" height="1000px" src="/Uploads/Items/dark_laptop.png" class="img-fluid" alt="Samsung Galaxy Book3 Pro 360 (Studio Config v4)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/954">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/954">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Samsung Galaxy Book3 Pro 360 (Studio Config v4)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i7-1355U | 16GB RAM">
+        Intel Core i7-1355U | 16GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$950.11</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(954, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/955">
+            <img width="1000px" height="1000px" src="/Uploads/Items/dark_laptop.png" class="img-fluid" alt="Samsung Galaxy Book3 Pro 360 (Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/955">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/955">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Samsung Galaxy Book3 Pro 360 (Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i7-1365U | 16GB RAM">
+        Intel Core i7-1365U | 16GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$716.78</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(955, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/956">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Dell G15 Gaming (Performance Pack v3)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/956">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/956">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Dell G15 Gaming (Performance Pack v3)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13900HX | 96GB RAM">
+        Intel Core i9-13900HX | 96GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$2,970.67</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(956, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/957">
+            <img width="1000px" height="1000px" src="/Uploads/Items/silver_ultrabook.png" class="img-fluid" alt="Microsoft Surface Pro 9 (Studio Config)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/957">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/957">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Microsoft Surface Pro 9 (Studio Config)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i5-1335U | 32GB RAM">
+        Intel Core i5-1335U | 32GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$830.06</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(957, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                                    <div class="product-box">
+                                        <div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a href="/Items/ItemDetails/958">
+            <img width="1000px" height="1000px" src="/Uploads/Items/gaming_laptop.png" class="img-fluid" alt="Lenovo LOQ 15 (Ultra Edition)" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a title="Quick View" tabindex="0" href="/Items/ItemDetails/958">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a style="flex: 1; min-width: 0; padding-right: 8px;" href="/Items/ItemDetails/958">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">Lenovo LOQ 15 (Ultra Edition)</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ 5.0/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="Intel Core i9-13900HX | 96GB RAM">
+        Intel Core i9-13900HX | 96GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$3,989.72</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(958, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="banner-tools" style="margin-top: 20px;">
+                    <img src="/Uploads/Sliders/laptop_deal_banner.png" alt="Banner" class="img-fluid" style="border-radius: 12px; max-height: 250px; width: 100%; object-fit: cover; filter: brightness(0.6); border: 1px solid rgba(255,255,255,0.06);">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- footer -->
+    <footer class="footer-light">
+        <div class="light-layout">
+            <div class="container">
+            </div>
+        </div>
+        <section class="section-b-space light-layout">
+            <div class="container">
+                <div class="row footer-theme partition-f">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-title footer-mobile-title">
+                            <h4>about</h4>
+                        </div>
+                        <div class="footer-contant">
+                            <div class="footer-logo" style="margin-bottom: 15px;">
+                                <a href="/Home/Index" style="text-decoration: none;">
+                                    <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: 1px; color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);">LapShop</span>
+                                </a>
+                            </div>
+                            <p>
+                                Your ultimate destination for premium laptops, gaming rigs, and enterprise business workstations.
+                            </p>
+                            <div class="footer-social">
+                                <ul>
+                                    <li>
+                                        <a id="lnkFacebook" href="https://facebook.com/lapshop" target="_blank">
+                                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li><a href="https://twitter.com/lapshop" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://instagram.com/lapshop" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://youtube.com/lapshop" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col offset-xl-1">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>my account</h4>
+                            </div>
+                            <div class="footer-contant">
+                                <ul>
+                                    <li><a href="/Items/ItemList">All Products</a></li>
+                                    <li><a href="/Home/Index">Home Portal</a></li>
+                                    <li><a href="/Order/Cart">Shopping Cart</a></li>
+                                    <li><a href="/Order/MyOrders">My Orders</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>why we choose</h4>
+                            </div>
+                            <div class="footer-contant">
+                                <ul>
+                                    <li><a href="/Pages/Index/3">About Us</a></li>
+                                    <li><a href="/Pages/Index/4">Terms Of Use</a></li>
+                                    <li><a href="/Pages/Index/5">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>store information</h4>
+                            </div>
+                            <div class="footer-contant">
+                                <ul class="contact-list">
+                                    <li>
+                                        <i class="fa fa-map-marker"></i>Cairo, Egypt
+                                    </li>
+                                    <li><i class="fa fa-phone"></i>Call Us: &#x2B;20 123 456 789</li>
+                                    <li>
+                                        <i class="fa fa-envelope-o"></i>Email Us: <a href="mailto:support@lapshop.com">support@lapshop.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="sub-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="footer-end">
+                            <p>
+                                <i class="fa fa-copyright" aria-hidden="true"></i> 2025 LapShop. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="payment-card-bottom">
+                            <ul>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/visa.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/mastercard.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/paypal.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/american-express.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/discover.png" alt=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end -->
+    <!--modal popup removed-->
+    <!-- theme setting removed -->
+    <!-- search overlay -->
+    <div id="search-overlay" class="search-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,10,26,0.95); z-index: 9999; backdrop-filter: blur(10px);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 90%; max-width: 600px;">
+            <button onclick="closeSearch()" style="position: absolute; top: -50px; right: 0; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer;"><i class="fa fa-times"></i></button>
+            <form action="/Items/ItemList" method="get" style="display: flex; gap: 10px;">
+                <input type="text" name="search" placeholder="Search laptops..." style="flex: 1; padding: 18px 24px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; font-size: 18px; outline: none; font-family: 'Inter', sans-serif;" autofocus />
+                <button type="submit" style="padding: 18px 32px; background: linear-gradient(135deg, #00f3ff, #00a2ff); border: none; border-radius: 12px; color: #000000; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif;"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+<!-- tap to top -->
+<div class="tap-top top-cls">
+    <div>
+        <i class="fa fa-angle-double-up"></i>
+    </div>
+</div>
+<!-- tap to top end -->
+<!-- latest jquery-->
+<script src="/Fontend/js/jquery-3.3.1.min.js"></script>
+
+<!-- fly cart ui jquery-->
+<script src="/Fontend/js/jquery-ui.min.js"></script>
+
+<!-- exitintent jquery-->
+<script src="/Fontend/js/jquery.exitintent.js"></script>
+<script src="/Fontend/js/exit.js"></script>
+
+<!-- popper js-->
+<script src="/Fontend/js/popper.min.js"></script>
+
+<!-- slick js-->
+<script src="/Fontend/js/slick.js"></script>
+
+<!-- menu js-->
+<script src="/Fontend/js/menu.js"></script>
+
+<!-- lazyload js-->
+<script src="/Fontend/js/lazysizes.min.js"></script>
+
+<!-- Bootstrap js-->
+<script src="/Fontend/js/bootstrap.js"></script>
+
+<!-- Bootstrap Notification js-->
+<script src="/Fontend/js/bootstrap-notify.min.js"></script>
+
+<!-- Fly cart js-->
+<script src="/Fontend/js/fly-cart.js"></script>
+
+<!-- Theme js-->
+<script src="/Fontend/js/script.js"></script>
+
+<script src="/modules/helper.js"></script>
+<script src="/modules/settings.js"></script>
+;
+
+<script>
+    $(document).ready(function() {
+        // Make the entire product card clickable
+        $(document).on('click', '.product-box', function(e) {
+            // Ignore if clicked on Add to Cart button, Quick View wrapper, or other explicit links
+            if ($(e.target).closest('.product-card-btn, .cart-info, a, button').length) {
+                return;
+            }
+            // Find the detail page link
+            var link = $(this).find('a[href*="/Items/ItemDetails"]').first();
+            if (link.length) {
+                var url = link.attr('href');
+                if (url) {
+                    window.location.href = url;
+                }
+            }
+        });
+    });
+
+    function openSearch() {
+        document.getElementById('search-overlay').style.display = 'block';
+        var input = document.getElementById('search-overlay').querySelector('input');
+        if (input) {
+            if (typeof ClsItems !== 'undefined' && ClsItems.currentSearch) {
+                input.value = ClsItems.currentSearch;
+            }
+            input.focus();
+        }
+    }
+    function closeSearch() {
+        document.getElementById('search-overlay').style.display = 'none';
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeSearch();
+            var menu = document.getElementById('accountMenu');
+            if (menu) menu.style.display = 'none';
+        }
+    });
+    // Account dropdown - click based
+    function toggleAccountMenu() {
+        var menu = document.getElementById('accountMenu');
+        if (menu.style.display === 'none' || menu.style.display === '') {
+            menu.style.display = 'block';
+        } else {
+            menu.style.display = 'none';
+        }
+    }
+    // Close account menu when clicking outside
+    document.addEventListener('click', function(e) {
+        var dropdown = document.getElementById('accountDropdown');
+        var menu = document.getElementById('accountMenu');
+        if (dropdown && menu && !dropdown.contains(e.target)) {
+            menu.style.display = 'none';
+        }
+    });
+    function AddToCartAjax(itemId, btn) {
+        Helper.AjaxCallGet("/Order/AddToCartAjax?itemId=" + itemId, {}, "json", function(response) {
+            if (response && response.success) {
+                var badge = $('#cartCountBadge');
+                if (badge.length) {
+                    badge.text(response.cartCount);
+                    badge.show();
+                }
+                
+                // Fly-to-Cart Animation
+                if (btn) {
+                    var img = $(btn).closest('.product-box').find('.img-wrapper img');
+                    if (img.length === 0) {
+                        img = $('.product-right-slick img').first();
+                    }
+                    if (img.length === 0) {
+                        img = $(btn).closest('.product-form-box').closest('.row').find('.product-right-slick img').first();
+                    }
+                    if (img.length > 0) {
+                        var cart = $('#cartCountBadge');
+                        if (!cart.length || cart.css('display') === 'none') {
+                            cart = $('.fa-shopping-cart').first();
+                        }
+                        if (cart.length > 0) {
+                            var imgClone = img.clone()
+                                .offset({
+                                    top: img.offset().top,
+                                    left: img.offset().left
+                                })
+                                .css({
+                                    'opacity': '0.8',
+                                    'position': 'absolute',
+                                    'height': img.height() + 'px',
+                                    'width': img.width() + 'px',
+                                    'z-index': '99999',
+                                    'border-radius': '50%',
+                                    'box-shadow': '0 0 15px rgba(0, 243, 255, 0.6)'
+                                })
+                                .appendTo($('body'));
+
+                            var easing = $.easing.easeInOutExpo ? 'easeInOutExpo' : 'swing';
+                            imgClone.animate({
+                                'top': cart.offset().top - 10,
+                                'left': cart.offset().left - 10,
+                                'width': 20,
+                                'height': 20,
+                                'opacity': 0.1
+                            }, 1000, easing, function () {
+                                $(this).detach();
+                                var b = $('#cartCountBadge');
+                                b.addClass('cart-badge-bounce');
+                                setTimeout(function() {
+                                    b.removeClass('cart-badge-bounce');
+                                }, 600);
+                            });
+                        }
+                    }
+                }
+
+                NotificationHelper.ShowSuccess("Laptop added to cart successfully!");
+            } else {
+                NotificationHelper.ShowError("Could not add item to cart.");
+            }
+        }, function() {
+            NotificationHelper.ShowError("Connection error while adding to cart.");
+        });
+    }
+
+</script>
+        
+</body>
+
+</html>

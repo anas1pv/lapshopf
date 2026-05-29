@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace lapshop.Domains;
@@ -63,6 +63,8 @@ public partial class TbItem
     public virtual ICollection<TbItemImage> TbItemImages { get; set; }
     public virtual ICollection<TbPurchaseInvoiceItem> TbPurchaseInvoiceItems { get; set; }
     public virtual ICollection<TbSalesInvoiceItem> TbSalesInvoiceItems { get; set; }
+
+    public decimal? DiscountPrice { get; set; }
 
     public virtual ICollection<TbCustomer> Customers { get; set; }
 }

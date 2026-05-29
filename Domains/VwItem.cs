@@ -1,4 +1,4 @@
-﻿namespace lapshop.Domains;
+namespace lapshop.Domains;
 
 public partial class VwItem
 {
@@ -48,5 +48,6 @@ public partial class VwItem
 
     public string OsName { get; set; } = null!;
 
+    public decimal? DiscountPrice { get; set; }
     public int ItemId { get; set; }
 }

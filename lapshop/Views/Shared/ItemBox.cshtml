@@ -19,6 +19,11 @@
            title="Quick View" tabindex="0">
             <i class="ti-search" aria-hidden="true"></i>
         </a>
+        <a href="javascript:void(0)" class="wishlist-btn" data-item-id="@Model.ItemId"
+           onclick="toggleWishlist(@Model.ItemId, '@Model.ItemName.Replace("'", "\\'")', @Model.SalesPrice, '@Model.ImageName', '@(Model.Processor ?? "Core i7")', @(Model.RamSize ?? 16))"
+           title="Add to Wishlist" tabindex="0">
+            <i class="fa fa-heart-o" aria-hidden="true" style="color: #ef4444;"></i>
+        </a>
     </div>
 </div>
 <div class="product-detail" style="padding-top: 14px; text-align: left;">
@@ -32,7 +37,17 @@
         @(string.IsNullOrEmpty(Model.Processor) ? "Core i7" : Model.Processor) | @(Model.RamSize ?? 16)GB RAM
     </div>
     <div class="product-card-footer">
-        <h4 class="product-card-price">$@Model.SalesPrice.ToString("N2")</h4>
+        @if (Model.DiscountPrice.HasValue && Model.DiscountPrice.Value > 0)
+        {
+            <h4 class="product-card-price" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 0;">
+                <del style="color: #64748b; font-size: 12px; font-weight: 400; font-family: 'Inter', sans-serif !important;">$@Model.SalesPrice.ToString("N2")</del>
+                <span style="color: #00f3ff; font-weight: 800; font-family: 'Inter', sans-serif !important;">$@Model.DiscountPrice.Value.ToString("N2")</span>
+            </h4>
+        }
+        else
+        {
+            <h4 class="product-card-price">$@Model.SalesPrice.ToString("N2")</h4>
+        }
         <a href="javascript:void(0)" onclick="AddToCartAjax(@Model.ItemId, this)" class="product-card-btn">ADD TO CART</a>
     </div>
 </div>

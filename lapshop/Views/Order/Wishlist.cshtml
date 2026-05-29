@@ -1,0 +1,159 @@
+@{
+    ViewData["Title"] = "Wishlist";
+}
+
+<!-- Breadcrumb -->
+<section style="padding: 20px 0 10px;">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background: transparent; padding: 0; margin: 0;">
+                <li class="breadcrumb-item"><a href="/" style="color: #00f3ff; text-decoration: none;">Home</a></li>
+                <li class="breadcrumb-item active" style="color: #94A3B8;" aria-current="page">Wishlist</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<!-- Wishlist Section -->
+<section style="padding: 20px 0 60px;">
+    <div class="container">
+        <!-- Header -->
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+            <div>
+                <h1 style="color: #F1F5F9; font-size: 28px; font-weight: 700; margin: 0;">
+                    <i class="fa fa-heart" style="color: #00f3ff; margin-right: 10px;"></i>My Wishlist
+                </h1>
+                <p id="wishlistSubtitle" style="color: #94A3B8; margin: 5px 0 0; font-size: 14px;"></p>
+            </div>
+            <a href="/Items/ItemList" class="btn btn-solid" style="text-decoration: none;">
+                <i class="fa fa-arrow-left" style="margin-right: 6px;"></i> Continue Shopping
+            </a>
+        </div>
+
+        <!-- Wishlist Items Container -->
+        <div id="wishlistContainer"></div>
+
+        <!-- Empty State (hidden by default) -->
+        <div id="wishlistEmpty" style="display: none; text-align: center; padding: 80px 20px;">
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 60px 40px; max-width: 500px; margin: 0 auto; backdrop-filter: blur(10px);">
+                <i class="fa fa-heart-o" style="font-size: 64px; color: #94A3B8; margin-bottom: 20px; display: block;"></i>
+                <h3 style="color: #F1F5F9; font-size: 22px; font-weight: 600; margin-bottom: 10px;">Your wishlist is empty</h3>
+                <p style="color: #94A3B8; font-size: 15px; margin-bottom: 25px;">Browse our collection and add items you love!</p>
+                <a href="/Items/ItemList" class="btn btn-solid" style="text-decoration: none;">
+                    <i class="fa fa-laptop" style="margin-right: 6px;"></i> Explore Laptops
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/Modules/wishlist.js"></script>
+    <script>
+        $(document).ready(function () {
+            renderWishlist();
+        });
+
+        function renderWishlist() {
+            var items = WishlistHelper.getAll();
+            var container = $('#wishlistContainer');
+            var emptyState = $('#wishlistEmpty');
+            var subtitle = $('#wishlistSubtitle');
+
+            container.empty();
+
+            if (items.length === 0) {
+                container.hide();
+                emptyState.show();
+                subtitle.text('No items yet');
+                return;
+            }
+
+            emptyState.hide();
+            container.show();
+            subtitle.text(items.length + (items.length === 1 ? ' item' : ' items') + ' saved');
+
+            // Build the items grid
+            var gridHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">';
+
+            items.forEach(function (item) {
+                var imageSrc = item.imageName ? '/Uploads/Items/' + item.imageName : '/Uploads/Items/default.png';
+                var addedDate = new Date(item.addedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                gridHtml += ''
+                    + '<div class="wishlist-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; transition: all 0.3s ease; position: relative;" '
+                    + 'onmouseenter="this.style.borderColor=\'rgba(0,243,255,0.2)\'; this.style.transform=\'translateY(-3px)\'; this.style.boxShadow=\'0 8px 30px rgba(0,0,0,0.3)\'" '
+                    + 'onmouseleave="this.style.borderColor=\'rgba(255,255,255,0.06)\'; this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'none\'">'
+
+                    // Image section
+                    + '  <div style="display: flex; align-items: stretch;">'
+                    + '    <div style="width: 140px; min-height: 140px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; padding: 15px; flex-shrink: 0;">'
+                    + '      <img src="' + imageSrc + '" alt="' + item.itemName + '" style="max-width: 100%; max-height: 110px; object-fit: contain; border-radius: 6px;" />'
+                    + '    </div>'
+
+                    // Info section
+                    + '    <div style="flex: 1; padding: 18px 18px 18px 15px; display: flex; flex-direction: column; justify-content: space-between;">'
+                    + '      <div>'
+                    + '        <h4 style="color: #F1F5F9; font-size: 16px; font-weight: 600; margin: 0 0 8px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + item.itemName + '</h4>'
+                    + '        <div style="display: flex; gap: 12px; margin-bottom: 10px; flex-wrap: wrap;">'
+                    + '          <span style="color: #94A3B8; font-size: 12px;"><i class="fa fa-microchip" style="color: #00f3ff; margin-right: 4px;"></i>' + item.processor + '</span>'
+                    + '          <span style="color: #94A3B8; font-size: 12px;"><i class="fa fa-database" style="color: #00f3ff; margin-right: 4px;"></i>' + item.ramSize + ' GB RAM</span>'
+                    + '        </div>'
+                    + '        <div style="color: #00f3ff; font-size: 20px; font-weight: 700;">' + parseFloat(item.salesPrice).toLocaleString('en-US') + ' EGP</div>'
+                    + '      </div>'
+
+                    // Actions
+                    + '      <div style="display: flex; gap: 8px; margin-top: 12px; align-items: center;">'
+                    + '        <button onclick="moveItemToCart(' + item.itemId + ')" class="btn btn-solid" style="font-size: 13px; padding: 7px 16px; flex: 1;">'
+                    + '          <i class="fa fa-shopping-cart" style="margin-right: 5px;"></i> Move to Cart'
+                    + '        </button>'
+                    + '        <button onclick="removeFromWishlist(' + item.itemId + ')" style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; border-radius: 8px; padding: 7px 12px; cursor: pointer; transition: all 0.3s ease; font-size: 13px;" '
+                    + '          onmouseenter="this.style.background=\'rgba(239,68,68,0.2)\'" '
+                    + '          onmouseleave="this.style.background=\'rgba(239,68,68,0.1)\'">'
+                    + '          <i class="fa fa-trash"></i>'
+                    + '        </button>'
+                    + '      </div>'
+
+                    // Added date
+                    + '      <div style="color: #64748b; font-size: 11px; margin-top: 8px;">Added ' + addedDate + '</div>'
+                    + '    </div>'
+                    + '  </div>'
+                    + '</div>';
+            });
+
+            gridHtml += '</div>';
+
+            // Clear all button
+            gridHtml += '<div style="text-align: center; margin-top: 30px;">'
+                + '<button onclick="clearWishlist()" style="background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.15); color: #ef4444; border-radius: 10px; padding: 10px 28px; cursor: pointer; font-size: 14px; transition: all 0.3s ease;" '
+                + '  onmouseenter="this.style.background=\'rgba(239,68,68,0.15)\'" '
+                + '  onmouseleave="this.style.background=\'rgba(239,68,68,0.08)\'">'
+                + '  <i class="fa fa-trash-o" style="margin-right: 6px;"></i> Clear Entire Wishlist'
+                + '</button>'
+                + '</div>';
+
+            container.html(gridHtml);
+        }
+
+        function removeFromWishlist(itemId) {
+            WishlistHelper.remove(itemId);
+            NotificationHelper.ShowSuccess('Removed from wishlist');
+            renderWishlist();
+        }
+
+        function moveItemToCart(itemId) {
+            WishlistHelper.moveToCart(itemId);
+            NotificationHelper.ShowSuccess('Moved to cart! 🛒');
+            renderWishlist();
+        }
+
+        function clearWishlist() {
+            if (confirm('Are you sure you want to clear your entire wishlist?')) {
+                localStorage.removeItem(WishlistHelper.storageKey);
+                WishlistHelper.updateBadge();
+                renderWishlist();
+                NotificationHelper.ShowSuccess('Wishlist cleared');
+            }
+        }
+    </script>
+}

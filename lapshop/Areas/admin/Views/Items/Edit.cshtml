@@ -1,4 +1,4 @@
-﻿@model lapshop.Domains.TbItem
+@model lapshop.Domains.TbItem
 
 
 <div class="content-wrapper">
@@ -60,6 +60,12 @@
                             <label for="exampleInputUsername1">@ResAdmin.lblPurchasePrice</label>
                             <input asp-for="PurchasePrice" type="text" class="form-control" placeholder="@ResAdmin.lblPurchasePrice">
                             <span asp-validation-for="PurchasePrice"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="DiscountPrice">Offer/Discount Price (Optional)</label>
+                            <input asp-for="DiscountPrice" type="text" class="form-control" placeholder="Offer Price (e.g. 899.99)">
+                            <span asp-validation-for="DiscountPrice" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">

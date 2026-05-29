@@ -43,10 +43,50 @@
     <!-- Custom Tech CSS -->
     <link rel="stylesheet" type="text/css" href="~/Fontend/css/custom-tech.css" asp-append-version="true">
 
-    @RenderSection("Styles", required: false);
+    @RenderSection("Styles", required: false)
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0c; z-index: 999999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease, visibility 0.5s ease;">
+        <div style="text-align: center;">
+            <div class="preloader-logo" style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 42px; letter-spacing: 2px; color: #00f3ff; text-shadow: 0 0 20px rgba(0, 243, 255, 0.6); margin-bottom: 20px; animation: preloaderPulse 1.8s infinite ease-in-out;">LapShop</div>
+            <div style="width: 140px; height: 3px; background: rgba(255,255,255,0.05); border-radius: 3px; margin: 0 auto; overflow: hidden; position: relative;">
+                <div style="position: absolute; top: 0; left: 0; height: 100%; width: 50px; background: linear-gradient(90deg, transparent, #00f3ff, transparent); animation: preloaderProgress 1.5s infinite linear;"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.addEventListener('load', function () {
+            var loader = document.getElementById('preloader');
+            if (loader) {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                setTimeout(function() {
+                    loader.remove();
+                }, 500);
+            }
+        });
+    </script>
+
+    <!-- Promo Banner -->
+    <div id="promoBanner" class="promo-banner" style="display: none; background: linear-gradient(90deg, #002244 0%, #00f3ff 50%, #002244 100%); background-size: 200% auto; animation: promoGradient 5s ease infinite; color: #000000; padding: 10px 40px 10px 20px; text-align: center; position: relative; font-size: 13px; font-weight: 700; z-index: 999; font-family: 'Outfit', sans-serif; border-bottom: 1px solid rgba(0,243,255,0.3); box-shadow: 0 4px 15px rgba(0,243,255,0.15);">
+        <span style="letter-spacing: 0.5px;">🔥 Summer Sale — Up to 40% Off All Laptops! <a href="/Items/ItemList" style="color: #000000; text-decoration: underline; margin-left: 5px; font-weight: 800;">Shop Now →</a></span>
+        <button onclick="closePromoBanner()" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 16px; color: #000000; cursor: pointer; padding: 5px; line-height: 1; transition: transform 0.2s;" onmouseenter="this.style.transform='translateY(-50%) scale(1.15)'" onmouseleave="this.style.transform='translateY(-50%) scale(1)'">✕</button>
+    </div>
+    <script>
+        if (!sessionStorage.getItem('lapshop_promo_closed')) {
+            document.getElementById('promoBanner').style.display = 'block';
+        }
+        function closePromoBanner() {
+            var banner = document.getElementById('promoBanner');
+            if (banner) {
+                banner.style.display = 'none';
+                sessionStorage.setItem('lapshop_promo_closed', 'true');
+            }
+        }
+    </script>
+
     <!-- header start -->
     <header class="header-tools marketplace">
         <div class="mobile-fix-option"></div>
@@ -77,11 +117,11 @@
                                                 <a href="/Items/ItemList">Products</a>
                                             </li>
                                             <li>
-                                                <a href="/Pages/Index/3">About Us</a>
+                                                <a href="/Pages/AboutUs">About Us</a>
                                             </li>
-                                            <li><a href="/Pages/Index/4">Terms Of Use</a></li>
+                                            <li><a href="/Pages/TermsOfUse">Terms Of Use</a></li>
                                             <li>
-                                                <a href="/Pages/Index/5">Contact Us</a>
+                                                <a href="/Pages/ContactUs">Contact Us</a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -110,19 +150,17 @@
                                             <a href="/Items/ItemList">Products</a>
                                         </li>
                                         <li id="hover-cls">
-                                            <a asp-controller="Pages" asp-action="Index" asp-route-id="3">
+                                            <a asp-controller="Pages" asp-action="AboutUs">
                                                 About Us
                                             </a>
                                         </li>
                                         <li>
-                                            <a asp-controller="Pages" asp-action="Index" asp-route-id="4">
-                                                Terms
-                                                Of Use
+                                            <a asp-controller="Pages" asp-action="TermsOfUse">
+                                                Terms Of Use
                                             </a>
                                         </li>
                                         <li>
-                                            <a asp-controller="Pages" asp-action="Index"
-                                               asp-route-id="5">Contact Us</a>
+                                            <a asp-controller="Pages" asp-action="ContactUs">Contact Us</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -133,6 +171,13 @@
                                 <li>
                                     <a href="javascript:void(0)" onclick="openSearch()" style="color: #94A3B8; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.3s ease;">
                                         <i class="fa fa-search" aria-hidden="true" style="margin-right: 5px; color: #00f3ff; text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);"></i> Search
+                                    </a>
+                                </li>
+                                <!-- Wishlist -->
+                                <li style="position: relative;">
+                                    <a href="/Order/Wishlist" style="color: #94A3B8; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.3s ease;">
+                                        <i class="fa fa-heart" aria-hidden="true" style="margin-right: 5px; color: #00f3ff; text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);"></i> Wishlist
+                                        <span id="wishlistCountBadge" class="badge bg-primary" style="display: none; position: absolute; top: -8px; right: -12px; background: #00f3ff !important; color: #000000 !important; font-size: 9px; padding: 3px 5px; border-radius: 50%; font-weight: 700; line-height: 1; box-shadow: 0 0 8px rgba(0, 243, 255, 0.6);">0</span>
                                     </a>
                                 </li>
                                 <!-- Cart -->
@@ -264,9 +309,9 @@
                             </div>
                             <div class="footer-contant">
                                 <ul>
-                                    <li><a href="/Pages/Index/3">About Us</a></li>
-                                    <li><a href="/Pages/Index/4">Terms Of Use</a></li>
-                                    <li><a href="/Pages/Index/5">Contact Us</a></li>
+                                    <li><a href="/Pages/AboutUs">About Us</a></li>
+                                    <li><a href="/Pages/TermsOfUse">Terms Of Use</a></li>
+                                    <li><a href="/Pages/ContactUs">Contact Us</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -383,7 +428,8 @@
 
 <script src="~/modules/helper.js"></script>
 <script src="~/modules/settings.js"></script>
-@RenderSection("Scripts", required: false);
+<script src="~/modules/wishlist.js"></script>
+@RenderSection("Scripts", required: false)
 
 <script>
     $(document).ready(function() {

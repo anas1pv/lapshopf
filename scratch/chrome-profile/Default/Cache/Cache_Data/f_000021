@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LapShop — Your premium destination for laptops. Browse our wide selection of gaming, business, and ultrabook laptops from top brands.">
+    <meta name="theme-color" content="#0a0a1a">
+    <title>LapShop | Premium Laptop Store</title>
+    <link rel="icon" href="/Fontend/images/favicon/1.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/Fontend/images/favicon/1.png" type="image/x-icon">
+
+    <!--Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/fontawesome.css">
+
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/slick-theme.css">
+
+    <!-- Animate icon -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/animate.css">
+
+    <!-- Themify icon -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/themify-icons.css">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/bootstrap.css">
+
+    <!-- Theme css -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/color19.css" media="screen" id="color">
+
+    <!-- Custom Tech CSS -->
+    <link rel="stylesheet" type="text/css" href="/Fontend/css/custom-tech.css?v=TdS5mQFmc6uc3Iij5_cKSkoO8PZKB_Z1kDURpuKDIHc">
+
+    
+    <link href="/custom/css/pagination.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+;
+</head>
+
+<body>
+    <!-- header start -->
+    <header class="header-tools marketplace">
+        <div class="mobile-fix-option"></div>
+        <div class="container-fluid custom-container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="main-menu">
+                        <div class="menu-left">
+                            <div class="navbar">
+                                <a href="javascript:void(0)" onclick="openNav()">
+                                    <div class="bar-style">
+                                        <i class="fa fa-bars sidebar-bar" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <div id="mySidenav" class="sidenav">
+                                    <a href="javascript:void(0)" class="sidebar-overlay" onclick="closeNav()"></a>
+                                    <nav>
+                                        <div onclick="closeNav()">
+                                            <div class="sidebar-back text-left">
+                                                <i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back
+                                            </div>
+                                        </div>
+                                        <ul id="sub-menu" class="sm pixelstrap sm-vertical">
+                                            <li>
+                                                <a href="/Home/Index">Home</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Items/ItemList">Products</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Pages/Index/3">About Us</a>
+                                            </li>
+                                            <li><a href="/Pages/Index/4">Terms Of Use</a></li>
+                                            <li>
+                                                <a href="/Pages/Index/5">Contact Us</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="brand-logo" style="padding: 10px 0;">
+                                <a href="/Home/Index" style="text-decoration: none;">
+                                    <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: 1px; color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);">LapShop</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="menu-right pull-right">
+                            <div>
+                                <nav id="main-nav">
+                                    <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+                                    <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+                                        <li>
+                                            <div class="mobile-back text-right">
+                                                Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="/Home/Index">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Items/ItemList">Products</a>
+                                        </li>
+                                        <li id="hover-cls">
+                                            <a href="/Pages/Index/3">
+                                                About Us
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Pages/Index/4">
+                                                Terms
+                                                Of Use
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Pages/Index/5">Contact Us</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- Header icons -->
+                            <ul class="header-dropdown" style="display: flex; align-items: center; gap: 22px; list-style: none; margin: 0 0 0 20px; padding: 0;">
+                                <!-- Search -->
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openSearch()" style="color: #94A3B8; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.3s ease;">
+                                        <i class="fa fa-search" aria-hidden="true" style="margin-right: 5px; color: #00f3ff; text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);"></i> Search
+                                    </a>
+                                </li>
+                                <!-- Cart -->
+                                <li style="position: relative;">
+                                    <a href="/Order/Cart" style="color: #94A3B8; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.3s ease;">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true" style="margin-right: 5px; color: #00f3ff; text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);"></i> Cart
+                                            <span id="cartCountBadge" class="badge bg-primary" style="display: none; position: absolute; top: -8px; right: -12px; background: #00f3ff !important; color: #000000 !important; font-size: 9px; padding: 3px 5px; border-radius: 50%; font-weight: 700; line-height: 1; box-shadow: 0 0 8px rgba(0, 243, 255, 0.6);">0</span>
+                                    </a>
+                                </li>
+                                <!-- My Account (click-based) -->
+                                <li id="accountDropdown" style="position: relative;">
+                                    <a href="javascript:void(0)" onclick="toggleAccountMenu()" style="color: #94A3B8; font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.3s ease;">
+                                        <i class="fa fa-user" aria-hidden="true" style="margin-right: 5px; color: #00f3ff; text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);"></i> My Account <i class="fa fa-chevron-down" style="font-size: 10px; margin-left: 3px;"></i>
+                                    </a>
+                                    <ul id="accountMenu" style="display: none; position: absolute; right: 0; top: 100%; margin-top: 10px; background: var(--bg-secondary, #10102a); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); backdrop-filter: blur(20px); min-width: 200px; padding: 8px 0; z-index: 1000; list-style: none;">
+                                            <li><a style="display: block; padding: 10px 20px; font-size: 13px;" href="/Users/Login"><i class="fa fa-sign-in" style="width: 20px; margin-right: 8px;"></i>Login</a></li>
+                                            <li><a style="display: block; padding: 10px 20px; font-size: 13px;" href="/Users/Register"><i class="fa fa-user-plus" style="width: 20px; margin-right: 8px;"></i>Register</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Products</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Products</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb end -->
+<!-- section start -->
+<section class="section-b-space ratio_asos">
+    <div class="collection-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 collection-filter">
+                    <!-- side-bar colleps block stat -->
+                    <div class="collection-filter-block">
+                        <!-- brand filter start -->
+                        <div class="collection-mobile-back">
+                            <span class="filter-back">
+                                <i class="fa fa-angle-left"
+                                   aria-hidden="true"></i> back
+                            </span>
+                        </div>
+                        <div class="collection-collapse-block open">
+                            <h3 class="collapse-block-title">Brand</h3>
+                            <div class="collection-collapse-block-content">
+                                <div class="collection-brand-filter">
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-apple" data-val="1">
+                                        <label class="custom-control-label" for="brand-apple">Apple</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-dell" data-val="2">
+                                        <label class="custom-control-label" for="brand-dell">Dell</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-lenovo" data-val="3">
+                                        <label class="custom-control-label" for="brand-lenovo">Lenovo</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-hp" data-val="4">
+                                        <label class="custom-control-label" for="brand-hp">HP</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-asus" data-val="5">
+                                        <label class="custom-control-label" for="brand-asus">ASUS</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-razer" data-val="6">
+                                        <label class="custom-control-label" for="brand-razer">Razer</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-msi" data-val="7">
+                                        <label class="custom-control-label" for="brand-msi">MSI</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-acer" data-val="8">
+                                        <label class="custom-control-label" for="brand-acer">Acer</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-microsoft" data-val="9">
+                                        <label class="custom-control-label" for="brand-microsoft">Microsoft</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox brand-filter" id="brand-samsung" data-val="10">
+                                        <label class="custom-control-label" for="brand-samsung">Samsung</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- RAM filter start here -->
+                        <div class="collection-collapse-block open">
+                            <h3 class="collapse-block-title">RAM Size</h3>
+                            <div class="collection-collapse-block-content">
+                                <div class="collection-brand-filter">
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox ram-filter" id="ram-4" data-val="4">
+                                        <label class="custom-control-label" for="ram-4">4 GB</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox ram-filter" id="ram-8" data-val="8">
+                                        <label class="custom-control-label" for="ram-8">8 GB</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox ram-filter" id="ram-16" data-val="16">
+                                        <label class="custom-control-label" for="ram-16">16 GB</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox ram-filter" id="ram-32" data-val="32">
+                                        <label class="custom-control-label" for="ram-32">32 GB</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Range filter -->
+                        <div class="collection-collapse-block open">
+                            <h3 class="collapse-block-title">Price Range</h3>
+                            <div class="collection-collapse-block-content">
+                                <div class="price-filter-wrapper" style="padding: 10px 5px 5px;">
+                                    <div id="price-slider" style="margin: 10px 8px 20px;"></div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 13px; color: #94a3b8; font-family: 'Inter', sans-serif;">
+                                        <span>$<span id="price-min-label">50</span></span>
+                                        <span>$<span id="price-max-label">10,000</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Processor filter -->
+                        <div class="collection-collapse-block open">
+                            <h3 class="collapse-block-title">Processor</h3>
+                            <div class="collection-collapse-block-content">
+                                <div class="collection-brand-filter">
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-i3" data-val="i3">
+                                        <label class="custom-control-label" for="proc-i3">Intel Core i3</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-i5" data-val="i5">
+                                        <label class="custom-control-label" for="proc-i5">Intel Core i5</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-i7" data-val="i7">
+                                        <label class="custom-control-label" for="proc-i7">Intel Core i7</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-i9" data-val="i9">
+                                        <label class="custom-control-label" for="proc-i9">Intel Core i9</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-r5" data-val="Ryzen 5">
+                                        <label class="custom-control-label" for="proc-r5">AMD Ryzen 5</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-r7" data-val="Ryzen 7">
+                                        <label class="custom-control-label" for="proc-r7">AMD Ryzen 7</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-r9" data-val="Ryzen 9">
+                                        <label class="custom-control-label" for="proc-r9">AMD Ryzen 9</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-m1" data-val="M1">
+                                        <label class="custom-control-label" for="proc-m1">Apple M1</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-m2" data-val="M2">
+                                        <label class="custom-control-label" for="proc-m2">Apple M2</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox processor-filter" id="proc-m3" data-val="M3">
+                                        <label class="custom-control-label" for="proc-m3">Apple M3</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OS filter -->
+                        <div class="collection-collapse-block open">
+                            <h3 class="collapse-block-title">Operating System</h3>
+                            <div class="collection-collapse-block-content">
+                                <div class="collection-brand-filter">
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox os-filter" id="os-win11" data-val="1">
+                                        <label class="custom-control-label" for="os-win11">Windows 11</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox os-filter" id="os-win10" data-val="2">
+                                        <label class="custom-control-label" for="os-win10">Windows 10</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox os-filter" id="os-macos" data-val="3">
+                                        <label class="custom-control-label" for="os-macos">macOS</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox os-filter" id="os-linux" data-val="4">
+                                        <label class="custom-control-label" for="os-linux">Linux</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox collection-filter-checkbox">
+                                        <input type="checkbox" class="custom-control-input filter-checkbox os-filter" id="os-chrome" data-val="5">
+                                        <label class="custom-control-label" for="os-chrome">ChromeOS</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- silde-bar colleps block end here -->
+                    <!-- side-bar single product slider start -->
+                    <!-- side-bar banners removed -->
+                </div>
+                <div class="collection-content col">
+                    <div class="page-main-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="top-banner-wrapper">
+                                    <div class="top-banner-content small-section" style="padding-top: 10px;">
+                                        <h4 style="font-family: 'Outfit', sans-serif; font-weight: 800; color: #1a1a1a; font-size: 28px;">Laptops Collection</h4>
+                                        <h5 style="color: #666; font-size: 16px; margin: 10px 0;">
+                                            Find the perfect computer matching your technical specifications and brand preference.
+                                        </h5>
+                                        <p style="color: #888; font-size: 14px; line-height: 1.6;">
+                                            Use the sidebar filters to narrow down by Brand and RAM size. All listed items are fully inspected, tested, and come with standard operating systems and official warranties.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="collection-product-wrapper">
+                                    <div class="product-top-filter">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="filter-main-btn">
+                                                    <span class="filter-btn btn btn-theme">
+                                                        <i class="fa fa-filter"
+                                                           aria-hidden="true"></i> Filter
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="product-filter-content">
+                                                    <div class="search-count">
+                                                        <h5>Showing Products 1-24 of 10 Result</h5>
+                                                    </div>
+                                                    <div class="collection-view">
+                                                        <ul>
+                                                            <li><i class="fa fa-th grid-layout-view"></i></li>
+                                                            <li><i class="fa fa-list-ul list-layout-view"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="collection-grid-view">
+                                                        <ul>
+                                                            <li><img src="../assets/images/icon/2.png" alt="" class="product-2-layout-view"></li>
+                                                            <li><img src="../assets/images/icon/3.png" alt="" class="product-3-layout-view"></li>
+                                                            <li><img src="../assets/images/icon/4.png" alt="" class="product-4-layout-view"></li>
+                                                            <li><img src="../assets/images/icon/6.png" alt="" class="product-6-layout-view"></li>
+                                                        </ul>
+                                                    </div>
+                                                     <div class="product-page-per-view">
+                                                         <select id="select-page-size" style="background: #161617; color: #fff; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 6px 12px; font-family: 'Inter', sans-serif;">
+                                                             <option value="24">24 Products Per Page</option>
+                                                             <option value="48">48 Products Per Page</option>
+                                                             <option value="96">96 Products Per Page</option>
+                                                         </select>
+                                                     </div>
+                                                     <div class="product-page-filter">
+                                                         <select id="select-sort-order" style="background: #161617; color: #fff; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 6px 12px; font-family: 'Inter', sans-serif;">
+                                                             <option value="default">Default Sorting</option>
+                                                             <option value="price-asc">Price: Low to High</option>
+                                                             <option value="price-desc">Price: High to Low</option>
+                                                             <option value="name-asc">Name: A to Z</option>
+                                                         </select>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-wrapper-grid">
+                                        <div class="row margin-res" id="ItemArea">
+
+                                        </div>
+                                    </div>
+                                    <div class="product-pagination" id="ItemPagination">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section End -->
+
+
+
+
+
+    <!-- footer -->
+    <footer class="footer-light">
+        <div class="light-layout">
+            <div class="container">
+            </div>
+        </div>
+        <section class="section-b-space light-layout">
+            <div class="container">
+                <div class="row footer-theme partition-f">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-title footer-mobile-title">
+                            <h4>about</h4>
+                        </div>
+                        <div class="footer-contant">
+                            <div class="footer-logo" style="margin-bottom: 15px;">
+                                <a href="/Home/Index" style="text-decoration: none;">
+                                    <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: 1px; color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);">LapShop</span>
+                                </a>
+                            </div>
+                            <p>
+                                Your ultimate destination for premium laptops, gaming rigs, and enterprise business workstations.
+                            </p>
+                            <div class="footer-social">
+                                <ul>
+                                    <li>
+                                        <a id="lnkFacebook" href="https://facebook.com/lapshop" target="_blank">
+                                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li><a href="https://twitter.com/lapshop" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://instagram.com/lapshop" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://youtube.com/lapshop" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col offset-xl-1">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>my account</h4>
+                            </div>
+                            <div class="footer-contant">
+                                <ul>
+                                    <li><a href="/Items/ItemList">All Products</a></li>
+                                    <li><a href="/Home/Index">Home Portal</a></li>
+                                    <li><a href="/Order/Cart">Shopping Cart</a></li>
+                                    <li><a href="/Order/MyOrders">My Orders</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>why we choose</h4>
+                            </div>
+                            <div class="footer-contant">
+                                <ul>
+                                    <li><a href="/Pages/Index/3">About Us</a></li>
+                                    <li><a href="/Pages/Index/4">Terms Of Use</a></li>
+                                    <li><a href="/Pages/Index/5">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>store information</h4>
+                            </div>
+                            <div class="footer-contant">
+                                <ul class="contact-list">
+                                    <li>
+                                        <i class="fa fa-map-marker"></i>Cairo, Egypt
+                                    </li>
+                                    <li><i class="fa fa-phone"></i>Call Us: &#x2B;20 123 456 789</li>
+                                    <li>
+                                        <i class="fa fa-envelope-o"></i>Email Us: <a href="mailto:support@lapshop.com">support@lapshop.com</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="sub-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="footer-end">
+                            <p>
+                                <i class="fa fa-copyright" aria-hidden="true"></i> 2025 LapShop. All rights reserved.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="payment-card-bottom">
+                            <ul>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/visa.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/mastercard.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/paypal.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/american-express.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/Fontend/images/icon/discover.png" alt=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end -->
+    <!--modal popup removed-->
+    <!-- theme setting removed -->
+    <!-- search overlay -->
+    <div id="search-overlay" class="search-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10,10,26,0.95); z-index: 9999; backdrop-filter: blur(10px);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 90%; max-width: 600px;">
+            <button onclick="closeSearch()" style="position: absolute; top: -50px; right: 0; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer;"><i class="fa fa-times"></i></button>
+            <form action="/Items/ItemList" method="get" style="display: flex; gap: 10px;">
+                <input type="text" name="search" placeholder="Search laptops..." style="flex: 1; padding: 18px 24px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; color: #fff; font-size: 18px; outline: none; font-family: 'Inter', sans-serif;" autofocus />
+                <button type="submit" style="padding: 18px 32px; background: linear-gradient(135deg, #00f3ff, #00a2ff); border: none; border-radius: 12px; color: #000000; font-size: 16px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif;"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+<!-- tap to top -->
+<div class="tap-top top-cls">
+    <div>
+        <i class="fa fa-angle-double-up"></i>
+    </div>
+</div>
+<!-- tap to top end -->
+<!-- latest jquery-->
+<script src="/Fontend/js/jquery-3.3.1.min.js"></script>
+
+<!-- fly cart ui jquery-->
+<script src="/Fontend/js/jquery-ui.min.js"></script>
+
+<!-- exitintent jquery-->
+<script src="/Fontend/js/jquery.exitintent.js"></script>
+<script src="/Fontend/js/exit.js"></script>
+
+<!-- popper js-->
+<script src="/Fontend/js/popper.min.js"></script>
+
+<!-- slick js-->
+<script src="/Fontend/js/slick.js"></script>
+
+<!-- menu js-->
+<script src="/Fontend/js/menu.js"></script>
+
+<!-- lazyload js-->
+<script src="/Fontend/js/lazysizes.min.js"></script>
+
+<!-- Bootstrap js-->
+<script src="/Fontend/js/bootstrap.js"></script>
+
+<!-- Bootstrap Notification js-->
+<script src="/Fontend/js/bootstrap-notify.min.js"></script>
+
+<!-- Fly cart js-->
+<script src="/Fontend/js/fly-cart.js"></script>
+
+<!-- Theme js-->
+<script src="/Fontend/js/script.js"></script>
+
+<script src="/modules/helper.js"></script>
+<script src="/modules/settings.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="/custom/js/pagination.js"></script>
+    <script src="/modules/items.js?v=HP6yp4YhC1fRvNTnaOZtW4UfL30gYYW6XQOscXPWnVM"></script>
+    <script>
+        var initialSearch = '';
+        var initialCategoryId = '3';
+        ClsItems.GetAll(initialSearch, initialCategoryId);
+
+        // Initialize Price Range Slider
+        $('#price-slider').slider({
+            range: true,
+            min: 50,
+            max: 10000,
+            values: [50, 10000],
+            step: 50,
+            slide: function(event, ui) {
+                $('#price-min-label').text(ui.values[0].toLocaleString());
+                $('#price-max-label').text(ui.values[1].toLocaleString());
+            },
+            change: function(event, ui) {
+                ClsItems.RefreshPagination();
+            }
+        });
+    </script>
+;
+
+<script>
+    $(document).ready(function() {
+        // Make the entire product card clickable
+        $(document).on('click', '.product-box', function(e) {
+            // Ignore if clicked on Add to Cart button, Quick View wrapper, or other explicit links
+            if ($(e.target).closest('.product-card-btn, .cart-info, a, button').length) {
+                return;
+            }
+            // Find the detail page link
+            var link = $(this).find('a[href*="/Items/ItemDetails"]').first();
+            if (link.length) {
+                var url = link.attr('href');
+                if (url) {
+                    window.location.href = url;
+                }
+            }
+        });
+    });
+
+    function openSearch() {
+        document.getElementById('search-overlay').style.display = 'block';
+        var input = document.getElementById('search-overlay').querySelector('input');
+        if (input) {
+            if (typeof ClsItems !== 'undefined' && ClsItems.currentSearch) {
+                input.value = ClsItems.currentSearch;
+            }
+            input.focus();
+        }
+    }
+    function closeSearch() {
+        document.getElementById('search-overlay').style.display = 'none';
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeSearch();
+            var menu = document.getElementById('accountMenu');
+            if (menu) menu.style.display = 'none';
+        }
+    });
+    // Account dropdown - click based
+    function toggleAccountMenu() {
+        var menu = document.getElementById('accountMenu');
+        if (menu.style.display === 'none' || menu.style.display === '') {
+            menu.style.display = 'block';
+        } else {
+            menu.style.display = 'none';
+        }
+    }
+    // Close account menu when clicking outside
+    document.addEventListener('click', function(e) {
+        var dropdown = document.getElementById('accountDropdown');
+        var menu = document.getElementById('accountMenu');
+        if (dropdown && menu && !dropdown.contains(e.target)) {
+            menu.style.display = 'none';
+        }
+    });
+    function AddToCartAjax(itemId, btn) {
+        Helper.AjaxCallGet("/Order/AddToCartAjax?itemId=" + itemId, {}, "json", function(response) {
+            if (response && response.success) {
+                var badge = $('#cartCountBadge');
+                if (badge.length) {
+                    badge.text(response.cartCount);
+                    badge.show();
+                }
+                
+                // Fly-to-Cart Animation
+                if (btn) {
+                    var img = $(btn).closest('.product-box').find('.img-wrapper img');
+                    if (img.length === 0) {
+                        img = $('.product-right-slick img').first();
+                    }
+                    if (img.length === 0) {
+                        img = $(btn).closest('.product-form-box').closest('.row').find('.product-right-slick img').first();
+                    }
+                    if (img.length > 0) {
+                        var cart = $('#cartCountBadge');
+                        if (!cart.length || cart.css('display') === 'none') {
+                            cart = $('.fa-shopping-cart').first();
+                        }
+                        if (cart.length > 0) {
+                            var imgClone = img.clone()
+                                .offset({
+                                    top: img.offset().top,
+                                    left: img.offset().left
+                                })
+                                .css({
+                                    'opacity': '0.8',
+                                    'position': 'absolute',
+                                    'height': img.height() + 'px',
+                                    'width': img.width() + 'px',
+                                    'z-index': '99999',
+                                    'border-radius': '50%',
+                                    'box-shadow': '0 0 15px rgba(0, 243, 255, 0.6)'
+                                })
+                                .appendTo($('body'));
+
+                            var easing = $.easing.easeInOutExpo ? 'easeInOutExpo' : 'swing';
+                            imgClone.animate({
+                                'top': cart.offset().top - 10,
+                                'left': cart.offset().left - 10,
+                                'width': 20,
+                                'height': 20,
+                                'opacity': 0.1
+                            }, 1000, easing, function () {
+                                $(this).detach();
+                                var b = $('#cartCountBadge');
+                                b.addClass('cart-badge-bounce');
+                                setTimeout(function() {
+                                    b.removeClass('cart-badge-bounce');
+                                }, 600);
+                            });
+                        }
+                    }
+                }
+
+                NotificationHelper.ShowSuccess("Laptop added to cart successfully!");
+            } else {
+                NotificationHelper.ShowError("Could not add item to cart.");
+            }
+        }, function() {
+            NotificationHelper.ShowError("Connection error while adding to cart.");
+        });
+    }
+
+</script>
+        
+</body>
+
+</html>

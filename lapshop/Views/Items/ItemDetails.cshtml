@@ -130,8 +130,16 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="product-right product-form-box">
-                        <h4><del>$@Model.Item.SalesPrice</del><span>55% off</span></h4>
-                        <h3>$@Model.Item.SalesPrice</h3>
+                        @if (Model.Item.DiscountPrice.HasValue && Model.Item.DiscountPrice.Value > 0)
+                        {
+                            var discountPercent = Math.Round((1 - (Model.Item.DiscountPrice.Value / Model.Item.SalesPrice)) * 100);
+                            <h4><del>$@Model.Item.SalesPrice.ToString("N2")</del><span>@discountPercent% off</span></h4>
+                            <h3>$@Model.Item.DiscountPrice.Value.ToString("N2")</h3>
+                        }
+                        else
+                        {
+                            <h3>$@Model.Item.SalesPrice.ToString("N2")</h3>
+                        }
                         <div class="product-description border-product">
                             <h6 class="product-title">Availability</h6>
                             <p style="font-weight: 600; color: #10B981; font-size: 15px; margin-bottom: 20px;"><i class="fa fa-check-circle"></i> In Stock & Ready to Ship</p>
@@ -155,10 +163,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product-buttons">
+                        <div class="product-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
                             <a href="javascript:void(0)" onclick="AddToCartAjax(@Model.Item.ItemId, this)"
-                               class="btn btn-solid">add to cart</a> 
-                            <a href="/Order/AddToCart?itemId=@Model.Item.ItemId" class="btn btn-solid">buy now</a>
+                               class="btn btn-solid" style="flex: 1; min-width: 120px;">add to cart</a> 
+                            <a href="/Order/AddToCart?itemId=@Model.Item.ItemId" class="btn btn-solid" style="flex: 1; min-width: 120px;">buy now</a>
+                            <a href="javascript:void(0)" class="wishlist-btn btn btn-solid" data-item-id="@Model.Item.ItemId"
+                               onclick="toggleWishlist(@Model.Item.ItemId, '@Model.Item.ItemName.Replace("'", "\\'")', @Model.Item.SalesPrice, '@Model.Item.ImageName', '@(Model.Item.Processor ?? "Core i7")', @(Model.Item.RamSize ?? 16))"
+                               style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; flex: 1; min-width: 120px; display: inline-flex; align-items: center; justify-content: center; transition: all 0.3s;"
+                               onmouseenter="this.style.background='rgba(0,243,255,0.12)'; this.style.borderColor='rgba(0,243,255,0.3)'; this.style.boxShadow='0 0 15px rgba(0, 243, 255, 0.35)';"
+                               onmouseleave="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';">
+                                <i class="fa fa-heart-o" aria-hidden="true" style="margin-right: 6px; color: #ef4444;"></i> Wishlist
+                            </a>
                         </div>
                     </div>
                 </div>

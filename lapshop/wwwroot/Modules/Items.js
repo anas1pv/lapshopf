@@ -131,21 +131,10 @@ var ClsItems = {
                 if (d1) {
                     d1.innerHTML = htmlData;
 
-                    // bg-img parent conversion commented out because card images are rendered natively
-                    // $('#ItemArea .bg-img').parent().addClass('bg-size');
-                    // $('#ItemArea .bg-img').each(function () {
-                    //     var el = $(this),
-                    //         src = el.attr("src"),
-                    //         parent = el.parent();
-                    //     parent.css({
-                    //         'background-image': 'url(' + src + ')',
-                    //         'background-size': 'contain',
-                    //         'background-position': 'center',
-                    //         'background-repeat': 'no-repeat',
-                    //         'display': 'block'
-                    //     });
-                    //     el.hide();
-                    // });
+                    // Sync Wishlist icons state for newly drawn items
+                    if (typeof WishlistHelper !== 'undefined') {
+                        WishlistHelper.updateHeartIcons();
+                    }
                 }
             }
         });
@@ -159,7 +148,12 @@ var ClsItems = {
         var img = item.imageName || 'silver_ultrabook.png';
         data += "<div class='img-wrapper' style='border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;'>";
         data += "<div class='front'><a href='/Items/ItemDetails/" + item.itemId + "'><img src='/Uploads/Items/" + img + "' class='img-fluid' alt='' style='max-height: 100%; width: auto; object-fit: contain;'></a></div>";
-        data += "<div class='cart-info cart-wrap'><a href='/Items/ItemDetails/" + item.itemId + "' title='View details'><i class='ti-search' aria-hidden='true'></i></a></div>";
+        
+        var escapedName = item.itemName.replace(/'/g, "\\'");
+        data += "<div class='cart-info cart-wrap'>";
+        data += "<a href='/Items/ItemDetails/" + item.itemId + "' title='View details'><i class='ti-search' aria-hidden='true'></i></a>";
+        data += "<a href='javascript:void(0)' class='wishlist-btn' data-item-id='" + item.itemId + "' onclick=\"toggleWishlist(" + item.itemId + ", '" + escapedName + "', " + item.salesPrice + ", '" + img + "', '" + (item.processor || 'Core i7') + "', " + (item.ramSize || 16) + ")\" title='Add to Wishlist'><i class='fa fa-heart-o' aria-hidden='true' style='color: #ef4444;'></i></a>";
+        data += "</div>";
         data += "</div>";
         
         var avg = item.averageRating || 4.8;
@@ -175,7 +169,14 @@ var ClsItems = {
         data += (item.processor || 'Core i7') + " | " + (item.ramSize || 16) + "GB RAM";
         data += "</div>";
         data += "<div class='product-card-footer'>";
-        data += "<h4 class='product-card-price'>$" + parseFloat(item.salesPrice).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "</h4>";
+        if (item.discountPrice && item.discountPrice > 0) {
+            data += "<h4 class='product-card-price' style='display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 0;'>";
+            data += "<del style='color: #64748b; font-size: 12px; font-weight: 400; font-family: \"Inter\", sans-serif !important;'>$" + parseFloat(item.salesPrice).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "</del>";
+            data += "<span style='color: #00f3ff; font-weight: 800; font-family: \"Inter\", sans-serif !important;'>$" + parseFloat(item.discountPrice).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "</span>";
+            data += "</h4>";
+        } else {
+            data += "<h4 class='product-card-price'>$" + parseFloat(item.salesPrice).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "</h4>";
+        }
         data += "<a href='javascript:void(0)' onclick='ClsItems.AddToCart(" + item.itemId + ", this)' class='product-card-btn'>ADD TO CART</a>";
         data += "</div>";
         data += "</div></div></div>";

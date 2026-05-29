@@ -1,0 +1,132 @@
+@inject lapshop.Bl.ISettings settingsService
+@{
+    ViewBag.Title = "About Us";
+    var websiteSettings = settingsService.GetAll();
+}
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>About Us</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+
+<!-- About Section -->
+<section class="section-b-space" style="padding-top: 45px; padding-bottom: 60px;">
+    <div class="container">
+        
+        <!-- Welcome / Story Grid -->
+        <div class="row align-items-center" style="margin-bottom: 70px;">
+            <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+                <div style="padding-right: 20px;">
+                    <h4 style="color: #00f3ff; letter-spacing: 3px; text-transform: uppercase; font-size: 13px; font-weight: 600; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">our story</h4>
+                    <h2 style="color: #F1F5F9; font-size: 34px; font-weight: 700; line-height: 1.25; margin-bottom: 22px; font-family: 'Outfit', sans-serif;">Pioneering the Next Generation of Personal Computing</h2>
+                    <p style="color: #94A3B8; font-size: 16px; line-height: 1.8; margin-bottom: 16px;">
+                        Founded in 2026, <strong>LapShop</strong> has quickly risen to become the premier destination for tech enthusiasts, creative professionals, and hardcore gamers. We set out with a simple mission: to bridge the gap between complex hardware configurations and the ultimate user experience.
+                    </p>
+                    <p style="color: #94A3B8; font-size: 15px; line-height: 1.7; margin-bottom: 24px;">
+                        We curated an exclusive inventory of high-performance laptops and workstations, establishing direct partnerships with global tech giants like Apple, Dell, HP, Lenovo, ASUS, and Razer. At LapShop, we believe that buying a laptop is an investment in your potential. That is why we support every purchase with specialized tech configuration guidance and official warranty services.
+                    </p>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <a href="/Items/ItemList" class="btn btn-solid" style="padding: 13px 30px; font-size: 14px; font-weight: 600; border-radius: 8px;">
+                            Explore Catalog <i class="fa fa-arrow-right" style="margin-left: 6px;"></i>
+                        </a>
+                        <a href="/Pages/ContactUs" style="padding: 13px 30px; font-size: 14px; font-weight: 600; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none; display: flex; align-items: center; transition: all 0.3s;"
+                           onmouseenter="this.style.borderColor='rgba(0,243,255,0.4)'; this.style.background='rgba(0,243,255,0.04)';"
+                           onmouseleave="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.background='transparent';">
+                            Get Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div style="position: relative; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); padding: 25px; backdrop-filter: blur(10px);">
+                    <img src="/Uploads/Sliders/laptop_deal_banner.png" alt="LapShop Technology" style="width: 100%; border-radius: 12px; filter: brightness(0.75); display: block;" />
+                    <div style="position: absolute; bottom: 40px; right: 40px; background: rgba(10,10,12,0.9); border: 1px solid #00f3ff; border-radius: 12px; padding: 18px 25px; backdrop-filter: blur(15px); box-shadow: 0 10px 30px rgba(0,243,255,0.15);">
+                        <div style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #00f3ff; line-height: 1;">100%</div>
+                        <div style="color: #F1F5F9; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-top: 4px; letter-spacing: 0.5px;">Genuine Laptops</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="row text-center" style="margin-bottom: 75px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 16px; padding: 40px 20px; backdrop-filter: blur(5px);">
+            <div class="col-md-3 col-6 mb-4 mb-md-0">
+                <h3 style="font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 800; color: #00f3ff; margin-bottom: 6px;">15K+</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin: 0; font-weight: 500;">Happy Customers</p>
+            </div>
+            <div class="col-md-3 col-6 mb-4 mb-md-0">
+                <h3 style="font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 800; color: #00f3ff; margin-bottom: 6px;">250+</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin: 0; font-weight: 500;">Laptop Models</p>
+            </div>
+            <div class="col-md-3 col-6">
+                <h3 style="font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 800; color: #00f3ff; margin-bottom: 6px;">24/7</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin: 0; font-weight: 500;">Expert Tech Support</p>
+            </div>
+            <div class="col-md-3 col-6">
+                <h3 style="font-family: 'Outfit', sans-serif; font-size: 36px; font-weight: 800; color: #00f3ff; margin-bottom: 6px;">100%</h3>
+                <p style="color: #94A3B8; font-size: 14px; margin: 0; font-weight: 500;">Secured Payments</p>
+            </div>
+        </div>
+
+        <!-- Core Values Section -->
+        <div>
+            <div class="text-center" style="margin-bottom: 45px;">
+                <h4 style="color: #00f3ff; letter-spacing: 3px; text-transform: uppercase; font-size: 13px; font-weight: 600; margin-bottom: 10px; font-family: 'Outfit', sans-serif;">our principles</h4>
+                <h2 style="color: #F1F5F9; font-size: 30px; font-weight: 700; font-family: 'Outfit', sans-serif;">Values That Drive Us</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 35px 25px; transition: all 0.3s ease; height: 100%;"
+                         onmouseenter="this.style.borderColor='rgba(0,243,255,0.25)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 30px rgba(0,243,255,0.08)';"
+                         onmouseleave="this.style.borderColor='rgba(255,255,255,0.06)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <div style="width: 55px; height: 55px; border-radius: 12px; background: rgba(0,243,255,0.08); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                            <i class="fa fa-certificate" style="font-size: 24px; color: #00f3ff; text-shadow: 0 0 10px rgba(0,243,255,0.5);"></i>
+                        </div>
+                        <h5 style="color: #F1F5F9; font-size: 18px; font-weight: 600; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Uncompromised Quality</h5>
+                        <p style="color: #94A3B8; font-size: 14px; line-height: 1.7; margin: 0;">We audit and verify every machine. Every laptop shipped carries official warranties and matches strict quality checkmarks.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 35px 25px; transition: all 0.3s ease; height: 100%;"
+                         onmouseenter="this.style.borderColor='rgba(0,243,255,0.25)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 30px rgba(0,243,255,0.08)';"
+                         onmouseleave="this.style.borderColor='rgba(255,255,255,0.06)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <div style="width: 55px; height: 55px; border-radius: 12px; background: rgba(0,243,255,0.08); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                            <i class="fa fa-users" style="font-size: 22px; color: #00f3ff; text-shadow: 0 0 10px rgba(0,243,255,0.5);"></i>
+                        </div>
+                        <h5 style="color: #F1F5F9; font-size: 18px; font-weight: 600; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Customer First Approach</h5>
+                        <p style="color: #94A3B8; font-size: 14px; line-height: 1.7; margin: 0;">From custom specifications setup to 24/7 technical query resolution, our client service division goes above and beyond to provide satisfaction.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 35px 25px; transition: all 0.3s ease; height: 100%;"
+                         onmouseenter="this.style.borderColor='rgba(0,243,255,0.25)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 30px rgba(0,243,255,0.08)';"
+                         onmouseleave="this.style.borderColor='rgba(255,255,255,0.06)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                        <div style="width: 55px; height: 55px; border-radius: 12px; background: rgba(0,243,255,0.08); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                            <i class="fa fa-lightbulb-o" style="font-size: 24px; color: #00f3ff; text-shadow: 0 0 10px rgba(0,243,255,0.5);"></i>
+                        </div>
+                        <h5 style="color: #F1F5F9; font-size: 18px; font-weight: 600; margin-bottom: 12px; font-family: 'Outfit', sans-serif;">Technical Excellence</h5>
+                        <p style="color: #94A3B8; font-size: 14px; line-height: 1.7; margin: 0;">We stay updated with next-gen processors, graphical GPUs, SSD configurations, and software architectures to provide the best advice for users.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

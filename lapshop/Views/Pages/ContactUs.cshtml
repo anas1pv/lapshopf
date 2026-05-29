@@ -1,0 +1,242 @@
+@inject lapshop.Bl.ISettings settingsService
+@{
+    ViewBag.Title = "Contact Us";
+    var websiteSettings = settingsService.GetAll();
+}
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Contact Us</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+
+<!-- contact section -->
+<section class="section-b-space" style="padding-top: 40px; padding-bottom: 60px;">
+    <div class="container">
+
+        <!-- Success / Error Messages -->
+        @if (TempData["ContactSuccess"] != null)
+        {
+            <div style="background: rgba(0, 243, 255, 0.08); border: 1px solid rgba(0, 243, 255, 0.3); border-radius: 12px; padding: 18px 24px; margin-bottom: 30px; display: flex; align-items: center; gap: 12px; animation: fadeInDown 0.5s ease;">
+                <i class="fa fa-check-circle" style="color: #00f3ff; font-size: 22px; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);"></i>
+                <span style="color: #F1F5F9; font-size: 15px; font-weight: 500;">@TempData["ContactSuccess"]</span>
+            </div>
+        }
+        @if (TempData["ContactError"] != null)
+        {
+            <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 18px 24px; margin-bottom: 30px; display: flex; align-items: center; gap: 12px; animation: fadeInDown 0.5s ease;">
+                <i class="fa fa-exclamation-circle" style="color: #EF4444; font-size: 22px; text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);"></i>
+                <span style="color: #F1F5F9; font-size: 15px; font-weight: 500;">@TempData["ContactError"]</span>
+            </div>
+        }
+
+        <div class="row" style="gap: 0;">
+
+            <!-- Left Column: Contact Form -->
+            <div class="col-lg-7 col-md-12" style="margin-bottom: 30px;">
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 35px; backdrop-filter: blur(10px); height: 100%;">
+                    <h3 style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 24px; color: #F1F5F9; margin-bottom: 8px;">
+                        <i class="fa fa-paper-plane" style="color: #00f3ff; margin-right: 10px; text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);"></i>
+                        Send Us a Message
+                    </h3>
+                    <p style="color: #94A3B8; font-size: 14px; margin-bottom: 30px; line-height: 1.6;">
+                        Have a question or need assistance? Fill out the form below and we'll get back to you as soon as possible.
+                    </p>
+
+                    <form action="/Pages/SubmitContact" method="post">
+                        <div class="row">
+                            <div class="col-md-6" style="margin-bottom: 20px;">
+                                <label style="display: block; color: #94A3B8; font-size: 13px; font-weight: 500; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
+                                    Your Name <span style="color: #00f3ff;">*</span>
+                                </label>
+                                <input type="text" name="Name" required
+                                       placeholder="John Doe"
+                                       style="width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: all 0.3s ease;" 
+                                       onfocus="this.style.borderColor='rgba(0,243,255,0.5)'; this.style.boxShadow='0 0 15px rgba(0,243,255,0.1)';"
+                                       onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';" />
+                            </div>
+                            <div class="col-md-6" style="margin-bottom: 20px;">
+                                <label style="display: block; color: #94A3B8; font-size: 13px; font-weight: 500; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
+                                    Your Email <span style="color: #00f3ff;">*</span>
+                                </label>
+                                <input type="email" name="Email" required
+                                       placeholder="john@example.com"
+                                       style="width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: all 0.3s ease;"
+                                       onfocus="this.style.borderColor='rgba(0,243,255,0.5)'; this.style.boxShadow='0 0 15px rgba(0,243,255,0.1)';"
+                                       onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';" />
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; color: #94A3B8; font-size: 13px; font-weight: 500; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
+                                Subject <span style="color: #00f3ff;">*</span>
+                            </label>
+                            <input type="text" name="Subject" required
+                                   placeholder="How can we help you?"
+                                   style="width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: all 0.3s ease;"
+                                   onfocus="this.style.borderColor='rgba(0,243,255,0.5)'; this.style.boxShadow='0 0 15px rgba(0,243,255,0.1)';"
+                                   onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';" />
+                        </div>
+                        <div style="margin-bottom: 25px;">
+                            <label style="display: block; color: #94A3B8; font-size: 13px; font-weight: 500; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
+                                Message <span style="color: #00f3ff;">*</span>
+                            </label>
+                            <textarea name="Message" required rows="6"
+                                      placeholder="Write your message here..."
+                                      style="width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; resize: vertical; min-height: 140px; transition: all 0.3s ease;"
+                                      onfocus="this.style.borderColor='rgba(0,243,255,0.5)'; this.style.boxShadow='0 0 15px rgba(0,243,255,0.1)';"
+                                      onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-solid" style="padding: 14px 40px; font-size: 15px; font-weight: 600; letter-spacing: 0.5px; border-radius: 10px;">
+                            <i class="fa fa-send" style="margin-right: 8px;"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column: Store Info Cards -->
+            <div class="col-lg-5 col-md-12">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+
+                    <!-- Address Card -->
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px 28px; backdrop-filter: blur(10px); display: flex; align-items: flex-start; gap: 18px; transition: all 0.3s ease;"
+                         onmouseenter="this.style.borderColor='rgba(0,243,255,0.25)'; this.style.boxShadow='0 4px 25px rgba(0,243,255,0.06)';"
+                         onmouseleave="this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none';">
+                        <div style="width: 50px; height: 50px; min-width: 50px; border-radius: 12px; background: rgba(0,243,255,0.08); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa fa-map-marker" style="font-size: 22px; color: #00f3ff; text-shadow: 0 0 10px rgba(0,243,255,0.5);"></i>
+                        </div>
+                        <div>
+                            <h5 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 16px; color: #F1F5F9; margin-bottom: 6px;">Our Address</h5>
+                            <p style="color: #94A3B8; font-size: 14px; margin: 0; line-height: 1.6;">@websiteSettings.Address</p>
+                        </div>
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px 28px; backdrop-filter: blur(10px); display: flex; align-items: flex-start; gap: 18px; transition: all 0.3s ease;"
+                         onmouseenter="this.style.borderColor='rgba(0,243,255,0.25)'; this.style.boxShadow='0 4px 25px rgba(0,243,255,0.06)';"
+                         onmouseleave="this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none';">
+                        <div style="width: 50px; height: 50px; min-width: 50px; border-radius: 12px; background: rgba(0,243,255,0.08); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa fa-phone" style="font-size: 22px; color: #00f3ff; text-shadow: 0 0 10px rgba(0,243,255,0.5);"></i>
+                        </div>
+                        <div>
+                            <h5 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 16px; color: #F1F5F9; margin-bottom: 6px;">Phone Number</h5>
+                            <p style="color: #94A3B8; font-size: 14px; margin: 0; line-height: 1.6;">
+                                <a href="tel:@websiteSettings.ContactNumber" style="color: #94A3B8; text-decoration: none; transition: color 0.3s ease;"
+                                   onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">
+                                    @websiteSettings.ContactNumber
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Email Card -->
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px 28px; backdrop-filter: blur(10px); display: flex; align-items: flex-start; gap: 18px; transition: all 0.3s ease;"
+                         onmouseenter="this.style.borderColor='rgba(0,243,255,0.25)'; this.style.boxShadow='0 4px 25px rgba(0,243,255,0.06)';"
+                         onmouseleave="this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none';">
+                        <div style="width: 50px; height: 50px; min-width: 50px; border-radius: 12px; background: rgba(0,243,255,0.08); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa fa-envelope-o" style="font-size: 20px; color: #00f3ff; text-shadow: 0 0 10px rgba(0,243,255,0.5);"></i>
+                        </div>
+                        <div>
+                            <h5 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 16px; color: #F1F5F9; margin-bottom: 6px;">Email Address</h5>
+                            <p style="color: #94A3B8; font-size: 14px; margin: 0; line-height: 1.6;">
+                                <a href="mailto:support@@lapshop.com" style="color: #94A3B8; text-decoration: none; transition: color 0.3s ease;"
+                                   onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">
+                                    support@("@")lapshop.com
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Business Hours Card -->
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px 28px; backdrop-filter: blur(10px); display: flex; align-items: flex-start; gap: 18px; transition: all 0.3s ease;"
+                         onmouseenter="this.style.borderColor='rgba(0,243,255,0.25)'; this.style.boxShadow='0 4px 25px rgba(0,243,255,0.06)';"
+                         onmouseleave="this.style.borderColor='rgba(255,255,255,0.06)'; this.style.boxShadow='none';">
+                        <div style="width: 50px; height: 50px; min-width: 50px; border-radius: 12px; background: rgba(0,243,255,0.08); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa fa-clock-o" style="font-size: 22px; color: #00f3ff; text-shadow: 0 0 10px rgba(0,243,255,0.5);"></i>
+                        </div>
+                        <div>
+                            <h5 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 16px; color: #F1F5F9; margin-bottom: 6px;">Business Hours</h5>
+                            <p style="color: #94A3B8; font-size: 14px; margin: 0; line-height: 1.8;">
+                                Saturday – Thursday: 10:00 AM – 10:00 PM<br />
+                                Friday: Closed
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Media Links -->
+        <div style="margin-top: 45px;">
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 30px 35px; backdrop-filter: blur(10px); text-align: center;">
+                <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 18px; color: #F1F5F9; margin-bottom: 6px;">Follow Us on Social Media</h4>
+                <p style="color: #94A3B8; font-size: 14px; margin-bottom: 22px;">Stay connected and get the latest updates on our products and offers.</p>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
+                    @if (!string.IsNullOrEmpty(websiteSettings.FacebookLink))
+                    {
+                        <a href="@websiteSettings.FacebookLink" target="_blank"
+                           style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease;"
+                           onmouseenter="this.style.background='rgba(0,243,255,0.12)'; this.style.borderColor='rgba(0,243,255,0.3)'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,243,255,0.15)';"
+                           onmouseleave="this.style.background='rgba(255,255,255,0.04)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <i class="fa fa-facebook" style="font-size: 20px; color: #00f3ff;"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(websiteSettings.TwitterLink))
+                    {
+                        <a href="@websiteSettings.TwitterLink" target="_blank"
+                           style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease;"
+                           onmouseenter="this.style.background='rgba(0,243,255,0.12)'; this.style.borderColor='rgba(0,243,255,0.3)'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,243,255,0.15)';"
+                           onmouseleave="this.style.background='rgba(255,255,255,0.04)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <i class="fa fa-twitter" style="font-size: 20px; color: #00f3ff;"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(websiteSettings.InstgramLink))
+                    {
+                        <a href="@websiteSettings.InstgramLink" target="_blank"
+                           style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease;"
+                           onmouseenter="this.style.background='rgba(0,243,255,0.12)'; this.style.borderColor='rgba(0,243,255,0.3)'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,243,255,0.15)';"
+                           onmouseleave="this.style.background='rgba(255,255,255,0.04)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <i class="fa fa-instagram" style="font-size: 20px; color: #00f3ff;"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(websiteSettings.YoutubeLink))
+                    {
+                        <a href="@websiteSettings.YoutubeLink" target="_blank"
+                           style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s ease;"
+                           onmouseenter="this.style.background='rgba(0,243,255,0.12)'; this.style.borderColor='rgba(0,243,255,0.3)'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,243,255,0.15)';"
+                           onmouseleave="this.style.background='rgba(255,255,255,0.04)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <i class="fa fa-youtube-play" style="font-size: 20px; color: #00f3ff;"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    @@keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    input::placeholder, textarea::placeholder {
+        color: rgba(148, 163, 184, 0.5) !important;
+    }
+</style>

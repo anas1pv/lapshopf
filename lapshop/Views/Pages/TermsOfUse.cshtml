@@ -1,0 +1,137 @@
+@inject lapshop.Bl.ISettings settingsService
+@{
+    ViewBag.Title = "Terms of Use";
+    var websiteSettings = settingsService.GetAll();
+}
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Terms of Use</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Terms of Use</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+
+<!-- Terms of Use Section -->
+<section class="section-b-space" style="padding-top: 40px; padding-bottom: 60px;">
+    <div class="container">
+        <div class="row" style="gap: 0;">
+            
+            <!-- Left Column: Table of Contents -->
+            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 25px; backdrop-filter: blur(10px); position: sticky; top: 30px;">
+                    <h5 style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16px; color: #F1F5F9; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        <i class="fa fa-list" style="color: #00f3ff; margin-right: 8px;"></i> Navigation
+                    </h5>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+                        <li><a href="#intro" style="color: #94A3B8; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">1. Introduction</a></li>
+                        <li><a href="#acceptance" style="color: #94A3B8; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">2. Acceptance of Terms</a></li>
+                        <li><a href="#accounts" style="color: #94A3B8; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">3. User Accounts & Security</a></li>
+                        <li><a href="#pricing" style="color: #94A3B8; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">4. Products & Pricing</a></li>
+                        <li><a href="#billing" style="color: #94A3B8; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">5. Payment & Invoicing</a></li>
+                        <li><a href="#intellectual" style="color: #94A3B8; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">6. Intellectual Property</a></li>
+                        <li><a href="#liability" style="color: #94A3B8; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">7. Limitation of Liability</a></li>
+                        <li><a href="#governing" style="color: #94A3B8; text-decoration: none; font-size: 14px; transition: color 0.2s;" onmouseenter="this.style.color='#00f3ff';" onmouseleave="this.style.color='#94A3B8';">8. Governing Law</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Terms Content -->
+            <div class="col-lg-8 col-md-12">
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 35px; backdrop-filter: blur(10px);">
+                    <div style="color: #64748B; font-size: 12px; font-weight: 500; text-transform: uppercase; margin-bottom: 20px;">Last Updated: May 2026</div>
+
+                    <div style="display: flex; flex-direction: column; gap: 35px;">
+                        <!-- Introduction -->
+                        <div id="intro" style="scroll-margin-top: 30px;">
+                            <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: #F1F5F9; margin-bottom: 12px; border-left: 3px solid #00f3ff; padding-left: 12px;">1. Introduction</h4>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin: 0;">
+                                Welcome to LapShop. These Terms of Use govern your access to and use of the LapShop website, services, and applications. By browsing or purchasing from our storefront, you agree to these legal conditions in full.
+                            </p>
+                        </div>
+
+                        <!-- Acceptance -->
+                        <div id="acceptance" style="scroll-margin-top: 30px;">
+                            <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: #F1F5F9; margin-bottom: 12px; border-left: 3px solid #00f3ff; padding-left: 12px;">2. Acceptance of Terms</h4>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin: 0;">
+                                By accessing this website, you certify that you are at least 18 years old or are accessing the site under the supervision of a parent or guardian. If you do not agree to these terms, you must immediately discontinue your use of our platform.
+                            </p>
+                        </div>
+
+                        <!-- Accounts -->
+                        <div id="accounts" style="scroll-margin-top: 30px;">
+                            <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: #F1F5F9; margin-bottom: 12px; border-left: 3px solid #00f3ff; padding-left: 12px;">3. User Accounts & Security</h4>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin: 0;">
+                                When registering an account on LapShop, you are responsible for maintaining the confidentiality of your username, password, and active sessions. LapShop is not liable for unauthorized access resulting from user negligence.
+                            </p>
+                        </div>
+
+                        <!-- Products and Pricing -->
+                        <div id="pricing" style="scroll-margin-top: 30px;">
+                            <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: #F1F5F9; margin-bottom: 12px; border-left: 3px solid #00f3ff; padding-left: 12px;">4. Products & Pricing</h4>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin-bottom: 12px;">
+                                We strive to ensure absolute accuracy in technical specifications, storage configurations, processor benchmarks, and sales prices. However, errors may occasionally occur.
+                            </p>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin: 0;">
+                                In the event that a product is listed at an incorrect price, LapShop reserves the right to cancel any orders placed for that item prior to shipment, and will issue a full refund immediately.
+                            </p>
+                        </div>
+
+                        <!-- Payment & Invoicing -->
+                        <div id="billing" style="scroll-margin-top: 30px;">
+                            <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: #F1F5F9; margin-bottom: 12px; border-left: 3px solid #00f3ff; padding-left: 12px;">5. Payment & Invoicing</h4>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin: 0;">
+                                We accept major credit cards, PayPal, and cash payments on delivery. All invoices are generated digitally upon successful order placement and can be reviewed in your Account Dashboard under My Orders.
+                            </p>
+                        </div>
+
+                        <!-- Intellectual Property -->
+                        <div id="intellectual" style="scroll-margin-top: 30px;">
+                            <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: #F1F5F9; margin-bottom: 12px; border-left: 3px solid #00f3ff; padding-left: 12px;">6. Intellectual Property</h4>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin: 0;">
+                                All site layouts, banners, customized stylesheets, JavaScript code, and graphics are the exclusive property of LapShop and protected by international intellectual property laws.
+                            </p>
+                        </div>
+
+                        <!-- Limitation of Liability -->
+                        <div id="liability" style="scroll-margin-top: 30px;">
+                            <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: #F1F5F9; margin-bottom: 12px; border-left: 3px solid #00f3ff; padding-left: 12px;">7. Limitation of Liability</h4>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin: 0;">
+                                LapShop is not liable for direct, indirect, incidental, or consequential damages resulting from the purchase, use, or performance of hardware devices sold through our platform beyond the purchase price of the device itself.
+                            </p>
+                        </div>
+
+                        <!-- Governing Law -->
+                        <div id="governing" style="scroll-margin-top: 30px;">
+                            <h4 style="font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 20px; color: #F1F5F9; margin-bottom: 12px; border-left: 3px solid #00f3ff; padding-left: 12px;">8. Governing Law</h4>
+                            <p style="color: #94A3B8; font-size: 15px; line-height: 1.8; margin: 0;">
+                                These Terms of Use shall be governed by and construed in accordance with local laws, without giving effect to any principles of conflicts of law.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>

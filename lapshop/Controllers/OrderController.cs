@@ -22,6 +22,12 @@ namespace lapshop.Controllers
             salesInvoiceService = ssalesInvoiceService;
             _context = context;
         }
+
+        public IActionResult Wishlist()
+        {
+            return View();
+        }
+
         public IActionResult Cart()
         {
             //-----------------------------------------------------------------------------------
@@ -282,14 +288,15 @@ namespace lapshop.Controllers
             }
             else
             {
+                var price = item.DiscountPrice.HasValue && item.DiscountPrice.Value > 0 ? item.DiscountPrice.Value : item.SalesPrice;
                 cart.lstItems.Add(new ShoppingCartItem
                 {
                     ItemId = item.ItemId,
                     ItemName = item.ItemName,
-                    Price = item.SalesPrice,
+                    Price = price,
                     ImageName = item.ImageName, // Populated ImageName
                     Qty = 1,
-                    Total = item.SalesPrice
+                    Total = price
                 });
             }
             cart.Total = cart.lstItems.Sum(a => a.Total);
@@ -325,14 +332,15 @@ namespace lapshop.Controllers
             }
             else
             {
+                var price = item.DiscountPrice.HasValue && item.DiscountPrice.Value > 0 ? item.DiscountPrice.Value : item.SalesPrice;
                 cart.lstItems.Add(new ShoppingCartItem
                 {
                     ItemId = item.ItemId,
                     ItemName = item.ItemName,
-                    Price = item.SalesPrice,
+                    Price = price,
                     ImageName = item.ImageName,
                     Qty = 1,
-                    Total = item.SalesPrice
+                    Total = price
                 });
             }
             cart.Total = cart.lstItems.Sum(a => a.Total);
