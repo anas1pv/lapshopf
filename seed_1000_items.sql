@@ -42,16 +42,16 @@ INSERT INTO TbItemTypes (ItemTypeId, ItemTypeName, ImageName, CurrentState, Crea
 SET IDENTITY_INSERT TbItemTypes OFF;
 
 SET IDENTITY_INSERT TbCategories ON;
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (1, 'Apple', 'apple_macbook.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (2, 'Dell', 'dell_xps.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (3, 'Lenovo', 'lenovo_thinkpad.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (4, 'HP', 'silver_ultrabook.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (5, 'Asus', 'gaming_laptop.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (6, 'Razer', 'razer_blade.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (7, 'MSI', 'gaming_laptop.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (8, 'Acer', 'silver_ultrabook.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (9, 'Microsoft', 'silver_ultrabook.png', 1, GETDATE(), 'Admin');
-INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy) VALUES (10, 'Samsung', 'dark_laptop.png', 1, GETDATE(), 'Admin');
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (1, 'Apple', 'apple_macbook.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (2, 'Dell', 'dell_xps.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (3, 'Lenovo', 'lenovo_thinkpad.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (4, 'HP', 'silver_ultrabook.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (5, 'Asus', 'gaming_laptop.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (6, 'Razer', 'razer_blade.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (7, 'MSI', 'gaming_laptop.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (8, 'Acer', 'silver_ultrabook.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (9, 'Microsoft', 'silver_ultrabook.png', 1, GETDATE(), 'Admin', 1);
+INSERT INTO TbCategories (CategoryId, CategoryName, ImageName, CurrentState, CreatedDate, CreatedBy, ShowInHomePage) VALUES (10, 'Samsung', 'dark_laptop.png', 1, GETDATE(), 'Admin', 1);
 SET IDENTITY_INSERT TbCategories OFF;
 
 SET IDENTITY_INSERT TbItems ON;
@@ -1103,32 +1103,35 @@ SELECT TOP 1 @u3 = Id FROM AspNetUsers WHERE Id != @u1 AND Id != @u2;
 IF @u2 IS NULL SET @u2 = @u1;
 IF @u3 IS NULL SET @u3 = @u1;
 
-DECLARE @orderId INT;
+IF @u1 IS NOT NULL
+BEGIN
+    DECLARE @orderId INT;
 
-INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState, UpdatedDate, UpdatedBy) VALUES
-(DATEADD(day, -6, GETDATE()), DATEADD(day, -1, GETDATE()), @u1, 'Address: 123 Market St, San Francisco | Phone: 555-1234', @u1, DATEADD(day, -6, GETDATE()), 3, DATEADD(day, -1, GETDATE()), '1');
-SET @orderId = SCOPE_IDENTITY();
-INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (1, @orderId, 1, 3499.00);
+    INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState, UpdatedDate, UpdatedBy) VALUES
+    (DATEADD(day, -6, GETDATE()), DATEADD(day, -1, GETDATE()), @u1, 'Address: 123 Market St, San Francisco | Phone: 555-1234', @u1, DATEADD(day, -6, GETDATE()), 3, DATEADD(day, -1, GETDATE()), '1');
+    SET @orderId = SCOPE_IDENTITY();
+    INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (1, @orderId, 1, 3499.00);
 
-INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState, UpdatedDate, UpdatedBy) VALUES
-(DATEADD(day, -4, GETDATE()), DATEADD(day, 1, GETDATE()), @u2, 'Address: 456 Tech Park, San Jose | Phone: 555-5678', @u2, DATEADD(day, -4, GETDATE()), 2, DATEADD(day, -2, GETDATE()), '1');
-SET @orderId = SCOPE_IDENTITY();
-INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (3, @orderId, 1, 1999.00);
+    INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState, UpdatedDate, UpdatedBy) VALUES
+    (DATEADD(day, -4, GETDATE()), DATEADD(day, 1, GETDATE()), @u2, 'Address: 456 Tech Park, San Jose | Phone: 555-5678', @u2, DATEADD(day, -4, GETDATE()), 2, DATEADD(day, -2, GETDATE()), '1');
+    SET @orderId = SCOPE_IDENTITY();
+    INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (3, @orderId, 1, 1999.00);
 
-INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState) VALUES
-(DATEADD(day, -2, GETDATE()), DATEADD(day, 3, GETDATE()), @u3, 'Address: 789 Cloud Ave, Oakland | Phone: 555-9012', @u3, DATEADD(day, -2, GETDATE()), 1);
-SET @orderId = SCOPE_IDENTITY();
-INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (5, @orderId, 1, 1749.00);
+    INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState) VALUES
+    (DATEADD(day, -2, GETDATE()), DATEADD(day, 3, GETDATE()), @u3, 'Address: 789 Cloud Ave, Oakland | Phone: 555-9012', @u3, DATEADD(day, -2, GETDATE()), 1);
+    SET @orderId = SCOPE_IDENTITY();
+    INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (5, @orderId, 1, 1749.00);
 
-INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState) VALUES
-(GETDATE(), DATEADD(day, 5, GETDATE()), @u1, 'Address: 123 Market St, San Francisco | Phone: 555-1234', @u1, GETDATE(), 1);
-SET @orderId = SCOPE_IDENTITY();
-INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (11, @orderId, 1, 2999.00);
+    INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState) VALUES
+    (GETDATE(), DATEADD(day, 5, GETDATE()), @u1, 'Address: 123 Market St, San Francisco | Phone: 555-1234', @u1, GETDATE(), 1);
+    SET @orderId = SCOPE_IDENTITY();
+    INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (11, @orderId, 1, 2999.00);
 
-INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState, UpdatedDate, UpdatedBy) VALUES
-(DATEADD(day, -15, GETDATE()), DATEADD(day, -10, GETDATE()), @u2, 'Address: 99 Broadway, New York | Phone: 555-3344 | Coupon: LUNAR25 (25% off)', @u2, DATEADD(day, -15, GETDATE()), 3, DATEADD(day, -10, GETDATE()), '1');
-SET @orderId = SCOPE_IDENTITY();
-INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (2, @orderId, 1, 824.25);
+    INSERT INTO TbSalesInvoices (InvoiceDate, DelivryDate, CustomerId, Notes, CreatedBy, CreatedDate, CurrentState, UpdatedDate, UpdatedBy) VALUES
+    (DATEADD(day, -15, GETDATE()), DATEADD(day, -10, GETDATE()), @u2, 'Address: 99 Broadway, New York | Phone: 555-3344 | Coupon: LUNAR25 (25% off)', @u2, DATEADD(day, -15, GETDATE()), 3, DATEADD(day, -10, GETDATE()), '1');
+    SET @orderId = SCOPE_IDENTITY();
+    INSERT INTO TbSalesInvoiceItems (ItemId, InvoiceId, Qty, InvoicePrice) VALUES (2, @orderId, 1, 824.25);
+END
 
 INSERT INTO TbItemEvaluations (ItemId, CustomerName, CustomerEmail, Rating, ReviewText, CreatedDate) VALUES
 (1, 'John Doe', 'john@example.com', 5, 'Absolutely incredible laptop. The M3 Max chip compiles code instantly and the screen is beautiful.', DATEADD(day, -5, GETDATE())),
