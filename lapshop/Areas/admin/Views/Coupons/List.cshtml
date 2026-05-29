@@ -1,0 +1,97 @@
+@model List<lapshop.Domains.TbCoupon>
+@{
+    ViewData["Title"] = "Coupons Management";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title" style="color: #ffffff; font-family: 'Outfit', sans-serif; font-weight: 700;"> Coupons </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/admin/Home">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Coupons</li>
+            </ol>
+        </nav>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" style="background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); color: #00f3ff; border-radius: 8px; padding: 12px 18px; margin-bottom: 20px;">
+            <i class="mdi mdi-check-circle me-2"></i>@TempData["SuccessMessage"]
+        </div>
+    }
+
+    <div class="card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;">
+        <div class="card-body" style="padding: 25px;">
+            <h4 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Coupons List</h4>
+            
+            <div class="col-12 p-0">
+                <a href="/Admin/Coupons/Edit" class="btn btn-gradient-primary mb-3" style="padding: 10px 20px; font-weight: 600; border-radius: 8px; font-size: 13px;">
+                    <i class="mdi mdi-plus me-1"></i> New Coupon
+                </a>
+                
+                <div class="table-responsive">
+                    <table class="table table-hover" style="vertical-align: middle;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                                <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 15px;">Coupon Code</th>
+                                <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 15px;">Discount</th>
+                                <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 15px;">Expiry Date</th>
+                                <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 15px;">Status</th>
+                                <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 15px; width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model == null || !Model.Any())
+                            {
+                                <tr>
+                                    <td colspan="5" class="text-center" style="color: #94a3b8; padding: 30px; border: none;">
+                                        <i class="mdi mdi-ticket-percent-outline" style="font-size: 40px; display: block; margin-bottom: 10px;"></i>
+                                        No coupons found. Click "New Coupon" to create one.
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    bool isExpired = item.ExpiryDate.Date < DateTime.Today;
+                                    string statusText = item.IsActive ? (isExpired ? "Expired" : "Active") : "Inactive";
+                                    string badgeStyle = item.IsActive
+                                        ? (isExpired ? "background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2);"
+                                                     : "background: rgba(48, 209, 88, 0.1); color: #30d158; border: 1px solid rgba(48, 209, 88, 0.2);")
+                                        : "background: rgba(148, 163, 184, 0.1); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.2);";
+
+                                    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04); transition: background-color 0.2s;">
+                                        <td style="color: #00f3ff; font-weight: 700; font-size: 14px; border: none; padding: 15px; font-family: 'Inter', sans-serif;">
+                                            @item.CouponCode
+                                        </td>
+                                        <td style="color: #ffffff; font-weight: 600; font-size: 14px; border: none; padding: 15px; font-family: 'Inter', sans-serif;">
+                                            @item.DiscountPercent.ToString("0")% OFF
+                                        </td>
+                                        <td style="color: #94a3b8; font-size: 13px; border: none; padding: 15px; font-family: 'Inter', sans-serif;">
+                                            @item.ExpiryDate.ToString("yyyy-MM-dd")
+                                        </td>
+                                        <td style="border: none; padding: 15px;">
+                                            <span class="badge" style="padding: 6px 12px; font-size: 11px; border-radius: 6px; font-weight: 600; @badgeStyle">
+                                                @statusText
+                                            </span>
+                                        </td>
+                                        <td style="border: none; padding: 15px; white-space: nowrap;">
+                                            <a asp-controller="Coupons" asp-action="Edit" asp-route-id="@item.CouponId"
+                                               class="btn btn-info btn-sm" style="padding: 6px 12px; font-size: 12px; border-radius: 6px; margin-right: 5px;">Edit</a>
+                                            
+                                            <a asp-controller="Coupons" asp-action="Delete" asp-route-id="@item.CouponId"
+                                               class="btn btn-danger btn-sm" style="padding: 6px 12px; font-size: 12px; border-radius: 6px;"
+                                               onclick="return confirm('Are you sure you want to delete this coupon?');">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

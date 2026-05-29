@@ -1,0 +1,414 @@
+@using lapshop.Domains;
+@using lapshop.Models;
+
+@model VmItemDetails
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Product Details</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+<!-- section start -->
+<section>
+    <div class="collection-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1 col-sm-2 col-xs-12">
+                    <div class="row">
+                        <div class="col-12 p-0">
+                            <div class="slider-right-nav">
+                                @if (Model.lstItemImages.Count == 0)
+                                {
+                                    <div>
+                                        <img src="~/Uploads/Items/@Model.Item.ImageName" alt=""
+                                             class="img-fluid blur-up lazyload">
+                                    </div>
+                                }
+                                else
+                                {
+                                    @foreach (var item in Model.lstItemImages)
+                                    {
+                                        <div>
+                                            <img src="~/Uploads/Items/@item.ImageName" alt=""
+                                                 class="img-fluid blur-up lazyload">
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-10 col-xs-12 order-up">
+                    <div class="product-right-slick">
+                        @if (Model.lstItemImages.Count == 0)
+                        {
+                            <div>
+                                <img src="~/Uploads/Items/@Model.Item.ImageName" alt=""
+                                     class="img-fluid blur-up lazyload image_zoom_cls-0">
+                            </div>
+                        }
+                        else
+                        {
+                            @foreach (var item in Model.lstItemImages)
+                            {
+                                <div>
+                                    <img src="~/Uploads/Items/@item.ImageName" alt=""
+                                         class="img-fluid blur-up lazyload image_zoom_cls-0">
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="product-right product-description-box">
+                        <h2>@Model.Item.ItemName</h2>
+                        <div class="rating-section mb-3">
+                            @{
+                                double avgRating = ViewBag.AverageRating ?? 5.0;
+                                int roundedRating = (int)Math.Round(avgRating);
+                                int totalReviews = ViewBag.Reviews != null ? ((List<lapshop.Domains.TbItemEvaluation>)ViewBag.Reviews).Count : 0;
+                            }
+                            <div class="rating" style="display: inline-flex; align-items: center; gap: 4px;">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= roundedRating)
+                                    {
+                                        <i class="fa fa-star" style="color: #ffb503; font-size: 16px;"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star-o" style="color: #ccc; font-size: 16px;"></i>
+                                    }
+                                }
+                                <span style="font-size: 14px; color: #94A3B8; margin-left: 8px;">@avgRating.ToString("0.0") (@totalReviews reviews)</span>
+                            </div>
+                        </div>
+                        <div class="border-product">
+                            <h6 class="product-title">product details</h6>
+                            <p>@Model.Item.Description</p>
+                        </div>
+
+
+                        <div class="border-product">
+                            <h6 class="product-title">100% SECURE PAYMENT</h6>
+                            <div class="payment-card-bottom">
+                                <ul>
+                                    <li>
+                                        <a href="#"><img src="~/Fontend/images/icon/visa.png" alt="Visa"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="~/Fontend/images/icon/mastercard.png" alt="Mastercard"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="~/Fontend/images/icon/paypal.png" alt="PayPal"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="~/Fontend/images/icon/american-express.png" alt="Amex"></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="~/Fontend/images/icon/discover.png" alt="Discover"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="product-right product-form-box">
+                        <h4><del>$@Model.Item.SalesPrice</del><span>55% off</span></h4>
+                        <h3>$@Model.Item.SalesPrice</h3>
+                        <div class="product-description border-product">
+                            <h6 class="product-title">Availability</h6>
+                            <p style="font-weight: 600; color: #10B981; font-size: 15px; margin-bottom: 20px;"><i class="fa fa-check-circle"></i> In Stock & Ready to Ship</p>
+
+                            <h6 class="product-title">quantity</h6>
+                            <div class="qty-box">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <button type="button"
+                                                class="btn quantity-left-minus" data-type="minus" data-field="">
+                                            <i class="ti-angle-left"></i>
+                                        </button>
+                                    </span>
+                                    <input type="text" name="quantity" class="form-control input-number" value="1">
+                                    <span class="input-group-prepend">
+                                        <button type="button"
+                                                class="btn quantity-right-plus" data-type="plus" data-field="">
+                                            <i class="ti-angle-right"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-buttons">
+                            <a href="javascript:void(0)" onclick="AddToCartAjax(@Model.Item.ItemId, this)"
+                               class="btn btn-solid">add to cart</a> 
+                            <a href="/Order/AddToCart?itemId=@Model.Item.ItemId" class="btn btn-solid">buy now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+<!-- product-tab starts -->
+<section class="tab-product m-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="top-home-tab" data-toggle="tab"
+                           href="#top-home" role="tab" aria-selected="true">Description</a>
+                        <div class="material-border"></div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-top-tab" data-toggle="tab"
+                           href="#top-profile" role="tab" aria-selected="false">Specifications</a>
+                        <div class="material-border"></div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="review-top-tab" data-toggle="tab"
+                           href="#top-review" role="tab" aria-selected="false">Write Review</a>
+                        <div class="material-border"></div>
+                    </li>
+                </ul>
+                <div class="tab-content nav-material" id="top-tabContent">
+                    <div class="tab-pane fade show active" id="top-home" role="tabpanel"
+                         aria-labelledby="top-home-tab">
+                        <p>@Model.Item.Description</p>
+                    </div>
+                    <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
+                        <div class="single-product-tables">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Processor</td>
+                                        <td>@Model.Item.Processor</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ram Size</td>
+                                        <td>@Model.Item.RamSize GB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hard Disk</td>
+                                        <td>@Model.Item.HardDisk</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Screen Resolution</td>
+                                        <td>@Model.Item.ScreenReslution</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Screen Size</td>
+                                        <td>@Model.Item.ScreenSize</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>GPU</td>
+                                        <td>@Model.Item.Gpu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weight</td>
+                                        <td>@Model.Item.Weight</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <h4 class="mb-3 text-white" style="font-weight: 600;">Customer Reviews (@(ViewBag.Reviews != null ? ((List<lapshop.Domains.TbItemEvaluation>)ViewBag.Reviews).Count : 0))</h4>
+                                @if (ViewBag.Reviews == null || ((List<lapshop.Domains.TbItemEvaluation>)ViewBag.Reviews).Count == 0)
+                                {
+                                    <p class="text-muted">No reviews yet. Be the first to write a review!</p>
+                                }
+                                else
+                                {
+                                    <div class="reviews-list" style="max-height: 450px; overflow-y: auto; padding-right: 10px;">
+                                        @foreach (var review in (List<lapshop.Domains.TbItemEvaluation>)ViewBag.Reviews)
+                                        {
+                                            <div class="review-item p-3 mb-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 8px;">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <h6 class="m-0 text-white" style="font-weight: 600;">@review.CustomerName</h6>
+                                                    <small class="text-muted">@review.CreatedDate.ToString("yyyy-MM-dd")</small>
+                                                </div>
+                                                <div class="rating mb-2">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= review.Rating)
+                                                        {
+                                                            <i class="fa fa-star" style="color: #ffb503;"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fa fa-star-o" style="color: #ccc;"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                                <p class="mb-0 text-light" style="font-size: 14px;">@review.ReviewText</p>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <h4 class="mb-3 text-white" style="font-weight: 600;">Write a Review</h4>
+                                <form class="theme-form" method="post" action="/Items/SubmitReview">
+                                    <input type="hidden" name="itemId" value="@Model.Item.ItemId" />
+                                    <div class="form-row">
+                                        <div class="col-md-12 mb-3">
+                                            <label style="display: block; font-weight: 500; color: #fff;">Your Rating</label>
+                                            <div class="rating-input" style="font-size: 24px; cursor: pointer; display: inline-flex; gap: 8px;">
+                                                <i class="fa fa-star-o star-rating" data-value="1" style="color: #ffb503;"></i>
+                                                <i class="fa fa-star-o star-rating" data-value="2" style="color: #ffb503;"></i>
+                                                <i class="fa fa-star-o star-rating" data-value="3" style="color: #ffb503;"></i>
+                                                <i class="fa fa-star-o star-rating" data-value="4" style="color: #ffb503;"></i>
+                                                <i class="fa fa-star-o star-rating" data-value="5" style="color: #ffb503;"></i>
+                                                <input type="hidden" name="rating" id="selectedRating" value="5" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="name" style="color: #ccc;">Name</label>
+                                            <input type="text" class="form-control" name="name" placeholder="Enter Your name" required style="background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1);">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" style="color: #ccc;">Email</label>
+                                            <input type="email" class="form-control" name="email" placeholder="Email" required style="background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1);">
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label for="reviewText" style="color: #ccc;">Review Message</label>
+                                            <textarea class="form-control" name="reviewText" placeholder="Write Your Review Here" rows="5" required style="background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.1);"></textarea>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="btn btn-solid" type="submit" style="background: var(--gradient-button); border: none; color: #000 !important; font-weight: 600; padding: 12px 30px; border-radius: 6px; box-shadow: var(--shadow-button);">Submit Your Review</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product-tab ends -->
+<!-- product section start -->
+<section class="section-b-space ratio_asos">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 product-related">
+                <h2>related products</h2>
+            </div>
+        </div>
+        <div class="row search-product">
+            @foreach (var item in Model.lstRecommendedItems)
+            {
+                <div class="col-xl-2 col-md-4 col-sm-6">
+
+                    <div class="product-box">
+                        <partial name="ItemBox" model="@item" />
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- product section end -->
+@section Scripts
+{
+    <!-- Zoom js-->
+    <script src="~/Fontend/js/jquery.elevatezoom.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Hover animation (mouseenter/mouseleave)
+            $('.star-rating').on('mouseenter', function() {
+                var val = $(this).data('value');
+                $('.star-rating').each(function() {
+                    var starVal = $(this).data('value');
+                    if (starVal <= val) {
+                        $(this).removeClass('fa-star-o').addClass('fa-star star-hover-glow');
+                        // Add pulsing animation to the hovered star itself
+                        if (starVal === val) {
+                            $(this).addClass('star-pulse');
+                        } else {
+                            $(this).removeClass('star-pulse');
+                        }
+                    } else {
+                        $(this).removeClass('fa-star star-hover-glow star-pulse').addClass('fa-star-o');
+                    }
+                });
+            });
+
+            $('.star-rating').on('mouseleave', function() {
+                var selectedVal = parseInt($('#selectedRating').val()) || 5;
+                $('.star-rating').each(function() {
+                    var starVal = $(this).data('value');
+                    $(this).removeClass('star-hover-glow star-pulse');
+                    if (starVal <= selectedVal) {
+                        $(this).removeClass('fa-star-o').addClass('fa-star');
+                    } else {
+                        $(this).removeClass('fa-star').addClass('fa-star-o');
+                    }
+                });
+            });
+
+            $('.star-rating').on('click', function() {
+                var val = $(this).data('value');
+                $('#selectedRating').val(val);
+                
+                // Trigger click visual feedback
+                $('.star-rating').each(function() {
+                    var starVal = $(this).data('value');
+                    $(this).removeClass('star-hover-glow star-pulse');
+                    if (starVal <= val) {
+                        $(this).removeClass('fa-star-o').addClass('fa-star');
+                        if (starVal === val) {
+                            // Add a quick pulse click animation
+                            var self = $(this);
+                            self.addClass('star-pulse');
+                            setTimeout(function() {
+                                self.removeClass('star-pulse');
+                            }, 600);
+                        }
+                    } else {
+                        $(this).removeClass('fa-star').addClass('fa-star-o');
+                    }
+                });
+            });
+
+            // Default set stars on page load
+            var defaultVal = $('#selectedRating').val();
+            $('.star-rating').each(function() {
+                var starVal = $(this).data('value');
+                if (starVal <= defaultVal) {
+                    $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        });
+    </script>
+}

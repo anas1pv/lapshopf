@@ -1,0 +1,116 @@
+@model lapshop.Domains.TbSalesInvoice
+@{
+    ViewBag.Title = "Create New Order";
+    var customers = ViewBag.Customers as IEnumerable<dynamic> ?? new List<dynamic>();
+    var items = ViewBag.Items as IEnumerable<dynamic> ?? new List<dynamic>();
+}
+
+<div class="content-wrapper">
+    <!-- Page Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+            <h2 style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #ffffff; margin: 0; font-size: 24px;">Create New Order</h2>
+            <span style="color: #86868b; font-size: 13px;">Create and record a manual customer order</span>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background: transparent; margin: 0; padding: 0;">
+                <li class="breadcrumb-item"><a href="/admin/Home" style="color: #0071e3; text-decoration: none;">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/admin/Orders/List" style="color: #0071e3; text-decoration: none;">Orders</a></li>
+                <li class="breadcrumb-item active" style="color: #86868b;">Create</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Creation Form Card -->
+    <div class="card" style="background: #161617; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+        <div class="card-body" style="padding: 30px;">
+            <form method="post" action="/admin/Orders/Create">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row">
+                    <!-- Left Column: Customer & Item Selection -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label style="color: #86868b; font-weight: 500; font-size: 13px; margin-bottom: 8px; display: block;">Select Customer</label>
+                            <select name="customerId" required class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 12px; font-size: 14px; outline: none; width: 100%;">
+                                <option value="" style="background: #161617; color: #86868b;">-- Choose Customer --</option>
+                                @foreach (var customer in customers)
+                                {
+                                    <option value="@customer.Id" style="background: #161617; color: #fff;">@customer.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label style="color: #86868b; font-weight: 500; font-size: 13px; margin-bottom: 8px; display: block;">Select Laptop Model</label>
+                            <select id="itemSelect" name="itemId" required class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 12px; font-size: 14px; outline: none; width: 100%;">
+                                <option value="" data-price="0" style="background: #161617; color: #86868b;">-- Choose Laptop --</option>
+                                @foreach (var item in items)
+                                {
+                                    <option value="@item.Id" data-price="@item.Price" style="background: #161617; color: #fff;">@item.Name ($@item.Price.ToString("N2"))</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label style="color: #86868b; font-weight: 500; font-size: 13px; margin-bottom: 8px; display: block;">Quantity</label>
+                                    <input type="number" id="qtyInput" name="qty" value="1" min="1" max="100" required class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 12px; font-size: 14px; outline: none; width: 100%;" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label style="color: #86868b; font-weight: 500; font-size: 13px; margin-bottom: 8px; display: block;">Estimated Total</label>
+                                    <div id="totalDisplay" style="font-size: 20px; font-weight: 700; color: #00f3ff; padding: 8px 0; font-family: 'Outfit', sans-serif;">$0.00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Shipping Info -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label style="color: #86868b; font-weight: 500; font-size: 13px; margin-bottom: 8px; display: block;">Shipping Phone Number</label>
+                            <input type="text" name="phone" placeholder="e.g. +1 (555) 019-2834" required class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 12px; font-size: 14px; outline: none; width: 100%;" />
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label style="color: #86868b; font-weight: 500; font-size: 13px; margin-bottom: 8px; display: block;">Shipping Address</label>
+                            <input type="text" name="address" placeholder="Street Address, City, State, ZIP" required class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 12px; font-size: 14px; outline: none; width: 100%;" />
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label style="color: #86868b; font-weight: 500; font-size: 13px; margin-bottom: 8px; display: block;">Order Notes (Optional)</label>
+                            <textarea name="notes" placeholder="Any specific instructions for delivery..." rows="3" class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 12px; font-size: 14px; outline: none; width: 100%; resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Footer Actions -->
+                <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 25px;">
+                    <a href="/admin/Orders/List" class="btn" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 12px 28px; font-size: 14px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: all 0.3s ease;">Cancel</a>
+                    <button type="submit" class="btn" style="background: linear-gradient(135deg, #0071e3 0%, #0077ed 100%); border: none; border-radius: 8px; color: #ffffff; padding: 12px 28px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 113, 227, 0.2);">Create Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            function updateEstimatedTotal() {
+                var selectedOption = $('#itemSelect option:selected');
+                var price = parseFloat(selectedOption.attr('data-price')) || 0;
+                var qty = parseInt($('#qtyInput').val()) || 1;
+                var total = price * qty;
+                $('#totalDisplay').text('$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+            }
+
+            $('#itemSelect, #qtyInput').on('change keyup input', function() {
+                updateEstimatedTotal();
+            });
+        });
+    </script>
+}

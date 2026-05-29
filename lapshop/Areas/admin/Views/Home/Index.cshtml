@@ -1,0 +1,399 @@
+@using lapshop.Domains
+<div class="content-wrapper">
+    <!-- Page Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <div>
+            <h2 style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #ffffff; margin: 0; font-size: 24px;">Customer Orders</h2>
+            <span style="color: #86868b; font-size: 13px;">Manage and track all customer purchases</span>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background: transparent; margin: 0; padding: 0;">
+                <li class="breadcrumb-item"><a href="/admin/Home" style="color: #0071e3; text-decoration: none;">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="color: #86868b;">Overview</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Orion KPI metrics cards (4 in a row) -->
+    <div class="row mb-4">
+        <!-- Card 1: Total Revenue -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="orion-metric-card">
+                <div class="orion-metric-title">Total Revenue</div>
+                <div class="orion-metric-value">$@(((decimal)(ViewBag.WeeklySales ?? 0)).ToString("N2"))</div>
+                <div class="orion-metric-change" style="color: #10B981;">
+                    <i class="mdi mdi-arrow-up-bold" style="font-size: 14px;"></i> +15.8%
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: New Orders -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="orion-metric-card">
+                <div class="orion-metric-title">New Orders</div>
+                <div class="orion-metric-value">@(ViewBag.WeeklyOrders ?? 0)</div>
+                <div class="orion-metric-change" style="color: #10B981;">
+                    <i class="mdi mdi-arrow-up-bold" style="font-size: 14px;"></i> +8.1%
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Active Customers -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="orion-metric-card">
+                <div class="orion-metric-title">Active Customers</div>
+                <div class="orion-metric-value">@(ViewBag.TotalUsers ?? 0)</div>
+                <div class="orion-metric-change" style="color: #10B981;">
+                    <i class="mdi mdi-arrow-up-bold" style="font-size: 14px;"></i> +5.3%
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: Avg. Order Value -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="orion-metric-card">
+                <div class="orion-metric-title">Avg. Order Value</div>
+                @{
+                    decimal weeklySales = (decimal)(ViewBag.WeeklySales ?? 0);
+                    int weeklyOrders = (int)(ViewBag.WeeklyOrders ?? 0);
+                    decimal avgVal = weeklyOrders > 0 ? (weeklySales / weeklyOrders) : 112.50m;
+                }
+                <div class="orion-metric-value">$@avgVal.ToString("N2")</div>
+                <div class="orion-metric-change" style="color: #10B981;">
+                    <i class="mdi mdi-arrow-up-bold" style="font-size: 14px;"></i> +2.1%
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monthly Line Chart Card -->
+    <div class="row mb-4">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;">
+                <div class="card-body" style="padding: 25px;">
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin: 0;">Monthly Sales Overview</h4>
+                    </div>
+                    <div style="position: relative; height: 320px; width: 100%;">
+                        <canvas id="monthly-sales-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Analytics Row -->
+    <div class="row mb-4">
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="card chart-card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;">
+                <div class="card-body" style="padding: 25px;">
+                    <h4 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Sales by Brand</h4>
+                    <div style="position: relative; height: 280px;">
+                        <canvas id="category-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 mb-4">
+            <div class="card chart-card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;">
+                <div class="card-body" style="padding: 25px;">
+                    <h4 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Top Selling Products</h4>
+                    <div style="position: relative; height: 280px;">
+                        <canvas id="top-products-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Customer Orders Table -->
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;">
+                <div class="card-body" style="padding: 25px;">
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin: 0;">Recent Customer Orders</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                                    <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Order ID </th>
+                                    <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Customer </th>
+                                    <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Date </th>
+                                    <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Amount </th>
+                                    <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Status </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.RecentOrders != null)
+                                {
+                                    foreach (var order in ViewBag.RecentOrders)
+                                    {
+                                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                                            <td style="color: #ffffff; font-weight: 500; font-size: 13px; border: none; padding: 14px 12px;"> #ORD-@order.InvoiceId </td>
+                                            <td style="color: #ffffff; font-weight: 500; font-size: 13px; border: none; padding: 14px 12px;"> @order.CustomerName </td>
+                                            <td style="color: #86868b; font-size: 13px; border: none; padding: 14px 12px;"> @order.InvoiceDate.ToString("MMM dd, yyyy") </td>
+                                            <td style="color: #ffffff; font-weight: 600; font-size: 13px; border: none; padding: 14px 12px;"> $@order.Total.ToString("N2") </td>
+                                            <td style="border: none; padding: 14px 12px;">
+                                                @if (order.CurrentState == 2)
+                                                {
+                                                    <span class="status-pill status-shipped">Shipped</span>
+                                                }
+                                                else if (order.CurrentState == 3)
+                                                {
+                                                    <span class="status-pill status-delivered">Delivered</span>
+                                                }
+                                                else if (order.CurrentState == 4)
+                                                {
+                                                    <span class="status-pill status-canceled">Canceled</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="status-pill status-pending">Pending</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" style="text-align: center; color: #64748B; padding: 40px; border: none;">
+                                            <i class="mdi mdi-package-variant" style="font-size: 40px; display: block; margin-bottom: 10px;"></i>
+                                            No orders yet
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $.get('/admin/Home/GetSalesStats', function (data) {
+                if (data && data.monthly) {
+                    var labels = data.monthly.map(x => x.month);
+                    var sales = data.monthly.map(x => x.sales);
+
+                    var ctx = document.getElementById('monthly-sales-chart').getContext('2d');
+
+                    var gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                    gradient.addColorStop(0, 'rgba(0, 243, 255, 0.4)');
+                    gradient.addColorStop(1, 'rgba(0, 243, 255, 0.01)');
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Revenue ($)',
+                                data: sales,
+                                backgroundColor: gradient,
+                                borderColor: '#00f3ff',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.35,
+                                pointBackgroundColor: '#00f3ff',
+                                pointBorderColor: '#161617',
+                                pointBorderWidth: 2,
+                                pointRadius: 4,
+                                pointHoverRadius: 6,
+                                pointHoverBackgroundColor: '#66f7ff'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: { 
+                                        beginAtZero: true, 
+                                        fontColor: '#86868b', 
+                                        fontFamily: 'Inter',
+                                        fontSize: 11,
+                                        maxTicksLimit: 6,
+                                        callback: function(value) {
+                                            if (value >= 1000) {
+                                                return '$' + (value / 1000) + 'k';
+                                            }
+                                            return '$' + value;
+                                        }
+                                    },
+                                    gridLines: { 
+                                        color: 'rgba(255,255,255,0.03)', 
+                                        zeroLineColor: 'transparent',
+                                        drawBorder: false
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: { 
+                                        fontColor: '#86868b', 
+                                        fontFamily: 'Inter',
+                                        fontSize: 11
+                                    },
+                                    gridLines: { 
+                                        display: false,
+                                        drawBorder: false
+                                    }
+                                }]
+                            },
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                backgroundColor: '#1e1e1f',
+                                titleFontColor: '#ffffff',
+                                bodyFontColor: '#00f3ff',
+                                borderColor: 'rgba(255, 255, 255, 0.08)',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                titleFontFamily: 'Outfit',
+                                bodyFontFamily: 'Inter',
+                                displayColors: false,
+                                padding: 10
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Category Doughnut Chart
+            $.get('/admin/Home/GetCategoryStats', function (data) {
+                if (data && data.categories) {
+                    var catLabels = data.categories.map(x => x.name);
+                    var catSales = data.categories.map(x => x.sales);
+                    var catColors = ['#00f3ff', '#0ea5e9', '#06b6d4', '#14b8a6', '#10b981', '#22d3ee', '#38bdf8', '#67e8f9'];
+
+                    var catCtx = document.getElementById('category-chart').getContext('2d');
+                    new Chart(catCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: catLabels,
+                            datasets: [{
+                                data: catSales,
+                                backgroundColor: catColors.slice(0, catLabels.length),
+                                borderColor: '#161617',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            cutoutPercentage: 65,
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    fontColor: '#86868b',
+                                    fontFamily: 'Inter',
+                                    fontSize: 11,
+                                    padding: 12,
+                                    usePointStyle: true
+                                }
+                            },
+                            tooltips: {
+                                backgroundColor: '#1e1e1f',
+                                titleFontColor: '#ffffff',
+                                bodyFontColor: '#00f3ff',
+                                borderColor: 'rgba(255, 255, 255, 0.08)',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                titleFontFamily: 'Outfit',
+                                bodyFontFamily: 'Inter',
+                                displayColors: true,
+                                padding: 10,
+                                callbacks: {
+                                    label: function(tooltipItem, chartData) {
+                                        var value = chartData.datasets[0].data[tooltipItem.index];
+                                        return chartData.labels[tooltipItem.index] + ': $' + Number(value).toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Top Products Horizontal Bar Chart
+            $.get('/admin/Home/GetTopProducts', function (data) {
+                if (data && data.products) {
+                    var prodLabels = data.products.map(x => x.name);
+                    var prodQty = data.products.map(x => x.qty);
+
+                    var prodCtx = document.getElementById('top-products-chart').getContext('2d');
+                    var barGradient = prodCtx.createLinearGradient(0, 0, prodCtx.canvas.width, 0);
+                    barGradient.addColorStop(0, 'rgba(0, 243, 255, 0.8)');
+                    barGradient.addColorStop(1, 'rgba(0, 243, 255, 0.2)');
+
+                    new Chart(prodCtx, {
+                        type: 'horizontalBar',
+                        data: {
+                            labels: prodLabels,
+                            datasets: [{
+                                label: 'Qty Sold',
+                                data: prodQty,
+                                backgroundColor: barGradient,
+                                borderColor: '#00f3ff',
+                                borderWidth: 1,
+                                barThickness: 22,
+                                borderRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        fontColor: '#86868b',
+                                        fontFamily: 'Inter',
+                                        fontSize: 11,
+                                        maxTicksLimit: 6
+                                    },
+                                    gridLines: {
+                                        color: 'rgba(255,255,255,0.03)',
+                                        zeroLineColor: 'transparent',
+                                        drawBorder: false
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        fontColor: '#86868b',
+                                        fontFamily: 'Inter',
+                                        fontSize: 11
+                                    },
+                                    gridLines: {
+                                        display: false,
+                                        drawBorder: false
+                                    }
+                                }]
+                            },
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                backgroundColor: '#1e1e1f',
+                                titleFontColor: '#ffffff',
+                                bodyFontColor: '#00f3ff',
+                                borderColor: 'rgba(255, 255, 255, 0.08)',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                titleFontFamily: 'Outfit',
+                                bodyFontFamily: 'Inter',
+                                displayColors: false,
+                                padding: 10
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

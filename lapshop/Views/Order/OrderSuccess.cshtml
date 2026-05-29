@@ -1,0 +1,62 @@
+@{
+    ViewBag.Title = "Order Success";
+}
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Order Confirmed</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Order Success</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+
+<!-- Thank you section start -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="order-success-container">
+                    <!-- Success Check Animation Icon -->
+                    <div class="checkmark-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" style="width: 52px; height: 52px; stroke-width: 3; stroke: #fff; fill: none;">
+                            <path d="M14.1 27.2l7.1 7.2 16.7-16.8" style="stroke-dasharray: 48; stroke-dashoffset: 48; animation: checkStroke 0.5s ease-in-out 0.5s forwards;"/>
+                        </svg>
+                    </div>
+                    
+                    <h2 style="font-size: 34px; font-weight: 800; margin-bottom: 15px;">Thank You For Your Order!</h2>
+                    <p style="max-width: 550px; margin: 0 auto 35px; line-height: 1.7; font-size: 16px;">
+                        Your payment was processed successfully. Our team is preparing your laptop for shipping. You will receive it within 5 business days.
+                    </p>
+                    
+                    <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                        <a href="/Order/MyOrders" class="btn btn-solid" style="padding: 14px 32px;">View Order History</a>
+                        <a href="/Items/ItemList" class="btn btn-outline" style="padding: 12px 28px;">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Thank you section end -->
+
+<style>
+@@keyframes checkStroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+</style>

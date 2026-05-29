@@ -1,0 +1,38 @@
+@model lapshop.Domains.VwItem
+@inject lapshop.Bl.LapShopContext context
+@{
+    var reviews = context.TbItemEvaluations.Where(a => a.ItemId == Model.ItemId).ToList();
+    var avg = reviews.Count > 0 ? reviews.Average(a => a.Rating) : 5.0;
+    int fullStars = (int)Math.Floor(avg);
+    int halfStar = (avg % 1 >= 0.5) ? 1 : 0;
+    int emptyStars = 5 - fullStars - halfStar;
+}
+<div class="img-wrapper" style="border-radius: 12px; overflow: hidden; background: rgba(0, 0, 0, 0.2) !important; display: flex; align-items: center; justify-content: center; height: 180px; position: relative;">
+    <div class="front">
+        <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="@Model.ItemId">
+            <img width="1000px" height="1000px" src="~/Uploads/Items/@Model.ImageName"
+                 class="img-fluid blur-up lazyload bg-img" alt="@Model.ItemName" style="max-height: 100%; width: auto; object-fit: contain;">
+        </a>
+    </div>
+    <div class="cart-info cart-wrap">
+        <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="@Model.ItemId"
+           title="Quick View" tabindex="0">
+            <i class="ti-search" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+<div class="product-detail" style="padding-top: 14px; text-align: left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="@Model.ItemId" style="flex: 1; min-width: 0; padding-right: 8px;">
+            <h6 style="margin: 0; font-size: 15px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Outfit', sans-serif !important;">@Model.ItemName</h6>
+        </a>
+        <span style="color: #ff9f0a; font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Inter', sans-serif !important;">★ @avg.ToString("0.0")/5</span>
+    </div>
+    <div style="font-size: 12px; color: #64748b; margin-bottom: 12px; font-family: 'Inter', sans-serif !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="@(string.IsNullOrEmpty(Model.Processor) ? "Core i7" : Model.Processor) | @(Model.RamSize ?? 16)GB RAM">
+        @(string.IsNullOrEmpty(Model.Processor) ? "Core i7" : Model.Processor) | @(Model.RamSize ?? 16)GB RAM
+    </div>
+    <div class="product-card-footer">
+        <h4 class="product-card-price">$@Model.SalesPrice.ToString("N2")</h4>
+        <a href="javascript:void(0)" onclick="AddToCartAjax(@Model.ItemId, this)" class="product-card-btn">ADD TO CART</a>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+@model ConfirmEmailModel
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Verify Email</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active">Confirm Email</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="login-page section-b-space">
+    <div class="container">
+        <div class="row" style="justify-content: center;">
+            <div class="col-lg-5">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #00f3ff, #00a2ff); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 25px rgba(0,243,255,0.3);">
+                        <i class="fa fa-envelope" style="font-size: 28px; color: #fff;"></i>
+                    </div>
+                    <h3 style="color: #F1F5F9; font-size: 26px; font-weight: 700; margin-bottom: 8px;">Verify Your Email</h3>
+                    <p style="color: #64748B; font-size: 14px;">Enter the verification code sent to your email</p>
+                </div>
+                <div class="theme-card" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 35px; box-shadow: 0 4px 24px rgba(0,0,0,0.3); backdrop-filter: blur(20px);">
+                    <form method="post" asp-controller="Users" asp-action="ConfirmEmail" class="theme-form">
+                        <input type="hidden" asp-for="UserId" />
+                        <div class="form-group">
+                            <label for="code" style="color: #94A3B8; font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Verification Code</label>
+                            <input asp-for="Code" type="text" class="form-control" placeholder="Enter the code sent to your email" required="" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #F1F5F9; padding: 14px 18px; font-size: 15px; text-align: center; letter-spacing: 4px; font-size: 20px;">
+                            <span asp-validation-for="Code" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-solid" style="width: 100%; padding: 14px; font-size: 15px; border-radius: 10px; margin-top: 10px;">Verify My Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

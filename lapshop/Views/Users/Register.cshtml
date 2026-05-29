@@ -1,0 +1,70 @@
+@model UserModel
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Create Account</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Register</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="register-page section-b-space">
+    <div class="container">
+        <div class="row" style="justify-content: center;">
+            <div class="col-lg-7">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #00f3ff, #00a2ff); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 25px rgba(0,243,255,0.3);">
+                        <i class="fa fa-user-plus" style="font-size: 28px; color: #fff;"></i>
+                    </div>
+                    <h3 style="color: #F1F5F9; font-size: 26px; font-weight: 700; margin-bottom: 8px;">Create Your Account</h3>
+                    <p style="color: #64748B; font-size: 14px;">Join LapShop and start shopping</p>
+                </div>
+                <div class="theme-card" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 35px; box-shadow: 0 4px 24px rgba(0,0,0,0.3); backdrop-filter: blur(20px);">
+                    <form class="theme-form" method="post" asp-controller="Users" asp-action="Register">
+                        <div asp-validation-summary="All" style="color: #EF4444; margin-bottom: 15px; font-size: 13px;"></div>
+                        <div class="form-row" style="display: flex; gap: 15px; margin-bottom: 0;">
+                            <div class="col-md-6 form-group">
+                                <label style="color: #94A3B8; font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">First Name</label>
+                                <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name" required="">
+                                <span asp-validation-for="FirstName" style="color: #EF4444; font-size: 12px;"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label style="color: #94A3B8; font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Last Name</label>
+                                <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name" required="">
+                                <span asp-validation-for="LastName" style="color: #EF4444; font-size: 12px;"></span>
+                            </div>
+                        </div>
+                        <div class="form-row" style="display: flex; gap: 15px; margin-bottom: 0;">
+                            <div class="col-md-6 form-group">
+                                <label style="color: #94A3B8; font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</label>
+                                <input asp-for="Email" type="text" class="form-control" placeholder="Email" required="">
+                                <span asp-validation-for="Email" style="color: #EF4444; font-size: 12px;"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label style="color: #94A3B8; font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">Password</label>
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" required="">
+                                <span asp-validation-for="Password" style="color: #EF4444; font-size: 12px;"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-solid" style="width: 100%; padding: 14px; font-size: 15px; border-radius: 10px; margin-top: 10px;">Create Account</button>
+                    </form>
+                </div>
+                <div style="text-align: center; margin-top: 25px;">
+                    <p style="color: #64748B; font-size: 14px;">Already have an account? <a href="/Users/Login" style="color: #00e5ff; font-weight: 600;">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

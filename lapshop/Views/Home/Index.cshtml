@@ -1,0 +1,187 @@
+@model VmHomePage
+
+<!-- Hero Slider -->
+<section class="p-0 layout-7" style="position: relative;">
+    <div class="slide-1 home-slider">
+        @foreach (var slider in Model.lstSliders)
+        {
+            <div>
+                <div class="home text-left" style="position: relative;">
+                    <img src="~/Uploads/Sliders/@slider.ImageName" alt="@slider.Title" class="bg-img blur-up lazyload" style="filter: brightness(0.35);">
+                    <div class="container-fluid custom-container" style="position: relative; z-index: 2;">
+                        <div class="row">
+                            <div class="col">
+                                <div class="slider-contain">
+                                    <div>
+                                        <h4 style="color: #00e5ff; letter-spacing: 4px; text-transform: uppercase; font-size: 16px; font-weight: 500; margin-bottom: 12px;">@slider.Title</h4>
+                                        <h1 style="color: #fff; font-size: 44px; font-weight: 800; line-height: 1.15; text-shadow: 0 2px 30px rgba(0,0,0,0.5);">@slider.Description</h1>
+                                        <a href="/Items/ItemList" class="btn-solid" style="display: inline-block; margin-top: 25px; padding: 14px 36px;">Shop Now <i class="fa fa-arrow-right" style="margin-left: 8px;"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Category Cards -->
+<section style="padding: 50px 0;">
+    <div class="container-fluid">
+        <div class="row partition4">
+            @foreach (var category in Model.lstCategories)
+            {
+                <div class="col-lg-3 col-md-6" style="margin-bottom: 20px;">
+                    <a href="/Items/ItemList/@category.CategoryId" style="text-decoration: none;">
+                        <div class="collection-banner p-right text-right" style="border-radius: 12px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); transition: all 0.3s ease;">
+                            <div class="img-part">
+                                <img src="~/Uploads/Categories/@category.ImageName" class="img-fluid blur-up lazyload bg-img" alt="@category.CategoryName">
+                            </div>
+                            <div class="contain-banner banner-4">
+                                <div>
+                                    <h4 style="background: rgba(0,243,255,0.75); backdrop-filter: blur(8px); padding: 10px 20px; border-radius: 8px; color: #000; font-size: 15px; font-weight: 600; display: inline-block;">@category.CategoryName</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Today's Deal -->
+<div class="title1 section-t-space">
+    <h4 style="color: #00e5ff; letter-spacing: 4px; text-transform: uppercase; font-size: 13px; font-weight: 500;">special offer</h4>
+    <h2 class="title-inner1" style="color: #F1F5F9; font-size: 30px; font-weight: 700;">Today's Deals</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="product-para">
+                <p class="text-center" style="color: #94A3B8;">
+                    Discover our handpicked collection of high-performance laptops — from ultra-lightweight business ultrabooks to extreme gaming rigs and professional workstations.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Grid -->
+<section class="pt-0 section-b-space ratio_asos">
+    <div class="container">
+        <div class="row game-product grid-products">
+            @foreach (var item in Model.lstAllItems)
+            {
+                <div class="col-xl-2 col-lg-3 col-sm-4 col-6 mb-4">
+                    <div class="product-box">
+                        <partial name="ItemBox" model="@item" />
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center" style="margin-top: 30px;">
+            <a href="/Items/ItemList" class="btn-solid" style="display: inline-block;">View All Products <i class="fa fa-arrow-right" style="margin-left: 8px;"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- Parallax Banner -->
+<section class="p-0">
+    <div class="full-banner parallax text-center p-right" style="position: relative; overflow: hidden;">
+        <img src="~/Uploads/Sliders/slider1.png" alt="Sale Banner" class="bg-img blur-up lazyload" style="filter: brightness(0.25);">
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="row">
+                <div class="col">
+                    <div class="banner-contain" style="padding: 80px 0;">
+                        <h2 style="color: #00e5ff; font-size: 52px; font-weight: 800; text-shadow: 0 0 30px rgba(0,243,255,0.4);">SALE</h2>
+                        <h3 style="color: #F1F5F9; font-size: 26px; font-weight: 600; margin: 10px 0;">Next-Gen Laptops</h3>
+                        <h4 style="color: #94A3B8; font-size: 16px; font-weight: 400;">Special Tech Deals — Up to 40% Off</h4>
+                        <a href="/Items/ItemList" class="btn-solid" style="display: inline-block; margin-top: 25px;">Shop Deals</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Deals & Recommendations -->
+<section class="tools_product bg-title section-b-space" style="background: rgba(16,16,42,0.5) !important; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <div class="container">
+        <div class="row multiple-slider">
+            <div class="col-xl-4 col-lg-4 col-md-12">
+                <div class="theme-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px; backdrop-filter: blur(10px);">
+                    <h5 class="title-border" style="color: #F1F5F9; border-bottom: 2px solid #00f3ff; padding-bottom: 12px; font-size: 16px;">Featured Deals | Free Shipping</h5>
+                    <div class="offer-slider slide-1">
+                        <div>
+                            @foreach (var item in Model.lstFreeDelivry)
+                            {
+                                <div class="media" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 12px 0;">
+                                    <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="@item.ItemId">
+                                        <img class="img-fluid blur-up lazyload"
+                                             src="~/Uploads/Items/@item.ImageName" alt="@item.ItemName" style="max-height: 80px; width: 80px; object-fit: contain; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 4px;">
+                                    </a>
+                                    <div class="media-body align-self-center" style="padding-left: 15px;">
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <a asp-controller="Items" asp-action="ItemDetails" asp-route-id="@item.ItemId">
+                                            <h6 style="color: #94A3B8; font-size: 13px; margin: 6px 0;">@item.ItemName</h6>
+                                        </a>
+                                        <h4 style="color: #00e5ff; font-weight: 700; font-size: 15px;">$@item.SalesPrice</h4>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-8 col-md-12">
+                <div class="theme-tab">
+                    <div class="bg-title-part" style="background: transparent; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 15px; margin-bottom: 20px;">
+                        <h5 class="title-border" style="color: #F1F5F9; border-bottom: none; padding-bottom: 0; display: inline; margin-right: 20px;">RECOMMENDATIONS FOR YOU</h5>
+                        <ul class="tabs tab-title">
+                            <li class="current">
+                                <a href="tab-4" style="color: #00e5ff; font-weight: 600;">New Products</a>
+                            </li>
+                            <li class="">
+                                <a href="tab-5" style="color: #64748B; font-weight: 500;">Featured Products</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content-cls ratio_asos">
+                        <div id="tab-4" class="tab-content active default">
+                            <div class="product-4 game-product product-m no-arrow">
+                                @foreach (var item in Model.lstRecommendedItems)
+                                {
+                                    <div class="product-box">
+                                        <partial name="ItemBox" model="@item" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div id="tab-5" class="tab-content">
+                            <div class="product-4 game-product product-m no-arrow">
+                                @foreach (var item in Model.lstNewItems)
+                                {
+                                    <div class="product-box">
+                                        <partial name="ItemBox" model="@item" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="banner-tools" style="margin-top: 20px;">
+                    <img src="~/Uploads/Sliders/slider1.png" alt="Banner" class="img-fluid" style="border-radius: 12px; max-height: 250px; width: 100%; object-fit: cover; filter: brightness(0.6); border: 1px solid rgba(255,255,255,0.06);">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

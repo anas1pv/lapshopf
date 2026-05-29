@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Bl/Bl.csproj" Id="d60fd45d-32ef-4841-a07c-b101d67cb2f4" />
+  <Project Path="Domains/Domains.csproj" Id="ac988cda-e120-4d4d-a9dc-1858960a1c04" />
+  <Project Path="lapshop/lapshop.csproj" />
+</Solution>

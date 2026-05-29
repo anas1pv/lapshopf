@@ -1,0 +1,318 @@
+@model ShoppingCart
+@{
+    ViewData["Title"] = "Checkout";
+    var subtotal = Model.Total;
+    var shipping = 12.00m;
+    var tax = subtotal * 0.07m;
+    var totalAmount = subtotal + shipping + tax;
+}
+
+<div class="breadcrumb-section" style="background: #0a0a0c !important; border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important; padding: 25px 0 !important;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2 style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 24px; color: #fff; margin: 0;">Checkout</h2>
+                </div>
+            </div>
+            <div class="col-sm-6 text-sm-end">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb" style="display: inline-block;">
+                    <ol class="breadcrumb" style="margin: 0; background: transparent; padding: 0;">
+                        <li class="breadcrumb-item"><a href="/Home/Index" style="color: #64748b; text-decoration: none;">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/Order/Cart" style="color: #64748b; text-decoration: none;">Cart</a></li>
+                        <li class="breadcrumb-item active" style="color: #00f3ff; font-weight: 500;">Checkout</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section-b-space" style="background: #0a0a0c; padding: 60px 0;">
+    <div class="container" style="max-width: 1000px;">
+        <!-- LUNAR TECH Title -->
+        <div style="text-align: center; margin-bottom: 15px;">
+            <h1 style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: 2px; color: #ffffff; margin: 0;">LUNAR <span style="color: #86868b; font-weight: 400;">TECH</span></h1>
+        </div>
+
+        <!-- Progress Timeline (Shipping -> Payment -> Review) -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 35px;">
+            <span style="color: #64748b; font-size: 13px; font-weight: 500;">Shipping</span>
+            <span style="width: 40px; height: 1px; background: #334155; position: relative;">
+                <span style="position: absolute; right: 0; top: -3px; border: solid #334155; border-width: 0 1px 1px 0; display: inline-block; padding: 2px; transform: rotate(-45deg);"></span>
+            </span>
+            <span style="color: #2563eb; font-size: 13px; font-weight: 600; border-bottom: 2px solid #2563eb; padding-bottom: 3px;">Payment</span>
+            <span style="width: 40px; height: 1px; background: #334155; position: relative;">
+                <span style="position: absolute; right: 0; top: -3px; border: solid #334155; border-width: 0 1px 1px 0; display: inline-block; padding: 2px; transform: rotate(-45deg);"></span>
+            </span>
+            <span style="color: #64748b; font-size: 13px; font-weight: 500;">Review</span>
+        </div>
+
+        <!-- Main Checkout Box -->
+        <div style="background: #111113; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);">
+            <form asp-controller="Order" asp-action="PlaceOrder" method="post" id="checkoutForm">
+                <input type="hidden" name="address" id="addressHidden" />
+                <input type="hidden" name="promoCode" id="promoCodeHidden" />
+                <div class="row">
+                    <!-- Left Column: Shipping & Payment -->
+                    <div class="col-lg-7 col-md-12 col-sm-12" style="padding-right: 30px; border-right: 1px solid rgba(255,255,255,0.04);">
+                        <div style="margin-bottom: 25px;">
+                            <h3 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; margin: 0;">SHIPPING DETAILS</h3>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-12 mb-3">
+                                <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 6px; display: block;">Full Name</label>
+                                <input type="text" id="fullName" value="@(ViewBag.UserFirstName + " " + ViewBag.UserLastName)" class="form-control" style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 14px !important; outline: none; font-size: 14px;" />
+                            </div>
+
+                            <div class="form-group col-12 mb-3">
+                                <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 6px; display: block;">Phone Number</label>
+                                <input type="text" id="phone" name="phone" value="@ViewBag.UserPhone" class="form-control" required style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 14px !important; outline: none; font-size: 14px;" placeholder="+1 555-123-4567" />
+                            </div>
+
+                            <div class="form-group col-12 mb-3">
+                                <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 6px; display: block;">Street Address</label>
+                                <input type="text" id="street" class="form-control" required style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 14px !important; outline: none; font-size: 14px;" placeholder="789 Galaxy Ave, Apt 3B" />
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 6px; display: block;">City</label>
+                                        <input type="text" id="city" class="form-control" required style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 14px !important; outline: none; font-size: 14px;" placeholder="San Francisco" />
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 6px; display: block;">State</label>
+                                        <input type="text" id="state" class="form-control" required style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 14px !important; outline: none; font-size: 14px;" placeholder="California" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 6px; display: block;">State/Province</label>
+                                        <input type="text" id="province" class="form-control" required style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 14px !important; outline: none; font-size: 14px;" placeholder="California" />
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 6px; display: block;">ZIP/Postal Code</label>
+                                        <input type="text" id="zip" class="form-control" required style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 14px !important; outline: none; font-size: 14px;" placeholder="94107" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Divider line -->
+                        <div style="border-bottom: 1px solid rgba(255, 255, 255, 0.05); margin: 30px 0;"></div>
+
+                        <!-- Payment Method Section -->
+                        <div style="margin-bottom: 15px;">
+                            <h3 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; margin: 0;">PAYMENT METHOD</h3>
+                        </div>
+
+                        <!-- LUNAR Credit Card Mockup -->
+                        <div class="lunar-card" style="width: 100%; max-width: 400px; height: 230px; border-radius: 16px; background: linear-gradient(135deg, #2a2c30 0%, #151619 100%); border: 1px solid rgba(255, 255, 255, 0.08); padding: 25px; position: relative; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); overflow: hidden; margin-top: 15px;">
+                            <!-- Holographic shine effect overlay -->
+                            <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(25deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0) 60%); pointer-events: none;"></div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <!-- Microchip simulation -->
+                                <div style="width: 44px; height: 34px; border-radius: 6px; background: linear-gradient(135deg, #dfc28d, #a2a8b3); border: 1px solid rgba(255,255,255,0.15); position: relative; overflow: hidden;">
+                                    <div style="position: absolute; top: 0; bottom: 0; left: 33%; right: 33%; border-left: 1px solid rgba(0,0,0,0.1); border-right: 1px solid rgba(0,0,0,0.1);"></div>
+                                    <div style="position: absolute; left: 0; right: 0; top: 33%; bottom: 33%; border-top: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid rgba(0,0,0,0.1);"></div>
+                                </div>
+                                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: 2px; color: #86868b;">LUNAR</span>
+                            </div>
+                            
+                            <div style="font-size: 22px; font-weight: 600; letter-spacing: 3px; color: #f5f5f7; font-family: monospace; margin: 15px 0 10px 0;">
+                                ****  ****  ****  8841
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: flex-end; font-family: monospace;">
+                                <div>
+                                    <span style="display: block; font-size: 8px; color: #86868b; text-transform: uppercase; letter-spacing: 1px;">Name</span>
+                                    <span id="cardName" style="font-size: 13px; font-weight: 600; color: #ffffff; text-transform: uppercase;">ALEX JOHNSON</span>
+                                </div>
+                                <div style="display: flex; gap: 20px;">
+                                    <div>
+                                        <span style="display: block; font-size: 8px; color: #86868b; text-transform: uppercase; letter-spacing: 1px;">Expiry</span>
+                                        <span style="font-size: 13px; font-weight: 600; color: #ffffff;">08/27</span>
+                                    </div>
+                                    <div>
+                                        <span style="display: block; font-size: 8px; color: #86868b; text-transform: uppercase; letter-spacing: 1px;">CVV</span>
+                                        <span style="font-size: 13px; font-weight: 600; color: #ffffff;">CVV</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hidden notes field passed directly -->
+                        <input type="hidden" name="notes" id="notesHidden" />
+                        <div class="form-group col-12 mb-3 mt-4">
+                            <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 6px; display: block;">Order Notes (Optional)</label>
+                            <textarea id="notesInput" rows="2" class="form-control" style="background: rgba(255,255,255,0.03) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 8px !important; padding: 10px 14px !important; outline: none; font-size: 14px;" placeholder="Any delivery instructions..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Order Summary -->
+                    <div class="col-lg-5 col-md-12 col-sm-12" style="padding-left: 30px;">
+                        <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; margin: 0;">ORDER SUMMARY</h3>
+                            <span style="color: #86868b; font-size: 13px;">White, 20px</span>
+                        </div>
+
+                        <!-- Product List with images -->
+                        <div style="max-height: 320px; overflow-y: auto; padding-right: 5px; margin-bottom: 25px;">
+                            @foreach (var item in Model.lstItems)
+                            {
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 15px;">
+                                    <div style="display: flex; align-items: center; gap: 15px; flex: 1; min-width: 0;">
+                                        <div style="width: 50px; height: 50px; border-radius: 8px; background: rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.06); flex-shrink: 0;">
+                                            <img src="/Uploads/Items/@item.ImageName" style="max-height: 85%; max-width: 85%; object-fit: contain;" />
+                                        </div>
+                                        <div style="flex: 1; min-width: 0;">
+                                            <h6 style="color: #ffffff; margin: 0; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'Inter', sans-serif;">@item.ItemName</h6>
+                                            <span style="color: #64748b; font-size: 12px; font-family: 'Inter', sans-serif;">Quantity: @item.Qty</span>
+                                        </div>
+                                    </div>
+                                    <span style="color: #ffffff; font-weight: 600; font-size: 14px; font-family: 'Inter', sans-serif;">$@item.Total.ToString("N2")</span>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Pricing Breakdown -->
+                        <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; font-family: 'Inter', sans-serif;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span style="color: #86868b; font-size: 14px;">Subtotal</span>
+                                <span id="subtotalVal" style="color: #ffffff; font-weight: 500; font-size: 14px;">$@subtotal.ToString("N2")</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span style="color: #86868b; font-size: 14px;">Shipping</span>
+                                <span id="shippingVal" style="color: #ffffff; font-weight: 500; font-size: 14px;">$@shipping.ToString("N2")</span>
+                            </div>
+
+                            <!-- Discount Row (Hidden by default) -->
+                            <div id="discountRow" style="display: none; justify-content: space-between; margin-bottom: 10px;">
+                                <span style="color: #00f3ff; font-size: 14px; font-weight: 600;">Discount (<span id="discountPercent">0</span>%)</span>
+                                <span style="color: #00f3ff; font-weight: 700; font-size: 14px;">-$<span id="discountVal">0.00</span></span>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">
+                                <span style="color: #86868b; font-size: 14px;">Estimated Tax</span>
+                                <span id="taxVal" style="color: #ffffff; font-weight: 500; font-size: 14px;">$@tax.ToString("N2")</span>
+                            </div>
+
+                            <!-- Promo Code Input Group -->
+                            <div style="margin-bottom: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 15px;">
+                                <label style="color: #86868b; font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;">Have a Promo Code?</label>
+                                <div style="display: flex; gap: 8px;">
+                                    <input type="text" id="promoCodeInput" placeholder="e.g. LAP2026" class="form-control" style="background: rgba(255,255,255,0.04) !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: #fff !important; border-radius: 6px !important; padding: 8px 12px !important; outline: none; font-size: 13px; text-transform: uppercase;" />
+                                    <button type="button" id="applyPromoBtn" style="background: linear-gradient(135deg, #00f3ff 0%, #00a2ff 100%) !important; border: none; color: #0a0a0c !important; font-weight: 700; font-size: 13px; padding: 8px 16px; border-radius: 6px; cursor: pointer; transition: all 0.25s ease; box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);">Apply</button>
+                                </div>
+                                <span id="promoFeedback" style="display: block; font-size: 11px; margin-top: 6px; font-weight: 600; display: none;"></span>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                                <h3 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800; margin: 0;">TOTAL</h3>
+                                <h3 id="totalVal" style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; margin: 0;">$@totalAmount.ToString("N2")</h3>
+                            </div>
+
+                            <!-- PLACE ORDER Button -->
+                            <button type="submit" class="btn w-100" style="padding: 14px; border-radius: 30px; font-size: 14px; font-weight: 700; text-transform: uppercase; background: #2563eb !important; color: #ffffff !important; box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); border: none; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Inter', sans-serif;">
+                                Place Order <i class="fa fa-arrow-right" style="font-size: 12px; color: #fff;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Keep Credit Card name mockup synced with Full Name input
+            $('#fullName').on('input', function() {
+                var val = $(this).val();
+                $('#cardName').text(val ? val.toUpperCase() : 'ALEX JOHNSON');
+            });
+
+            // Promo Code application logic
+            var subtotal = parseFloat('@subtotal');
+            var shipping = parseFloat('@shipping');
+            var currentDiscountPercent = 0;
+
+            $('#applyPromoBtn').on('click', function() {
+                var code = $('#promoCodeInput').val().trim();
+                var feedback = $('#promoFeedback');
+                
+                if (!code) {
+                    feedback.css('color', '#ff453a').text('Please enter a coupon code.').fadeIn();
+                    return;
+                }
+
+                $.ajax({
+                    url: '/Order/ValidateCoupon',
+                    type: 'POST',
+                    data: { code: code },
+                    success: function(response) {
+                        if (response.valid) {
+                            currentDiscountPercent = parseFloat(response.discount);
+                            var discountAmount = subtotal * (currentDiscountPercent / 100);
+                            var newSubtotal = subtotal - discountAmount;
+                            var newTax = newSubtotal * 0.07;
+                            var newTotal = newSubtotal + shipping + newTax;
+
+                            // Update UI
+                            $('#discountPercent').text(currentDiscountPercent);
+                            $('#discountVal').text(discountAmount.toFixed(2));
+                            $('#discountRow').css('display', 'flex');
+                            
+                            $('#taxVal').text('$' + newTax.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                            $('#totalVal').text('$' + newTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                            
+                            $('#promoCodeHidden').val(code.toUpperCase());
+                            
+                            feedback.css('color', '#30d158').html('<i class="fa fa-check-circle"></i> ' + response.message).fadeIn();
+                        } else {
+                            // Reset promo
+                            currentDiscountPercent = 0;
+                            $('#discountRow').hide();
+                            
+                            var originalTax = subtotal * 0.07;
+                            var originalTotal = subtotal + shipping + originalTax;
+                            
+                            $('#taxVal').text('$' + originalTax.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                            $('#totalVal').text('$' + originalTotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                            
+                            $('#promoCodeHidden').val('');
+                            
+                            feedback.css('color', '#ff453a').html('<i class="fa fa-exclamation-circle"></i> ' + response.message).fadeIn();
+                        }
+                    },
+                    error: function() {
+                        feedback.css('color', '#ff453a').text('Connection error. Please try again.').fadeIn();
+                    }
+                });
+            });
+
+            // Dynamically concatenate Full Address and Order Notes before submit
+            $('#checkoutForm').on('submit', function(e) {
+                var street = $('#street').val();
+                var city = $('#city').val();
+                var state = $('#state').val();
+                var province = $('#province').val();
+                var zip = $('#zip').val();
+
+                var fullAddress = street + ", " + city + ", " + state + ", " + province + " - " + zip;
+                $('#addressHidden').val(fullAddress);
+
+                // Set order notes hidden input
+                var userNotes = $('#notesInput').val();
+                $('#notesHidden').val(userNotes || "");
+            });
+        });
+    </script>
+}

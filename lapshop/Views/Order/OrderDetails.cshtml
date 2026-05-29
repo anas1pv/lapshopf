@@ -1,0 +1,121 @@
+@model List<lapshop.Domains.TbSalesInvoiceItem>
+@{
+    var invoice = ViewBag.Invoice as lapshop.Domains.VwSalesInvoice;
+    ViewBag.Title = "Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Order Details #@invoice.InvoiceId</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/Order/MyOrders">My Orders</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Details</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+
+<section class="cart-section section-b-space">
+    <div class="container">
+        <div class="row">
+            <!-- Receipt Header Card -->
+            <div class="col-12 mb-4">
+                <div style="background: rgba(15, 15, 42, 0.65); border: 1px solid rgba(0, 243, 255, 0.15); border-radius: 16px; padding: 25px; backdrop-filter: blur(12px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);">
+                    <div class="row">
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <span style="color: #94A3B8; font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Order Date</span>
+                            <h5 style="color: #F1F5F9; font-weight: 700; margin-top: 5px; font-size: 15px;">@invoice.InvoiceDate.ToString("MMMM dd, yyyy")</h5>
+                        </div>
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <span style="color: #94A3B8; font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Estimated Delivery</span>
+                            <h5 style="color: #F1F5F9; font-weight: 700; margin-top: 5px; font-size: 15px;">@invoice.DelivryDate.ToString("MMMM dd, yyyy")</h5>
+                        </div>
+                        <div class="col-md-3 mb-3 mb-md-0">
+                            <span style="color: #94A3B8; font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Customer</span>
+                            <h5 style="color: #F1F5F9; font-weight: 700; margin-top: 5px; font-size: 15px;">@invoice.FirstName @invoice.LastName</h5>
+                        </div>
+                        <div class="col-md-3">
+                            <span style="color: #94A3B8; font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Status</span>
+                            <div style="margin-top: 5px;">
+                                <span class="badge-status badge-delivered" style="font-size: 12px; padding: 5px 10px; border-radius: 6px; background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 600;">Delivered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Receipt Items Table -->
+            <div class="col-sm-12">
+                <div class="order-table-container" style="background: rgba(15, 15, 42, 0.65); border: 1px solid rgba(0, 243, 255, 0.15); border-radius: 16px; padding: 25px; backdrop-filter: blur(12px);">
+                    <h3 style="font-weight: 700; margin-bottom: 20px; color: #F1F5F9; font-size: 20px;">Ordered Items</h3>
+                    <div class="table-responsive">
+                        <table class="table" style="margin-bottom: 0;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid rgba(255, 255, 255, 0.05);">
+                                    <th scope="col" style="color: #94A3B8; font-weight: 600; border: none;">Image</th>
+                                    <th scope="col" style="color: #94A3B8; font-weight: 600; border: none;">Product Name</th>
+                                    <th scope="col" style="color: #94A3B8; font-weight: 600; text-align: center; border: none;">Price</th>
+                                    <th scope="col" style="color: #94A3B8; font-weight: 600; text-align: center; border: none;">Quantity</th>
+                                    <th scope="col" style="color: #94A3B8; font-weight: 600; text-align: right; border: none;">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    decimal grandTotal = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    var subtotal = (decimal)item.Qty * item.InvoicePrice;
+                                    grandTotal += subtotal;
+                                    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+                                        <td class="align-middle" style="border: none; padding: 15px 10px;">
+                                            <a href="/Items/ItemDetails/@item.ItemId"><img src="~/Uploads/Items/@(item.Item.ImageName ?? "silver_ultrabook.png")" alt="@item.Item.ItemName" style="max-width: 60px; border-radius: 8px; background: rgba(255,255,255,0.03); padding: 4px;"></a>
+                                        </td>
+                                        <td class="align-middle" style="border: none; padding: 15px 10px;">
+                                            <a href="/Items/ItemDetails/@item.ItemId" style="color: #F1F5F9; font-weight: 500; text-decoration: none;">@item.Item.ItemName</a>
+                                        </td>
+                                        <td class="align-middle text-center" style="color: #94A3B8; border: none; padding: 15px 10px;">
+                                            $@item.InvoicePrice.ToString("N2")
+                                        </td>
+                                        <td class="align-middle text-center" style="color: #94A3B8; border: none; padding: 15px 10px;">
+                                            @item.Qty
+                                        </td>
+                                        <td class="align-middle text-right" style="color: #00e5ff; font-weight: 700; font-size: 16px; border: none; padding: 15px 10px;">
+                                            $@subtotal.ToString("N2")
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4" class="text-right" style="border-top: 2px solid rgba(255,255,255,0.05); color: #94A3B8; font-weight: 600; text-transform: uppercase; font-size: 13px; padding-top: 20px; border-bottom: none;">Total Amount paid :</td>
+                                    <td class="text-right" style="border-top: 2px solid rgba(255,255,255,0.05); color: #00e5ff; font-weight: 800; font-size: 22px; padding-top: 20px; border-bottom: none;">
+                                        $@grandTotal.ToString("N2")
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Back Button -->
+            <div class="col-12 mt-4">
+                <a href="/Order/MyOrders" class="btn btn-solid" style="border-radius: 8px; padding: 12px 24px; text-transform: uppercase;"><i class="fa fa-arrow-left" style="margin-right: 8px;"></i> Back to My Orders</a>
+            </div>
+        </div>
+    </div>
+</section>

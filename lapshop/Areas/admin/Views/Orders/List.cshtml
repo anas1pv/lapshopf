@@ -1,0 +1,185 @@
+@model List<lapshop.Domains.TbSalesInvoice>
+@{
+    ViewBag.Title = "Customer Orders";
+    var users = ViewBag.Users as Dictionary<string, lapshop.Bl.ApplicationUser> ?? new Dictionary<string, lapshop.Bl.ApplicationUser>();
+}
+
+@section Styles
+{
+<link rel="stylesheet" href="~/assets/Backend/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+<style>
+    /* Styling adjustments for datatables search override to use AdminOS layout */
+    .dataTables_filter {
+        display: none !important;
+    }
+</style>
+}
+
+<div class="content-wrapper">
+    <!-- Page Header Title and Subtitle -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+            <h2 style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #ffffff; margin: 0; font-size: 24px;">Customer Orders</h2>
+            <span style="color: #86868b; font-size: 13px;">Manage and track all customer purchases</span>
+        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background: transparent; margin: 0; padding: 0;">
+                <li class="breadcrumb-item"><a href="/admin/Home" style="color: #0071e3; text-decoration: none;">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="color: #86868b;">Orders</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- AdminOS Control Bar -->
+    <div class="admin-control-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px; flex-wrap: wrap;">
+        <!-- Search bar on left -->
+        <div style="position: relative; max-width: 320px; width: 100%;">
+            <input type="text" id="customSearchInput" placeholder="Search orders, customers..." value="@ViewBag.SelectedSearch" style="width: 100%; padding: 10px 15px 10px 38px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; font-size: 13px; outline: none; font-family: 'Inter', sans-serif;" />
+            <i class="mdi mdi-magnify" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 16px;"></i>
+        </div>
+        <!-- Right side filter controls -->
+        <div class="admin-controls-right" style="display: flex; align-items: center; gap: 10px;">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="statusFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 10px 18px; font-size: 13px; font-weight: 500; font-family: 'Inter', sans-serif;">
+                    <i class="mdi mdi-filter-variant" style="margin-right: 5px;"></i> @(ViewBag.SelectedStateName ?? "All Statuses")
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="statusFilterDropdown" style="background: #161617; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                    <a class="dropdown-item" href="?state=&days=@ViewBag.SelectedDays&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">All Statuses</a>
+                    <a class="dropdown-item" href="?state=1&days=@ViewBag.SelectedDays&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">Pending</a>
+                    <a class="dropdown-item" href="?state=2&days=@ViewBag.SelectedDays&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">Processing</a>
+                    <a class="dropdown-item" href="?state=3&days=@ViewBag.SelectedDays&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">Delivered</a>
+                    <a class="dropdown-item" href="?state=4&days=@ViewBag.SelectedDays&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">Canceled</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="timeFilterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #fff; padding: 10px 18px; font-size: 13px; font-weight: 500; font-family: 'Inter', sans-serif;">
+                    <i class="mdi mdi-calendar-range" style="margin-right: 5px;"></i> @(ViewBag.SelectedDaysName ?? "All Time")
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="timeFilterDropdown" style="background: #161617; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                    <a class="dropdown-item" href="?days=&state=@ViewBag.SelectedState&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">All Time</a>
+                    <a class="dropdown-item" href="?days=7&state=@ViewBag.SelectedState&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">Last 7 Days</a>
+                    <a class="dropdown-item" href="?days=30&state=@ViewBag.SelectedState&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">Last 30 Days</a>
+                    <a class="dropdown-item" href="?days=90&state=@ViewBag.SelectedState&search=@ViewBag.SelectedSearch" style="color: #f5f5f7; font-size: 13px; padding: 10px 20px;">Last 90 Days</a>
+                </div>
+            </div>
+            
+            <a href="/admin/Orders/Create" class="btn" style="background: linear-gradient(135deg, #0071e3 0%, #0077ed 100%); border: none; border-radius: 8px; color: #ffffff; padding: 10px 18px; font-size: 13px; font-weight: 600; text-decoration: none; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 0 15px rgba(0, 113, 227, 0.3);"><i class="mdi mdi-plus" style="font-size: 16px;"></i> Add New Order</a>
+        </div>
+    </div>
+
+    <!-- Orders Table Card -->
+    <div class="card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+        <div class="card-body" style="padding: 25px;">
+            <div class="table-responsive">
+                <table id="order-listing" class="table table-hover">
+                    <thead>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Order ID <i class="mdi mdi-unfold-more-horizontal" style="margin-left: 3px;"></i></th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Customer </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Date </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Payment Status </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Order Status </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Total </th>
+                            <th style="color: #86868b; font-weight: 600; font-size: 12px; border: none; padding: 12px;"> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var invoice in Model)
+                        {
+                            var user = users.ContainsKey(invoice.CustomerId.ToString()) ? users[invoice.CustomerId.ToString()] : null;
+                            var customerName = user != null ? $"{user.FirstName} {user.LastName}" : "Guest Customer";
+                            var customerEmail = user?.Email ?? "guest@email.com";
+                            var total = invoice.TbSalesInvoiceItems.Sum(x => x.InvoicePrice * (decimal)x.Qty);
+                            
+                            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.04);">
+                                <td style="color: #ffffff; font-weight: 500; font-size: 13px; border: none; padding: 16px 12px;">#ORD-@invoice.InvoiceId</td>
+                                <td style="border: none; padding: 16px 12px;">
+                                    <div style="font-weight: 600; color: #ffffff; font-size: 13px;">@customerName</div>
+                                    <div style="color: #86868b; font-size: 11px; margin-top: 2px;">@customerEmail</div>
+                                </td>
+                                <td style="color: #86868b; font-size: 13px; border: none; padding: 16px 12px;">@invoice.InvoiceDate.ToString("MMM dd, yyyy\n hh:mm tt")</td>
+                                <td style="border: none; padding: 16px 12px;">
+                                    @if (invoice.CurrentState == 2)
+                                    {
+                                        <span class="status-pill status-shipped">Shipped</span>
+                                    }
+                                    else if (invoice.CurrentState == 3)
+                                    {
+                                        <span class="status-pill status-paid">Paid</span>
+                                    }
+                                    else if (invoice.CurrentState == 4)
+                                    {
+                                        <span class="status-pill status-canceled">Canceled</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status-pill status-pending">Pending</span>
+                                    }
+                                </td>
+                                <td style="border: none; padding: 16px 12px;">
+                                    @if (invoice.CurrentState == 2)
+                                    {
+                                        <span class="status-pill status-processing">Processing</span>
+                                    }
+                                    else if (invoice.CurrentState == 3)
+                                    {
+                                        <span class="status-pill status-delivered">Delivered</span>
+                                    }
+                                    else if (invoice.CurrentState == 4)
+                                    {
+                                        <span class="status-pill status-canceled">Canceled</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status-pill status-pending">Pending</span>
+                                    }
+                                </td>
+                                <td style="color: #ffffff; font-weight: 600; font-size: 13px; border: none; padding: 16px 12px;">$@total.ToString("N2")</td>
+                                <td style="border: none; padding: 16px 12px;">
+                                    <a href="/admin/Orders/Details/@invoice.InvoiceId" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px; font-weight: 600; border-radius: 6px; background: #2563eb !important; border: 1px solid #2563eb !important; color: #ffffff !important; display: inline-flex; align-items: center; gap: 4px; text-decoration: none;"><i class="mdi mdi-eye" style="font-size: 12px;"></i> View Details</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+<script src="~/Admin/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="~/Admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#order-listing').DataTable({
+            "dom": "<'row'<'col-sm-12'tr>><'row mt-3 align-items-center'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4 text-center'i><'col-sm-12 col-md-4 d-flex justify-content-end'p>>",
+            "pageLength": 20,
+            "lengthMenu": [10, 20, 50, 100],
+            "language": {
+                "paginate": {
+                    "previous": "Previous",
+                    "next": "Next"
+                }
+            }
+        });
+
+        // Search text box binding to custom AdminOS input box
+        $('#customSearchInput').on('keyup', function() {
+            table.search(this.value).draw();
+        });
+
+        // Trigger backend search on pressing Enter
+        $('#customSearchInput').on('keypress', function(e) {
+            if (e.which === 13) {
+                var searchVal = $(this).val();
+                window.location.href = '?search=' + encodeURIComponent(searchVal) + 
+                                       '&days=@(ViewBag.SelectedDays ?? "")' + 
+                                       '&state=@(ViewBag.SelectedState ?? "")';
+            }
+        });
+    });
+</script>
+}

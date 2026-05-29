@@ -1,0 +1,105 @@
+@model lapshop.Domains.TbSettings
+@{
+    ViewData["Title"] = "Site Settings";
+}
+
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-settings"></i>
+            </span> Site Settings
+        </h3>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success" style="background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); color: #00f3ff; border-radius: 8px; padding: 12px 18px; margin-bottom: 20px;">
+                    <i class="mdi mdi-check-circle me-2"></i>@TempData["SuccessMessage"]
+                </div>
+            }
+
+            <form class="forms-sample" asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Logo" />
+                <input type="hidden" asp-for="MiddlePanner" />
+                <input type="hidden" asp-for="LastPanner" />
+
+                <div class="row">
+                    <!-- General Settings -->
+                    <div class="col-lg-7 grid-margin stretch-card">
+                        <div class="card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; width: 100%;">
+                            <div class="card-body" style="padding: 25px;">
+                                <h4 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 5px;">General Settings</h4>
+                                <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px;">Update public website information</p>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="WebsiteName" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">Website Name</label>
+                                    <input asp-for="WebsiteName" class="form-control" placeholder="LapShop" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                    <span asp-validation-for="WebsiteName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="WebsiteDescription" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">Website Description</label>
+                                    <textarea asp-for="WebsiteDescription" class="form-control" rows="4" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px; resize: none;"></textarea>
+                                    <span asp-validation-for="WebsiteDescription" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label asp-for="ContactNumber" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">Contact Phone Number</label>
+                                    <input asp-for="ContactNumber" class="form-control" placeholder="+123456789" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group mb-0">
+                                    <label asp-for="Address" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;">Address</label>
+                                    <input asp-for="Address" class="form-control" placeholder="123 Main St" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="col-lg-5 grid-margin stretch-card">
+                        <div class="card" style="background: #161617; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; width: 100%;">
+                            <div class="card-body" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+                                <div>
+                                    <h4 style="color: #ffffff; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 5px;">Social Media Links</h4>
+                                    <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px;">Connect your social profiles</p>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="FacebookLink" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;"><i class="mdi mdi-facebook text-primary me-1" style="font-size: 16px; vertical-align: middle;"></i> Facebook URL</label>
+                                        <input asp-for="FacebookLink" class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="TwitterLink" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;"><i class="mdi mdi-twitter text-info me-1" style="font-size: 16px; vertical-align: middle;"></i> Twitter URL</label>
+                                        <input asp-for="TwitterLink" class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label asp-for="InstgramLink" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;"><i class="mdi mdi-instagram text-danger me-1" style="font-size: 16px; vertical-align: middle;"></i> Instagram URL</label>
+                                        <input asp-for="InstgramLink" class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label asp-for="YoutubeLink" style="color: #ffffff; font-weight: 500; font-size: 13px; margin-bottom: 6px; display: block;"><i class="mdi mdi-youtube text-danger me-1" style="font-size: 16px; vertical-align: middle;"></i> YouTube URL</label>
+                                        <input asp-for="YoutubeLink" class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #fff; border-radius: 8px; padding: 10px 14px;" />
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-gradient-primary w-100" style="padding: 12px 20px; font-weight: 600; border-radius: 8px; font-size: 14px;">Save Settings</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

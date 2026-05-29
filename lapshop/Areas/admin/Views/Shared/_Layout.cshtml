@@ -1,0 +1,194 @@
+@inject Microsoft.AspNetCore.Identity.SignInManager<lapshop.Bl.ApplicationUser> SignInManager
+@inject Microsoft.AspNetCore.Identity.UserManager<lapshop.Bl.ApplicationUser> UserManager
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>@ViewBag.Title — LapShop Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Admin/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Admin/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="~/Admin/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- End plugin css for this page -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/Admin/css/demo_3/style.css">
+    <link rel="stylesheet" href="~/Admin/css/custom-admin-dark.css" asp-append-version="true">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="~/Admin/images/favicon.png" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    @RenderSection("Styles",false)
+</head>
+<body>
+    <div class="container-scroller">
+      <!-- Top Navbar -->
+      <div class="horizontal-menu">
+        <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+          <div class="container">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+              <a class="navbar-brand brand-logo" href="/admin/Home" style="text-decoration: none !important;">
+                  <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 2px; color: #00f3ff;">LAP<span style="color: #F1F5F9;">SHOP</span></span>
+                  <span style="font-size: 11px; color: #64748B; display: block; margin-top: -4px; letter-spacing: 1px;">ADMIN PANEL</span>
+              </a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+              <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                  <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="nav-profile-img">
+                      <div style="width: 35px; height: 35px; border-radius: 50%; background: linear-gradient(135deg, #00f3ff, #00a2ff); display: flex; align-items: center; justify-content: center;">
+                          <i class="mdi mdi-account" style="color: #fff; font-size: 18px;"></i>
+                      </div>
+                      <span class="availability-status online"></span>
+                    </div>
+                    <div class="nav-profile-text">
+                      <p class="text-white" style="margin: 0;">
+                          @if (SignInManager.IsSignedIn(User))
+                          {
+                              var currentUser = await UserManager.GetUserAsync(User);
+                              @(currentUser?.FirstName ?? "Admin")
+                          }
+                          else
+                          {
+                              @:Admin
+                          }
+                      </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="/">
+                      <i class="mdi mdi-web me-2 text-info"></i> View Website
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="LoginOut">
+                      <i class="mdi mdi-logout me-2 text-primary"></i> Sign Out
+                    </a>
+                  </div>
+                </li>
+                <li class="nav-item d-none d-lg-flex full-screen-link">
+                  <a class="nav-link">
+                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                  </a>
+                </li>
+                <li class="nav-item nav-logout d-none d-lg-flex">
+                  <a class="nav-link" href="/">
+                    <i class="mdi mdi-web" title="View Website"></i>
+                  </a>
+                </li>
+              </ul>
+              <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                <span class="mdi mdi-menu"></span>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <nav class="bottom-navbar">
+          <div class="container">
+            <ul class="nav page-navigation">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/Home">
+                  <i class="mdi mdi-view-dashboard menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="mdi mdi-database menu-icon"></i>
+                  <span class="menu-title">Basic Data</span>
+                  <i class="menu-arrow"></i></a>
+                <div class="submenu">
+                  <ul class="submenu-item">
+                    <li class="nav-item"><a class="nav-link" href="/admin/Categories/List">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/Items/List">Items</a></li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a href="/admin/Users/List" class="nav-link">
+                  <i class="mdi mdi-account-group menu-icon"></i>
+                  <span class="menu-title">Users</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/admin/Orders/List" class="nav-link">
+                  <i class="mdi mdi-cart-outline menu-icon"></i>
+                  <span class="menu-title">Orders</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/admin/Coupons/List" class="nav-link">
+                  <i class="mdi mdi-ticket-percent menu-icon"></i>
+                  <span class="menu-title">Coupons</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/admin/Settings/Edit" class="nav-link">
+                  <i class="mdi mdi-cog menu-icon"></i>
+                  <span class="menu-title">Settings</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <div class="main-panel">
+
+          @RenderBody()
+          <!-- content-wrapper ends -->
+
+
+          <!-- Footer -->
+          <footer class="footer">
+            <div class="container">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">© @DateTime.Now.Year <a href="/" style="color: #00f3ff !important;">LapShop</a>. All rights reserved.</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Admin Panel <i class="mdi mdi-shield-check text-success"></i></span>
+              </div>
+            </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/Admin/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="~/Admin/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/Admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/Admin/js/off-canvas.js"></script>
+    <script src="~/Admin/js/hoverable-collapse.js"></script>
+    <script src="~/Admin/js/misc.js"></script>
+    <script src="~/Admin/js/settings.js"></script>
+    <script src="~/Admin/js/todolist.js"></script>
+    <script src="~/Admin/js/jquery.cookie.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="~/Admin/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <!-- End custom js for this page -->
+
+    @RenderSection("Scripts",false);
+</body>
+</html>
