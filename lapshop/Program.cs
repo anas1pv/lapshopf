@@ -117,6 +117,35 @@ using (var scope = app.Services.CreateScope())
     {
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var context = services.GetRequiredService<LapShopContext>();
+
+        // Ensure database and tables are created
+        context.Database.EnsureCreated();
+
+        // Seed catalog database from SQL file if empty
+        if (!context.TbItems.Any())
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogInformation("Database is empty. Seeding catalog database from SQL file...");
+
+            var sqlPath = Path.Combine(AppContext.BaseDirectory, "seed_1000_items.sql");
+            if (!System.IO.File.Exists(sqlPath))
+            {
+                sqlPath = "seed_1000_items.sql";
+            }
+
+            if (System.IO.File.Exists(sqlPath))
+            {
+                context.Database.SetCommandTimeout(300); // 5 minutes timeout for seeding 1000 items
+                var sqlText = System.IO.File.ReadAllText(sqlPath);
+                context.Database.ExecuteSqlRaw(sqlText);
+                logger.LogInformation("Database catalog successfully seeded with 1000 laptops!");
+            }
+            else
+            {
+                logger.LogWarning("Seeding failed: seed_1000_items.sql file not found!");
+            }
+        }
 
         // Ensure roles exist
         string[] roleNames = { "Admin", "Customer" };
