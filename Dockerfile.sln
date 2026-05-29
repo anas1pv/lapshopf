@@ -2,20 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# نسخ ملف الـ Solution
-COPY *.sln ./
-
-# نسخ ملفات الـ csproj مع الحفاظ على هيكلة الفولدرات
-COPY **/*.csproj ./
-# ملاحظة: إذا لم يعمل الأمر السابق، استخدم هذا السطر البديل:
-# COPY lapshop/*.csproj ./lapshop/
-
-# عمل Restore
-RUN dotnet restore
-
-# نسخ باقي الكود
+# نسخ كل شيء من المجلد الحالي إلى داخل الـ Container
 COPY . .
-RUN dotnet publish -c Release -o out
+
+# عمل Restore و Publish مباشرة
+RUN dotnet publish "lapshop.sln" -c Release -o out
 
 # مرحلة التشغيل
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
