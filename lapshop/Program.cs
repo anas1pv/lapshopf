@@ -122,6 +122,29 @@ using (var scope = app.Services.CreateScope())
         // Ensure database and tables are created
         context.Database.EnsureCreated();
 
+        // Seed default settings row if empty
+        if (!context.TbSettings.Any())
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogInformation("TbSettings table is empty. Seeding default settings...");
+            var sqlSettings = @"
+            INSERT INTO TbSettings (WebsiteName, Logo, WebsiteDescription, FacebookLink, TwitterLink, InstgramLink, YoutubeLink, Address, ContactNumber, MiddlePanner, LastPanner)
+            VALUES (
+                'LapShop', 
+                'logo.png', 
+                'Your ultimate destination for premium laptops, gaming rigs, and enterprise business workstations.', 
+                'https://facebook.com/lapshop', 
+                'https://twitter.com/lapshop', 
+                'https://instagram.com/lapshop', 
+                'https://youtube.com/lapshop', 
+                'Cairo, Egypt', 
+                '+20 123 456 789', 
+                'middle_banner.png', 
+                'last_banner.png'
+            )";
+            context.Database.ExecuteSqlRaw(sqlSettings);
+        }
+
         // Seed catalog database from SQL file if empty
         if (!context.TbItems.Any())
         {
