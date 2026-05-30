@@ -601,6 +601,67 @@
         </text>
     }
 </script>
+
+<!-- Free Hosting Notice Modal -->
+<div id="hostingNoticeModal" class="hosting-notice-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 12, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 99999; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease;">
+    <div class="hosting-notice-content" style="background: rgba(16, 16, 26, 0.85); border: 1px solid rgba(0, 243, 255, 0.25); border-radius: 16px; padding: 30px; max-width: 550px; width: 90%; box-shadow: 0 15px 50px rgba(0, 243, 255, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.02); text-align: center; transform: scale(0.9); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: 'Outfit', 'Inter', sans-serif;">
+        
+        <!-- Glowing Header Icon -->
+        <div style="width: 60px; height: 60px; background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);">
+            <i class="fa fa-bolt" style="font-size: 28px; color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);"></i>
+        </div>
+        
+        <!-- Title -->
+        <h4 style="color: #ffffff; font-weight: 800; font-size: 20px; margin-bottom: 22px; letter-spacing: 0.5px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 12px; display: flex; justify-content: center; gap: 8px;">
+            <span>Demo Site Notice</span>
+            <span style="color: rgba(255,255,255,0.3)">|</span>
+            <span style="font-family: 'Outfit', sans-serif;">تنويه هام</span>
+        </h4>
+        
+        <!-- English Text -->
+        <div style="text-align: left; margin-bottom: 18px; line-height: 1.6; font-size: 14px; color: #cbd5e1; border-left: 3px solid #00f3ff; padding-left: 12px;">
+            <p style="margin: 0; font-weight: 500;">
+                <strong style="color: #00f3ff;">Server Notice:</strong> This demo is hosted on a <strong>free cloud server (Render)</strong> which sleeps during inactivity. The initial load or queries might take a moment to wake up, but in a production environment with premium hosting, the database response and page loading are <strong>instant and extremely fast</strong>.
+            </p>
+        </div>
+        
+        <!-- Arabic Text -->
+        <div style="text-align: right; margin-bottom: 28px; line-height: 1.7; font-size: 14px; color: #cbd5e1; border-right: 3px solid #00f3ff; padding-right: 12px; direction: rtl;">
+            <p style="margin: 0; font-weight: 500;">
+                <strong style="color: #00f3ff;">تنويه الخادم:</strong> هذه النسخة التجريبية مستضافة على <strong>سيرفر سحابي مجاني (Render)</strong> يدخل في وضع الخمول عند عدم الاستخدام. قد يستغرق التحميل أو الاستعلام الأول بعض الوقت للاستجابة، ولكن في بيئة العمل الحقيقية وعلى استضافة مدفوعة، تكون استجابة قاعدة البيانات وسرعة الموقع <strong>فورية وفائقة السرعة</strong>.
+            </p>
+        </div>
+        
+        <!-- Action Button -->
+        <button id="closeNoticeBtn" style="background: linear-gradient(135deg, #00f3ff 0%, #00a2ff 100%); border: none; border-radius: 8px; color: #05050c; font-weight: 800; font-size: 14px; padding: 12px 35px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 243, 255, 0.3); text-transform: uppercase; letter-spacing: 0.5px; outline: none;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0, 243, 255, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0, 243, 255, 0.3)';">
+            Got it / حسناً فهمت
+        </button>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if (!sessionStorage.getItem('lapshop_notice_viewed')) {
+            var modal = $('#hostingNoticeModal');
+            var content = modal.find('.hosting-notice-content');
+            
+            modal.css('display', 'flex');
+            setTimeout(function() {
+                modal.css('opacity', '1');
+                content.css('transform', 'scale(1)');
+            }, 100);
+            
+            $('#closeNoticeBtn').on('click', function() {
+                modal.css('opacity', '0');
+                content.css('transform', 'scale(0.9)');
+                setTimeout(function() {
+                    modal.css('display', 'none');
+                    sessionStorage.setItem('lapshop_notice_viewed', 'true');
+                }, 400);
+            });
+        }
+    });
+</script>
         
 </body>
 
