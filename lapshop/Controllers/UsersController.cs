@@ -173,6 +173,12 @@ namespace lapshop.Controllers
                 return RedirectToAction(nameof(AccountDetails));
             }
 
+            if (user.Email == "admin@lapshop.com" && user.Email != model.Email)
+            {
+                TempData["ProfileError"] = "The email address of the root admin account cannot be changed.";
+                return RedirectToAction(nameof(AccountDetails));
+            }
+
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
 
@@ -212,6 +218,12 @@ namespace lapshop.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return NotFound();
 
+            if (user.Email == "admin@lapshop.com")
+            {
+                TempData["PasswordError"] = "The password of the root admin account cannot be changed on this demo site.";
+                return RedirectToAction(nameof(AccountDetails));
+            }
+
             if (!ModelState.IsValid)
             {
                 TempData["PasswordError"] = "Invalid password data.";
@@ -248,6 +260,12 @@ namespace lapshop.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
+
+            if (model.Email.Trim().ToLower() == "admin@lapshop.com")
+            {
+                ModelState.AddModelError("", "Password reset is disabled for the root admin account.");
+                return View(model);
+            }
 
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
@@ -289,6 +307,12 @@ namespace lapshop.Controllers
             if (user == null)
             {
                 return RedirectToAction("Login");
+            }
+
+            if (user.Email == "admin@lapshop.com")
+            {
+                ModelState.AddModelError("", "The password of the root admin account cannot be changed on this demo site.");
+                return View(model);
             }
 
             var decodedCode = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(model.Code));
