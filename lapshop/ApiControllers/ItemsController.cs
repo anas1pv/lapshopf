@@ -142,6 +142,7 @@ namespace lapshop.ApiControllers
                     i.ItemId,
                     i.ItemName,
                     i.SalesPrice,
+                    i.DiscountPrice,
                     i.ImageName,
                     i.Processor,
                     i.RamSize,
