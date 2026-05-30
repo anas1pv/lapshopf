@@ -74,50 +74,54 @@
             subtitle.text(items.length + (items.length === 1 ? ' item' : ' items') + ' saved');
 
             // Build the items grid
-            var gridHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">';
+            var gridHtml = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">';
 
             items.forEach(function (item) {
                 var imageSrc = item.imageName ? '/Uploads/Items/' + item.imageName : '/Uploads/Items/default.png';
                 var addedDate = new Date(item.addedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
                 gridHtml += ''
-                    + '<div class="wishlist-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; transition: all 0.3s ease; position: relative;" '
+                    + '<div class="wishlist-card" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; transition: all 0.3s ease; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; position: relative;" '
                     + 'onmouseenter="this.style.borderColor=\'rgba(0,243,255,0.2)\'; this.style.transform=\'translateY(-3px)\'; this.style.boxShadow=\'0 8px 30px rgba(0,0,0,0.3)\'" '
                     + 'onmouseleave="this.style.borderColor=\'rgba(255,255,255,0.06)\'; this.style.transform=\'translateY(0)\'; this.style.boxShadow=\'none\'">'
 
-                    // Image section
-                    + '  <div style="display: flex; align-items: stretch;">'
-                    + '    <div style="width: 140px; min-height: 140px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; padding: 15px; flex-shrink: 0;">'
-                    + '      <img src="' + imageSrc + '" alt="' + item.itemName + '" style="max-width: 100%; max-height: 110px; object-fit: contain; border-radius: 6px;" />'
+                    // Remove Button (Floating in top right)
+                    + '  <button onclick="removeFromWishlist(' + item.itemId + ')" style="position: absolute; top: 12px; right: 12px; z-index: 5; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;" '
+                    + '    onmouseenter="this.style.background=\'#ef4444\'; this.style.color=\'#ffffff\'" '
+                    + '    onmouseleave="this.style.background=\'rgba(239,68,68,0.15)\'; this.style.color=\'#ef4444\'" title="Remove from Wishlist">'
+                    + '    <i class="fa fa-times"></i>'
+                    + '  </button>'
+
+                    // Image Section
+                    + '  <div style="background: rgba(0,0,0,0.2); border-radius: 10px; height: 160px; display: flex; align-items: center; justify-content: center; padding: 15px; margin-bottom: 12px;">'
+                    + '    <img src="' + imageSrc + '" alt="' + item.itemName + '" style="max-width: 100%; max-height: 130px; object-fit: contain; border-radius: 6px;" />'
+                    + '  </div>'
+
+                    // Content Section
+                    + '  <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">'
+                    + '    <div>'
+                    + '      <h4 style="color: #F1F5F9; font-size: 15px; font-weight: 700; margin: 0 0 6px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="' + item.itemName + '">' + item.itemName + '</h4>'
+                    + '      <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">'
+                    + '        <span style="color: #94A3B8; font-size: 11px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;">'
+                    + '          <i class="fa fa-microchip" style="color: #00f3ff;"></i>' + item.processor + '</span>'
+                    + '        <span style="color: #94A3B8; font-size: 11px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;">'
+                    + '          <i class="fa fa-database" style="color: #00f3ff;"></i>' + item.ramSize + ' GB</span>'
+                    + '      </div>'
                     + '    </div>'
 
-                    // Info section
-                    + '    <div style="flex: 1; padding: 18px 18px 18px 15px; display: flex; flex-direction: column; justify-content: space-between;">'
-                    + '      <div>'
-                    + '        <h4 style="color: #F1F5F9; font-size: 16px; font-weight: 600; margin: 0 0 8px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + item.itemName + '</h4>'
-                    + '        <div style="display: flex; gap: 12px; margin-bottom: 10px; flex-wrap: wrap;">'
-                    + '          <span style="color: #94A3B8; font-size: 12px;"><i class="fa fa-microchip" style="color: #00f3ff; margin-right: 4px;"></i>' + item.processor + '</span>'
-                    + '          <span style="color: #94A3B8; font-size: 12px;"><i class="fa fa-database" style="color: #00f3ff; margin-right: 4px;"></i>' + item.ramSize + ' GB RAM</span>'
-                    + '        </div>'
-                    + '        <div style="color: #00f3ff; font-size: 20px; font-weight: 700;">' + parseFloat(item.salesPrice).toLocaleString('en-US') + ' EGP</div>'
-                    + '      </div>'
+                    + '    <div>'
+                    + '      <div style="color: #00f3ff; font-size: 18px; font-weight: 800; margin-bottom: 12px;">' + parseFloat(item.salesPrice).toLocaleString('en-US') + ' EGP</div>'
 
-                    // Actions
-                    + '      <div style="display: flex; gap: 8px; margin-top: 12px; align-items: center;">'
-                    + '        <button onclick="moveItemToCart(' + item.itemId + ')" class="btn btn-solid" style="font-size: 13px; padding: 7px 16px; flex: 1;">'
-                    + '          <i class="fa fa-shopping-cart" style="margin-right: 5px;"></i> Move to Cart'
-                    + '        </button>'
-                    + '        <button onclick="removeFromWishlist(' + item.itemId + ')" style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; border-radius: 8px; padding: 7px 12px; cursor: pointer; transition: all 0.3s ease; font-size: 13px;" '
-                    + '          onmouseenter="this.style.background=\'rgba(239,68,68,0.2)\'" '
-                    + '          onmouseleave="this.style.background=\'rgba(239,68,68,0.1)\'">'
-                    + '          <i class="fa fa-trash"></i>'
-                    + '        </button>'
-                    + '      </div>'
-
-                    // Added date
-                    + '      <div style="color: #64748b; font-size: 11px; margin-top: 8px;">Added ' + addedDate + '</div>'
+                    // Move to Cart Button
+                    + '      <button onclick="moveItemToCart(' + item.itemId + ')" class="btn btn-solid" style="font-size: 12px; padding: 10px 16px; width: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 6px;">'
+                    + '        <i class="fa fa-shopping-cart"></i> Move to Cart'
+                    + '        <i class="fa fa-arrow-right" style="font-size: 10px;"></i>'
+                    + '      </button>'
                     + '    </div>'
                     + '  </div>'
+
+                    // Added Date Footer
+                    + '  <div style="color: #64748b; font-size: 10px; margin-top: 10px; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px;">Added ' + addedDate + '</div>'
                     + '</div>';
             });
 

@@ -207,6 +207,30 @@ using (var scope = app.Services.CreateScope())
                 userManager.AddToRoleAsync(adminUser, "Admin").GetAwaiter().GetResult();
             }
         }
+
+        // Update slider images if they are still slider1.png
+        try
+        {
+            var sliders = context.TbSliders.ToList();
+            if (sliders.Count >= 3)
+            {
+                bool updated = false;
+                if (sliders[0].ImageName == "slider1.png") { sliders[0].ImageName = "slider_gaming.png"; updated = true; }
+                if (sliders[1].ImageName == "slider1.png") { sliders[1].ImageName = "slider_business.png"; updated = true; }
+                if (sliders[2].ImageName == "slider1.png") { sliders[2].ImageName = "slider_ultrabook.png"; updated = true; }
+                if (updated)
+                {
+                    context.SaveChanges();
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogInformation("Hero sliders updated with professional custom images.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred while updating slider images.");
+        }
     }
     catch (Exception ex)
     {

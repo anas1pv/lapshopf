@@ -313,8 +313,11 @@
      13. slick slider
      ==========================*/
     $('.slide-1').slick({
-        // autoplay: true,
-        // autoplaySpeed: 5000
+        autoplay: true,
+        autoplaySpeed: 5000,
+        infinite: true,
+        fade: true,
+        cssEase: 'linear'
     });
 
     $('.slide-2').slick({

@@ -1078,9 +1078,9 @@ INSERT INTO TbItems (ItemId, ItemName, SalesPrice, PurchasePrice, CategoryId, Im
 SET IDENTITY_INSERT TbItems OFF;
 
 INSERT INTO TbSlider (Title, Description, ImageName, CreatedBy, CreatedDate, CurrentState) VALUES
-('Ultimate Gaming Laptops', 'Unleash extreme power with the latest RTX graphics & high-refresh rate displays. Up to 30% Off.', 'slider1.png', 'Admin', GETDATE(), 1),
-('Sleek Business Workstations', 'Supercharge your productivity with Intel Core Ultra & Apple M-series chips. Free Delivery.', 'slider1.png', 'Admin', GETDATE(), 1),
-('Lightweight Premium Ultrabooks', 'All-day battery life and gorgeous displays, designed for creators on the go.', 'slider1.png', 'Admin', GETDATE(), 1);
+('Ultimate Gaming Laptops', 'Unleash extreme power with the latest RTX graphics & high-refresh rate displays. Up to 30% Off.', 'slider_gaming.png', 'Admin', GETDATE(), 1),
+('Sleek Business Workstations', 'Supercharge your productivity with Intel Core Ultra & Apple M-series chips. Free Delivery.', 'slider_business.png', 'Admin', GETDATE(), 1),
+('Lightweight Premium Ultrabooks', 'All-day battery life and gorgeous displays, designed for creators on the go.', 'slider_ultrabook.png', 'Admin', GETDATE(), 1);
 
 INSERT INTO TbCoupons (CouponCode, DiscountPercent, ExpiryDate, IsActive) VALUES
 ('WELCOME2026', 10.00, '2028-12-31', 1),
