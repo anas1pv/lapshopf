@@ -807,3 +807,76 @@ table.dataTable thead .sorting_desc::after {
     border-radius: 10px !important;
 }
 
+/* ── Sticky Footer and Layout Heights ── */
+.container-scroller {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+.page-body-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    padding-top: 0 !important;
+    background-color: #000000 !important;
+}
+
+.main-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    min-height: calc(100vh - 120px) !important; /* Viewport height minus header */
+    background-color: #000000 !important;
+}
+
+.content-wrapper {
+    flex-grow: 1 !important;
+    background-color: #000000 !important;
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem !important;
+}
+
+.footer {
+    margin-top: auto !important; /* Pushes the footer to the bottom */
+    background-color: #161617 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 20px 0 !important;
+}
+
+/* ── Custom Sleek Glassmorphic Buttons ── */
+.btn-info-glass {
+    background: rgba(0, 113, 227, 0.15) !important;
+    border: 1px solid rgba(0, 113, 227, 0.3) !important;
+    color: #2997ff !important;
+    transition: all 0.2s ease !important;
+}
+.btn-info-glass:hover {
+    background: #0071e3 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(0, 113, 227, 0.4) !important;
+}
+
+.btn-danger-glass {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: #ef4444 !important;
+    transition: all 0.2s ease !important;
+}
+.btn-danger-glass:hover {
+    background: #ef4444 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4) !important;
+}
+
+.btn-primary-glass {
+    background: rgba(0, 243, 255, 0.15) !important;
+    border: 1px solid rgba(0, 243, 255, 0.3) !important;
+    color: #00f3ff !important;
+    transition: all 0.2s ease !important;
+}
+.btn-primary-glass:hover {
+    background: #00f3ff !important;
+    color: #000000 !important;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4) !important;
+}
+
